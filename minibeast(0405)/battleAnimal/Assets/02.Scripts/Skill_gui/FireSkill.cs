@@ -5,7 +5,7 @@ public class FireSkill : MonoBehaviour {
 
 	public GameObject bulleta;
 	public Transform firePosa;
-	public MeshRenderer _renderera;
+	//public MeshRenderer _renderera;
 	
 	private float birth;
 	private float duration;
@@ -15,7 +15,7 @@ public class FireSkill : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		_renderera.enabled = false;	
+		//_renderera.enabled = false;	
 		duration = 0.5f;
 		distancea = 10.0f;
 	}
@@ -42,8 +42,8 @@ public class FireSkill : MonoBehaviour {
 	}
 	
 	IEnumerator ShowMuzzleFlash(){
-		_renderera.enabled = true;
+		//_renderera.enabled = true;
 		yield return new WaitForSeconds(Random.Range(0.01f,0.2f));
-		_renderera.enabled = false;
+	//	_renderera.enabled = false;
 	}
 }
