@@ -1,0 +1,211 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class MoveCtrl : MonoBehaviour {	
+	private Transform tr;
+	Vector3 pre_tr;
+	private CharacterController _controller;
+	private FireCtrl _fireCtrl;
+	
+	public float h = 0.0f;
+	public float v = 0.0f;
+	
+	public float movSpeed = 5.0f;
+	public float rotSpeed = 50.0f;
+	
+	private Vector3 movDir = Vector3.zero;
+	
+	private string ClientID;
+	
+	public float myypos, myxpos,myzpos;
+	
+	
+	public Vector3 clickendpoint;
+	
+	public bool playermoving =false;
+	
+	private bool screenmoveonly;
+	public Vector2 startPos;
+	public Vector2 direction;
+	public bool directionChosen;
+	
+	public float timeOfTouch;
+
+	public bool isAttack;
+	public Vector3 attackPoint;
+	
+	public bool isMoveAndAttack;
+	
+	// Use this for initialization
+	void Start () {
+		attackPoint = Vector3.zero;
+		tr = this.GetComponent<Transform> ();
+		_fireCtrl = this.GetComponent<FireCtrl> ();
+		pre_tr = t2v(tr);
+		_controller = GetComponent<CharacterController> ();
+		ClientID = ClientState.id;		
+		
+		myxpos = tr.transform.position.x;
+		myypos = tr.transform.position.y;
+		
+		directionChosen = false;
+		isAttack = false;
+		isMoveAndAttack=false;
+	}	
+
+	// Update is called once per frame
+	void Update () {
+		if (ClientID == gameObject.name) {//id가 내 캐릭터 일때
+		#if UNITY_ANDROID||UNITY_IPHONE
+		if (Input.touchCount == 1 && Input.touchCount > 0) {
+			if (Input.touchCount > 0) {
+				var touch = Input.GetTouch(0);				
+				
+				switch (touch.phase) {
+					// Record initial touch position.
+				case TouchPhase.Began:
+					timeOfTouch = Time.time;
+					break;					
+					// Determine direction by comparing the current touch position with the initial one.
+				case TouchPhase.Moved:
+					direction = touch.position - startPos;
+					break;					
+					// Report that a direction has been chosen when the finger is lifted.
+				case TouchPhase.Ended:					
+					if(Time.time - timeOfTouch>0.1f){
+						directionChosen = true;						
+					}else{
+						directionChosen = false;						
+					}					
+					break;
+				}
+			}
+			
+			
+			//move
+			
+			if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved && directionChosen == false) {
+				Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
+				RaycastHit hit3;				
+				if(Physics.Raycast(ray3, out hit3, Mathf.Infinity)&& hit3.collider.tag=="FLOOR"){
+					
+					Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
+
+					clickendpoint = hit3.point;
+					move();
+					
+					playermoving = true;
+					
+					tr.LookAt(hit3.point); 
+					myxpos	=hit3.point.x; //Input.touches [0].position.x;
+					myypos	=hit3.point.z;  //Input.touches [0].position.y;										
+				}
+			}			
+			
+		}		
+		
+						#else
+		
+		
+						Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		
+						Debug.DrawRay (ray.origin, ray.direction * 100.0f, Color.green);
+		
+						RaycastHit hitman;
+		
+		
+						if (Input.GetMouseButtonDown (0)) {			
+							if (Physics.Raycast (ray, out hitman, Mathf.Infinity)) {
+								if(hitman.collider.tag =="FLOOR"){
+									myxpos = hitman.point.x; //Input.touches [0].position.x;
+									myypos = hitman.point.y;  //Input.touches [0].position.y;
+									myzpos = hitman.point.z;
+
+									clickendpoint = hitman.point;
+						
+									string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+									SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.							
+										
+									move();
+								}
+					else if(hitman.collider.tag =="BUILDING" || hitman.collider.tag =="MINION"||hitman.collider.tag =="Player"){
+									Vector3 target = hitman.point;
+									target.y=50.0f;
+									attackPoint = target;
+									
+									string data = ClientID + ":" + attackPoint.x + "," + attackPoint.y + "," + attackPoint.z;
+									SocketStarter.Socket.Emit ("attackREQ", data);//내위치를 서버에 알린다.	
+									attack();								
+								}
+							} ///raycasr
+						}//mousedown
+						#endif
+			}
+
+		//ifmove
+		if (playermoving) {
+			tr.LookAt (clickendpoint); 	
+			if (clickendpoint != tr.position) {
+				float step = 5 * Time.deltaTime;
+				tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
+			}
+		}
+
+		if (isAttack) {
+			tr.LookAt (attackPoint);			
+			_fireCtrl.Fire();
+		}
+		
+		if(clickendpoint == tr.position) {
+			playermoving = false;
+		}
+
+		if (isMoveAndAttack) {
+			if(Vector3.Distance (tr.position, attackPoint) <= _fireCtrl.distance){
+				isMoveAndAttack = false;
+				attack ();
+			}
+		}
+
+	}//end update
+	public void attack(){
+		if (Vector3.Distance (tr.position, attackPoint) > _fireCtrl.distance) {
+			clickendpoint=attackPoint;
+			isMoveAndAttack = true;
+			playermoving = true;
+			//moveAndAttack ();
+		} else {
+				isAttack = true;
+				playermoving = false;
+		}
+	}
+
+	private void moveAndAttack(){
+		isMoveAndAttack = true;
+		playermoving = true;
+
+	}
+
+	public void move(){
+		playermoving = true;
+		isAttack = false;
+		isMoveAndAttack = false;
+	}	
+	
+	bool isSame(Transform a,Vector3 b){
+		if (a.position.x == b.x &&
+		    a.position.y == b.y &&
+		    a.position.z == b.z)
+			return true;
+		else
+			return false;
+	}
+	
+	Vector3 t2v(Transform t){		
+		Vector3 a;
+		a.x = t.position.x;
+		a.y = t.position.y;
+		a.z = t.position.z;
+		return a;
+	}
+}

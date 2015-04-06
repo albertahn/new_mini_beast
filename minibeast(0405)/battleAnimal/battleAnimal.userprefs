@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\SpawnMinion.cs">
+    <Files>
+      <File FileName="Assets\02.Scripts\scMulty\SpawnMinion.cs" Line="29" Column="5" />
+      <File FileName="..\..\minibeast(0404)\battleAnimal\Assets\02.Scripts\scMulty\SpawnMinion.cs" Line="26" Column="24" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
