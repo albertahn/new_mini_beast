@@ -25,6 +25,11 @@ public class SocketOn : MonoBehaviour {
 	private bool moveSyncSwitch;
 	private bool loadlevelSwitch;
 
+	public string minionID;
+	private Vector3 minionPos;
+	private Vector3 minionTg;
+	private bool minionSyncSwitch;
+
 	// Use this for initialization
 	void Start () {
 		_spawnPlayer = GetComponent<SpawnPlayer> ();
@@ -39,8 +44,6 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.On ("createRoomRES", (data) =>{
 			string temp = data.Json.args[0].ToString();
-			Debug.Log (temp);
-			Debug.Log (ClientState.id);
 			if(temp==ClientID){		
 				loadlevelSwitch=true;
 			}
@@ -91,8 +94,7 @@ public class SocketOn : MonoBehaviour {
 			
 			spawnPos = new Vector3(float.Parse(pos[0]),
 			                       float.Parse(pos[1]),
-			                       float.Parse(pos[2]));			                       
-			Debug.Log ("hi");
+			                       float.Parse(pos[2]));
 
 			while(_spawnMinion.spawnSwitch==true){
 			}
@@ -107,27 +109,21 @@ public class SocketOn : MonoBehaviour {
 			string[] temp3;
 			Vector3 spawnPos;
 			
-			Debug.Log (temp);
-			
 			string[] temp2 = temp.Split('=');
 			sender = temp2[0];
 			list = temp2[1].Split('_');
-			Debug.Log ("list.length = "+list.Length);
 			if(ClientID==sender){
 				for(int i=0;i<list.Length-2;i++)
 				{
 					temp3 = list[i].Split(':');
 					id =temp3[0];
 					pos = temp3[1].Split(',');
-					Debug.Log("id = "+id);
-					Debug.Log("pos = "+temp3[1]);
 					spawnPos = new Vector3(float.Parse(pos[0]),
 					                       float.Parse(pos[1]),
 					                       float.Parse(pos[2]));
 					while(_spawnMinion.spawnSwitch==true){
 					}
 					_spawnMinion.setSpawn(id,spawnPos);
-					//Debug.Log(list[i]);
 				}
 			}
 		});
@@ -141,27 +137,21 @@ public class SocketOn : MonoBehaviour {
 			string[] temp3;
 			Vector3 spawnPos;
 
-			Debug.Log (temp);
-
 			string[] temp2 = temp.Split('=');
 			sender = temp2[0];
 			list = temp2[1].Split('_');
-			Debug.Log ("list.length = "+list.Length);
 			if(ClientID==sender){
 				for(int i=0;i<list.Length-2;i++)
 				{
 					temp3 = list[i].Split(':');
 					id =temp3[0];
 					pos = temp3[1].Split(',');
-					Debug.Log("id = "+id);
-					Debug.Log("pos = "+temp3[1]);
 					spawnPos = new Vector3(float.Parse(pos[0]),
 					                       float.Parse(pos[1]),
 					                       float.Parse(pos[2]));
 					while(_spawnPlayer.spawnSwitch==true){
 					}
 						_spawnPlayer.setSpawn(id,spawnPos);
-					//Debug.Log(list[i]);
 				}
 			}
 		});
@@ -188,8 +178,27 @@ public class SocketOn : MonoBehaviour {
 			                     float.Parse(resPos[1]),
 			                     float.Parse(resPos[2]));
 			if(ClientID!=resID){
-				Debug.Log ("sync");
 				moveSyncSwitch=true;
+			}
+		});
+
+		SocketStarter.Socket.On ("minionSyncRES", (data) =>
+		                         {
+			string[] temp = data.Json.args[0].ToString().Split(':');
+			minionID = temp[0];
+			string[] resPos = temp[1].Split(',');
+			minionPos = new Vector3(float.Parse(resPos[0]),
+			                     float.Parse(resPos[1]),
+			                     float.Parse(resPos[2]));
+
+			resPos = temp[2].Split(',');
+			minionTg = new Vector3(float.Parse(resPos[0]),
+			                        float.Parse(resPos[1]),
+			                        float.Parse(resPos[2]));
+
+
+			if(ClientState.isMaster==false){
+				minionSyncSwitch=true;
 			}
 		});
 
@@ -240,6 +249,19 @@ public class SocketOn : MonoBehaviour {
 			_lobbyUI.isUI =false;
 			StartCoroutine(_spawnPlayer.CreatePlayer());
 			loadlevelSwitch=false;
+		}
+
+		if (minionSyncSwitch) {
+			minionSync();
+			minionSyncSwitch=false;
+		}
+	}
+
+	void minionSync(){
+		GameObject a = GameObject.Find ("redMinions/"+minionID);
+		if (a != null) {
+						a.transform.position = minionPos;
+						a.transform.LookAt (minionTg);
 		}
 	}
 

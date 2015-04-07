@@ -29,8 +29,11 @@ public class minionCtrl : MonoBehaviour {
 
 	public bool isMaster;
 
+	private minionSync _mSync;
+
 	// Use this for initialization
 	void Start () {
+		_mSync = GetComponentInParent<minionSync> ();
 
 		traceDist = 5.0f;
 		attackDist = 2.0f;
@@ -63,15 +66,18 @@ public class minionCtrl : MonoBehaviour {
 		if (isMaster) {
 			if (moveKey) {
 				moveKey = false;
-				//string data = ClientState.id + ":" + dest.x + "," + dest.y + "," + dest.z;
-				//SocketStarter.Socket.Emit ("moveMinionREQ", data);// 목표지점을 서버에 알린다.		
+			//	string data = gameObject.name + ":" + dest.x + "," + dest.y + "," + dest.z;
+			//	SocketStarter.Socket.Emit ("moveMinionREQ", data);// 목표지점을 서버에 알린다.	
+				_mSync.target = dest;
+
 				move ();
 			}
 			if (traceKey) {
 				traceKey = false;
 				target = playerTr.position;
-				//string data = ClientState.id + ":" + target.x + "," + target.y + "," + target.z;
-				//SocketStarter.Socket.Emit ("traceMinionREQ", data);// 목표지점을 서버에 알린다.		
+			//	string data = gameObject.name + ":" + target.x + "," + target.y + "," + target.z;
+			//	SocketStarter.Socket.Emit ("traceMinionREQ", data);// 목표지점을 서버에 알린다.	
+				_mSync.target = dest;
 				trace ();
 			}
 		}
