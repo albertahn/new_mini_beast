@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BulletCtrl : MonoBehaviour {
-	private int damage;
+	public int damage;
 	private float speed;
 	public float birth;
 	private float durationTime;

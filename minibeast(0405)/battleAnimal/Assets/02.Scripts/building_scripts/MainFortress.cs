@@ -7,7 +7,7 @@ public class MainFortress : MonoBehaviour {
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
 
-	private int hp = 400;
+	public int hp = 400;
 
 	// Use this for initialization
 	void Start () {
@@ -24,22 +24,33 @@ public class MainFortress : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider coll){
+
 		if (coll.gameObject.tag == "BULLET_BALL") {
 
-			Debug.Log("building hit!");
+			//Debug.Log("building hit!");
 
 
 			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 			
-		/*	if(coll.gameObject.tag == "BULET_BALL")
-				hp -= coll.gameObject.GetComponent<ArrowCtrl>().damage;
-			else 
-				hp -= coll.gameObject.GetComponent<preArrowCtrl>().damage;
+			if(coll.gameObject.tag == "BULLET_BALL"){
+
+				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
+						//Debug.Log("hi hp:"+hp);
+
+
+//emit to the server the hp
+
+				string data = this.name+":" + hp.ToString()+"";
+				SocketStarter.Socket.Emit ("attackBuilding", data);
+
+			}
+
+
 			if(hp<=0)
 			{
-				MonsterDie();
+				//MonsterDie();
 			}
-		*/	
+		
 
 		}
 	}

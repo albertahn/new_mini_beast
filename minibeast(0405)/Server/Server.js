@@ -115,7 +115,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
     });
     
-    socket.on('disconnect',function(data){//Ŭ���̾�Ʈ�� ������ ���� ���??? �ڵ����� ȣ���???
+    socket.on('disconnect',function(data){
         var key = socketRoom[socket.id];
         socket.leave(key);
         var ret = userNames[socket.id];
@@ -124,4 +124,13 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         delete(userNames[socket.id]);
         delete(socketRoom[socket.id]);
     });
+
+
+socket.on('attackBuilding', function(data){
+ var ret2 = data.split(":");
+        buildingHP[ret2[0]] = ret2[1];         
+        io.sockets.in(socketRoom[socket.id]).emit("attackBuilding", data);
+
+});
+
 });

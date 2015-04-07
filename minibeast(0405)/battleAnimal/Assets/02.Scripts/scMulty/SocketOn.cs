@@ -30,6 +30,10 @@ public class SocketOn : MonoBehaviour {
 	private Vector3 minionTg;
 	private bool minionSyncSwitch;
 
+	private bool building_health_change;
+	private string building_name;
+	private int building_hp_int;
+
 	// Use this for initialization
 	void Start () {
 		_spawnPlayer = GetComponent<SpawnPlayer> ();
@@ -219,6 +223,22 @@ public class SocketOn : MonoBehaviour {
 
 			outUserSwitch=true;
 		});
+
+
+		//building attack
+		SocketStarter.Socket.On ("attackBuilding", (data) =>{	
+			
+			
+			string[] temp = data.Json.args[0].ToString().Split(':');
+			building_name = temp[0];
+			building_hp_int = int.Parse(temp[1]);
+			
+			
+			Debug.Log("attack: " + building_name+":"+building_hp_int);
+			
+			building_health_change= true;
+		});
+
 	}
 	
 	// Update is called once per frame
@@ -255,6 +275,13 @@ public class SocketOn : MonoBehaviour {
 			minionSync();
 			minionSyncSwitch=false;
 		}
+	}
+
+//building health change
+	void change_building_health(){
+		GameObject buildingnow = GameObject.Find (building_name);
+		buildingnow.GetComponent<MainFortress>().hp = building_hp_int;
+		
 	}
 
 	void minionSync(){
