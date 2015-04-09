@@ -1,4 +1,4 @@
-var io = require("socket.io").listen(3000);
+﻿var io = require("socket.io").listen(3000);
 
 io.configure(function(){  
     io.set('log level', 2);
@@ -11,6 +11,9 @@ var userPos = {};
 
 var minionNames={};
 var minionPos = {};
+
+var buildingHP = {};
+
 
 
 var isRun = false;
@@ -138,6 +141,13 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         socket.leave(key);
     });
 
+
+socket.on('attackMinion', function(data){
+ var ret2 = data.split(":");
+        buildingHP[ret2[0]] = ret2[1];         
+        io.sockets.in(socketRoom[socket.id]).emit("attackMinion", data);
+
+});
 
     socket.on('attackBuilding', function(data){
         var ret2 = data.split(":");
