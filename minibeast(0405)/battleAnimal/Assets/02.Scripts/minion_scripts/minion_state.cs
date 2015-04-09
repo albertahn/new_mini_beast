@@ -36,24 +36,34 @@ public class minion_state : MonoBehaviour {
 		
 				
 				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
-				Debug.Log("hi hp:"+hp);
+				//Debug.Log("hi hp:"+hp);
 				
 				
 				//emit to the server the hp
 				
 				string data = this.name+":" + hp.ToString()+"";
-			//	SocketStarter.Socket.Emit ("attackBuilding", data);
+				SocketStarter.Socket.Emit ("attackMinion", data);
 				
 		
 			
 			
 			if(hp<=0)
 			{
-				//MonsterDie();
+				minionDie();
 			}
 			
 			
 		}
+	}//end
+
+	void minionDie(){
+
+		int oldInt = PlayerPrefs.GetInt ("minions_killed");
+
+		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
+
+		Destroy (this.gameObject, 3.0f);
+
 	}
 	
 	

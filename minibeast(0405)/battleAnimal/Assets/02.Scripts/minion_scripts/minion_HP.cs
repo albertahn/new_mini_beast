@@ -8,7 +8,7 @@ public class minion_HP : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		maxHP = 50;
+		maxHP = minion.GetComponent<minion_state> ().hp;
 	}
 	
 	// Update is called once per frame

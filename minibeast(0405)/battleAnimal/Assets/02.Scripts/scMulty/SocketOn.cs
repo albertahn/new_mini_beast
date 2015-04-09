@@ -230,6 +230,20 @@ public class SocketOn : MonoBehaviour {
 			outUserSwitch=true;
 		});
 
+		//building attack
+		SocketStarter.Socket.On ("attackMinion", (data) =>{	
+			
+			
+			string[] temp = data.Json.args[0].ToString().Split(':');
+			building_name = temp[0];
+			building_hp_int = int.Parse(temp[1]);
+			
+			
+			Debug.Log("attack: " + building_name+":"+building_hp_int);
+			
+			building_health_change= true;
+		});
+
 
 		//building attack
 		SocketStarter.Socket.On ("attackBuilding", (data) =>{	

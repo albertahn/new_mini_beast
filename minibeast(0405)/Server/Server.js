@@ -18,8 +18,8 @@ var buildingHP = {};
 
 var isRun = false;
 
-io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ����Ǵ�??? ���??? �Լ��� �����Ѵ�.
-    //socket.emit('news', { hello: 'world' });		//Ŭ���̾�Ʈ���� news���??? �̸����� JSON��Ʈ���� �����Ѵ�.
+io.sockets.on('connection', function (socket) {		
+    //socket.emit('news', { hello: 'world' });		
 
     console.log("A user connected !");
     
