@@ -48,14 +48,14 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
          createMinion();
         
          function createMinion(){
-             var timer = setInterval(sender,1000);
-             var maxMinion =10;
-             var currMinion=0;
-             var idx=0;
-             var data;
-             function sender(){
+            var timer = setInterval(sender,1000);
+            var maxMinion =10;
+            var currMinion=0;
+            var idx=0;
+            var data;
+            function sender(){
                 idx++;
-                data = "48.9,50.0,33.58";
+                data = "29.0,50.0,30.0";
                 minionNames[idx] = "rm"+idx;
                 minionPos["rm"+idx] = data;
                 
@@ -110,17 +110,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
     });
     
     socket.on("minionSyncREQ",function(data){  
-        if(data !=null){
-          /*  var temp = data.split("|");
-            for(var key in temp){
-                var temp2 = temp[key].split(":");
-                var id = temp2[0];
-                var pos = temp2[1];
-                
-                minionPos[id] = pos;
-            }*/
-    
-         // minionPos[ret[0]] = ret[1];         
+        if(data !=null){//edit?   
             io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
         }
     });
@@ -149,11 +139,10 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
     });
 
 
-socket.on('attackBuilding', function(data){
- var ret2 = data.split(":");
+    socket.on('attackBuilding', function(data){
+        var ret2 = data.split(":");
         buildingHP[ret2[0]] = ret2[1];         
         io.sockets.in(socketRoom[socket.id]).emit("attackBuilding", data);
-
-});
+    });
 
 });

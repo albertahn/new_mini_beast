@@ -50,7 +50,17 @@ public class minionCtrl : MonoBehaviour {
 		speed = 2;
 		minionTr = gameObject.GetComponent<Transform> ();
 
-		point = GameObject.Find ("movePoints").GetComponentsInChildren<Transform> ();
+		int number = int.Parse(gameObject.name[2]+"");
+		Debug.Log (number);
+
+		if (number % 3 == 0) {
+			point = GameObject.Find ("redMovePoints/route1").GetComponentsInChildren<Transform> ();
+		} else if (number % 3 == 1) {
+			point = GameObject.Find ("redMovePoints/route2").GetComponentsInChildren<Transform> ();
+		} else if (number % 3 == 2) {
+			point = GameObject.Find ("redMovePoints/route3").GetComponentsInChildren<Transform> ();
+		}
+
 		syncTarget = dest = point [idx].position;
 
 		if (isMaster) {

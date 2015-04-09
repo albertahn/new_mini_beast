@@ -191,8 +191,7 @@ public class SocketOn : MonoBehaviour {
 			if(ClientState.isMaster==false){
 				string[] temp = data.Json.args[0].ToString().Split('|');
 				
-				for(int i=0;i<temp.Length;i++){
-					//Debug.Log (temp[i]);
+				for(int i=0;i<temp.Length-1;i++){//edit
 					string[] temp2 = temp[i].Split(':');
 					minionID = temp2[0];
 					string[] resPos = temp2[1].Split(',');				
@@ -292,10 +291,13 @@ public class SocketOn : MonoBehaviour {
 	}
 
 	void minionSync(){
-		GameObject a = GameObject.Find ("redMinions/"+minionID);
-		if (a != null) {
-						a.transform.position = minionPos;
-						a.transform.LookAt (minionTg);
+		if (minionID != null) {
+			GameObject a = GameObject.Find ("redMinions/" + minionID);
+			if(a!=null){
+				a.transform.position = minionPos;
+				a.transform.LookAt (minionTg);
+			}
+			minionID=null;
 		}
 	}
 

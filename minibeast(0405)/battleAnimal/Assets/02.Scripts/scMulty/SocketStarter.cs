@@ -20,7 +20,7 @@ public class SocketStarter : MonoBehaviour
 		Debug.Log("Socket Opened!");
 	}
 	
-	void OnDisable()//30번 중에 30번 호출됨(100%)
+	void OnDisable()
 	{
 		Socket.Close();
 	}
