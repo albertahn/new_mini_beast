@@ -9,6 +9,7 @@ public class minionCtrl : MonoBehaviour {
 	private Transform[] point;
 	public Vector3 dest;
 	public Vector3 target;
+	public Vector3 syncTarget;
 
 	private int idx;
 	private int speed;
@@ -29,11 +30,8 @@ public class minionCtrl : MonoBehaviour {
 
 	public bool isMaster;
 
-	private minionSync _mSync;
-
 	// Use this for initialization
 	void Start () {
-		_mSync = GetComponentInParent<minionSync> ();
 
 		traceDist = 5.0f;
 		attackDist = 2.0f;
@@ -53,7 +51,7 @@ public class minionCtrl : MonoBehaviour {
 		minionTr = gameObject.GetComponent<Transform> ();
 
 		point = GameObject.Find ("movePoints").GetComponentsInChildren<Transform> ();
-		dest = point [idx].position;
+		syncTarget = dest = point [idx].position;
 
 		if (isMaster) {
 			StartCoroutine (checkPlayer ());
@@ -66,18 +64,11 @@ public class minionCtrl : MonoBehaviour {
 		if (isMaster) {
 			if (moveKey) {
 				moveKey = false;
-			//	string data = gameObject.name + ":" + dest.x + "," + dest.y + "," + dest.z;
-			//	SocketStarter.Socket.Emit ("moveMinionREQ", data);// 목표지점을 서버에 알린다.	
-				_mSync.target = dest;
 
 				move ();
 			}
 			if (traceKey) {
 				traceKey = false;
-				target = playerTr.position;
-			//	string data = gameObject.name + ":" + target.x + "," + target.y + "," + target.z;
-			//	SocketStarter.Socket.Emit ("traceMinionREQ", data);// 목표지점을 서버에 알린다.	
-				_mSync.target = dest;
 				trace ();
 			}
 		}
@@ -90,7 +81,7 @@ public class minionCtrl : MonoBehaviour {
 			} else {
 				if(isMaster){
 					if (idx < point.Length - 1){
-						dest = point [++idx].position;
+						syncTarget = dest = point [++idx].position;
 						moveKey=true;
 					}
 				}
@@ -98,6 +89,7 @@ public class minionCtrl : MonoBehaviour {
 		}
 
 		if (isTrace) {
+			syncTarget = target = playerTr.position;
 			minionTr.LookAt(target);
 			float step = speed * Time.deltaTime;
 			minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);

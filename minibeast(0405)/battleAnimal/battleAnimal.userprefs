@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/scMulty/BulletCtrl.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\minionSync.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/building_scripts/MainFortress.cs" Line="37" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/BulletCtrl.cs" Line="5" Column="8" />
+      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="196" Column="12" />
+      <File FileName="Assets\02.Scripts\scMulty\minionCtrl.cs" Line="48" Column="3" />
+      <File FileName="Assets\02.Scripts\scMulty\minionSync.cs" Line="24" Column="37" />
+      <File FileName="Assets\02.Scripts\scMulty\animationCtrl.cs" Line="26" Column="18" />
+      <File FileName="Assets\02.Scripts\scMulty\BulletCtrl.cs" Line="19" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

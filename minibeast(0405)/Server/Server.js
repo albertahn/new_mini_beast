@@ -15,8 +15,8 @@ var minionPos = {};
 
 var isRun = false;
 
-io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ����Ǵ�??? ���??? �Լ��� �����Ѵ�.
-    //socket.emit('news', { hello: 'world' });		//Ŭ���̾�Ʈ���� news���??? �̸����� JSON��Ʈ���� �����Ѵ�.
+io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ����Ǵ�??? ���??? �Լ��� �����Ѵ�.
+    //socket.emit('news', { hello: 'world' });		//Ŭ���̾�Ʈ���� news���??? �̸����� JSON��Ʈ���� �����Ѵ�.
 
     console.log("A user connected !");
     
@@ -55,7 +55,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
              var data;
              function sender(){
                 idx++;
-                data = "48.9,52.47,33.58";
+                data = "48.9,50.0,33.58";
                 minionNames[idx] = "rm"+idx;
                 minionPos["rm"+idx] = data;
                 
@@ -110,19 +110,42 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
     });
     
     socket.on("minionSyncREQ",function(data){  
-        var ret = data.split(":");
-        minionPos[ret[0]] = ret[1];         
-        io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
+        if(data !=null){
+          /*  var temp = data.split("|");
+            for(var key in temp){
+                var temp2 = temp[key].split(":");
+                var id = temp2[0];
+                var pos = temp2[1];
+                
+                minionPos[id] = pos;
+            }*/
+    
+         // minionPos[ret[0]] = ret[1];         
+            io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
+        }
     });
     
     socket.on('disconnect',function(data){
+        var rooms = io.sockets.manager.rooms;
         var key = socketRoom[socket.id];
-        socket.leave(key);
+        
+        key = '/'+key;
+        if(rooms[key].length<=1){
+            for(var i in minionNames){                
+                delete(minionNames[i])
+            }
+            for(var i in minionPos){
+                delete(minionPos[i])                
+            }
+        } 
+            
         var ret = userNames[socket.id];
         io.sockets.in(socketRoom[socket.id]).emit("imoutRES", ret);
         delete(userPos[userNames[socket.id]]);
         delete(userNames[socket.id]);
         delete(socketRoom[socket.id]);
+        
+        socket.leave(key);
     });
 
 

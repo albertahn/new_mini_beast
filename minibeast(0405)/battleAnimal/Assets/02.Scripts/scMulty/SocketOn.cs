@@ -188,21 +188,28 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.On ("minionSyncRES", (data) =>
 		                         {
-			string[] temp = data.Json.args[0].ToString().Split(':');
-			minionID = temp[0];
-			string[] resPos = temp[1].Split(',');
-			minionPos = new Vector3(float.Parse(resPos[0]),
-			                     float.Parse(resPos[1]),
-			                     float.Parse(resPos[2]));
-
-			resPos = temp[2].Split(',');
-			minionTg = new Vector3(float.Parse(resPos[0]),
-			                        float.Parse(resPos[1]),
-			                        float.Parse(resPos[2]));
-
-
 			if(ClientState.isMaster==false){
-				minionSyncSwitch=true;
+				string[] temp = data.Json.args[0].ToString().Split('|');
+				
+				for(int i=0;i<temp.Length;i++){
+					//Debug.Log (temp[i]);
+					string[] temp2 = temp[i].Split(':');
+					minionID = temp2[0];
+					string[] resPos = temp2[1].Split(',');				
+					minionPos = new Vector3(float.Parse(resPos[0]),
+					                        float.Parse(resPos[1]),
+					                        float.Parse(resPos[2]));
+					resPos = temp2[2].Split(',');
+					minionTg = new Vector3(float.Parse(resPos[0]),
+					                       float.Parse(resPos[1]),
+					                       float.Parse(resPos[2]));
+					
+					while(true){
+						if(minionSyncSwitch==false)
+							break;
+					}				 	
+					minionSyncSwitch = true;
+				}
 			}
 		});
 
