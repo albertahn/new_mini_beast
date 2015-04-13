@@ -62,6 +62,15 @@ public class minion_state : MonoBehaviour {
 
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 
+		if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
+			
+			
+			GameObject.Find (PlayerPrefs.GetString("email")).GetComponent<DogLevel_up>().switchToEvol=true;
+			
+			//PlayerPrefs.SetString("evolved", "true");
+			
+		}
+
 		Destroy (this.gameObject, 3.0f);
 
 	}

@@ -99,10 +99,15 @@ public class minionCtrl : MonoBehaviour {
 		}
 
 		if (isTrace) {
-			syncTarget = target = playerTr.position;
-			minionTr.LookAt(target);
-			float step = speed * Time.deltaTime;
-			minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);
+
+			if(playerTr !=null){
+				syncTarget = target = playerTr.position;
+				minionTr.LookAt(target);
+				float step = speed * Time.deltaTime;
+				minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);
+
+			}
+
 		}
 	}
 

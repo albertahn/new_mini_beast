@@ -21,6 +21,8 @@ public class SpawnPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ClientID = ClientState.id;
+
+		PlayerPrefs.SetString("evolved", "false");
 		//StartCoroutine (CreatePlayer());
 		spawnSwitch = false;
 	}

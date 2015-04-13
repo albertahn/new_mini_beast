@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\SpawnPlayer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/minion_scripts/minion_state.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scWait\waitSocketOn.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scWait\waitGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scMulty\LobbyUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scMulty\SpawnPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/minion_scripts/minion_state.cs" Line="68" Column="1" />
+      <File FileName="Assets/02.Scripts/minion_scripts/minion_HP.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/minion_scripts/minion_state.cs" Line="1" Column="1" />
+      <File FileName="../../../changenew_mini_beast copy/minibeast(0405)/battleAnimal/Assets/02.Scripts/minion_scripts/minion_state.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/SpawnPlayer.cs" Line="25" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
