@@ -121,7 +121,8 @@ io.sockets.on('connection', function (socket) {
     socket.on('disconnect',function(data){
         var rooms = io.sockets.manager.rooms;
         var key = socketRoom[socket.id];
-        
+
+        if(key!=null){//if client did enter the room
         key = '/'+key;
         if(rooms[key].length<=1){
             for(var i in minionNames){                
@@ -139,6 +140,7 @@ io.sockets.on('connection', function (socket) {
         delete(socketRoom[socket.id]);
         
         socket.leave(key);
+    }
     });
 
 
