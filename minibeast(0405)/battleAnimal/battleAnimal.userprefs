@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scLogIn\LogInUI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\SpawnPlayer.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scWait\waitGUI.cs" Line="18" Column="3" />
-      <File FileName="Assets\02.Scripts\scLogIn\LogInUI.cs" Line="20" Column="34" />
+      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scWait\waitSocketOn.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scWait\waitGUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\LobbyUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\SpawnPlayer.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

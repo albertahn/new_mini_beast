@@ -9,14 +9,14 @@ public class SpawnPlayer : MonoBehaviour {
 
 	public IEnumerator CreatePlayer(){
 		spawnSwitch = false;
-		//Vector3 pos = new Vector3 (430.0f,0.06f,226.0f);
 
-		string data = PlayerPrefs.GetString("email")+":25.0,50,25";//접속한 유저의 아이디와 생성할 위치를 서버에 전송
+		string data = ClientState.id+":25.0,50,25:"+ClientState.character;//접속한 유저의 아이디와 생성할 위치를 서버에 전송
 		SocketStarter.Socket.Emit("createPlayerREQ",data);
 		yield return null;
 	}
 	
 	private string id; //접속한 유저의 아이디
+	public string character;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +25,10 @@ public class SpawnPlayer : MonoBehaviour {
 		spawnSwitch = false;
 	}
 
-	public void setSpawn(string _id,Vector3 pos){
+	public void setSpawn(string _id,Vector3 pos,string _char){
 		id = _id;
 		spawnPos = pos;
+		character = _char;
 		spawnSwitch=true;
 	}
 
@@ -35,6 +36,7 @@ public class SpawnPlayer : MonoBehaviour {
 	void Update () {
 		if (spawnSwitch) {
 			GameObject a;
+			player = (GameObject)Resources.Load(character);
 			a = (GameObject)Instantiate(player,spawnPos,Quaternion.identity);
 			a.name=id;
 			//a.GetComponentInChildren<HP_Bar>().target = a.transform;

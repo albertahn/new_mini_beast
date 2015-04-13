@@ -21,8 +21,20 @@ public class waitGUI : MonoBehaviour {
 
 		for(int i=0;i<6;i++)
 			portrait[i] = emptyPortrait;
-	}
 
+		switch(Random.Range(1,3)){
+		case 1:
+			ClientState.character = "dog";					
+			break;
+		case 2:
+			ClientState.character = "turtle";						
+			break;
+		}
+	}
+	/*
+	id = ClientID;
+	character = ClientState.character;
+	*/
 	public void addUser(int _order,string _id){
 		name [_order] = _id;
 		portrait [_order] = randomPortrait;
@@ -67,18 +79,28 @@ public class waitGUI : MonoBehaviour {
 			//portrait[ClientState.order] = dogPortrait;
 			string data = ClientState.id +":"+ClientState.order+":dog";
 			waitSocketStarter.Socket.Emit ("characterSelectREQ", data);
+			ClientState.character = "dog";
 		}
 
 		if (GUI.Button (new Rect(120,400,100,50),"turtle")) {
 			//portrait[ClientState.order] = turtlePortrait;
 			string data = ClientState.id +":"+ClientState.order+":turtle";
-			waitSocketStarter.Socket.Emit ("characterSelectREQ", data);			
+			waitSocketStarter.Socket.Emit ("characterSelectREQ", data);
+			ClientState.character = "turtle";			
 		}
 
 		if (GUI.Button (new Rect(230,400,100,50),"random")) {
 			//portrait[ClientState.order] = turtlePortrait;
 			string data = ClientState.id +":"+ClientState.order+":random";
-			waitSocketStarter.Socket.Emit ("characterSelectREQ", data);			
+			waitSocketStarter.Socket.Emit ("characterSelectREQ", data);
+			switch(Random.Range(1,3)){
+			case 1:
+				ClientState.character = "dog";					
+				break;
+			case 2:
+				ClientState.character = "turtle";						
+				break;
+			}
 		}
 
 		if (GUI.Button (new Rect (200, 500, 100, 50), "Ready")) {
@@ -88,6 +110,12 @@ public class waitGUI : MonoBehaviour {
 		if(GUI.Button (new Rect(200+(100+10),500,100 ,50),"Back")){
 			Application.LoadLevel("scStart");
 		}
+
+
+		GUI.Label(new Rect(200,10,50,50),"id = "+ClientState.id);
+		GUI.Label(new Rect(200,70,50,50),"room = "+ClientState.room);
+		GUI.Label(new Rect(200,130,50,50),"order = "+ClientState.order);
+		GUI.Label(new Rect(200,190,50,50),"character = "+ClientState.character);
 	}
 
 	public void setCharacter(int _order,string _char){

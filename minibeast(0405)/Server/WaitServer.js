@@ -27,7 +27,7 @@ socket.on("createRoomREQ",function(data){
                  continue;
              }
              
-             if(rooms[key].length<4){//next man
+             if(rooms[key].length<6){//next man
                 var roomKey = key.replace('/','');
                 socket.join(roomKey);
                 

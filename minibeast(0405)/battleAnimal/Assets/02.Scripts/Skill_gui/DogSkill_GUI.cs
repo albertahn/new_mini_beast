@@ -5,6 +5,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	public Texture2D stexture1, stexture2 , stexture3 ;
 	private Transform trans;
+	private string ClientID;
 	
 	
 	
@@ -22,17 +23,18 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		ClientID = ClientState.id;
 		
 		xfirst = 10;  yfirst = 400;
 		xsecond = 10 + stexture1.width;
 		xthird = 10 + stexture1.width + stexture2.width;
 		
 		//Get game object
-		myMoveCtrl = GameObject.Find(PlayerPrefs.GetString ("email")).GetComponent<MoveCtrl> ();
+		myMoveCtrl = GetComponent<MoveCtrl> ();
 		guilayer = Camera.main.GetComponent<GUILayer>();
 		
-		trans = GameObject.Find(PlayerPrefs.GetString ("email")).GetComponent<Transform> ();
-		skillfire = GameObject.Find(PlayerPrefs.GetString ("email")).GetComponent<FireSkill> ();
+		trans = GetComponent<Transform> ();
+		skillfire = GetComponent<FireSkill> ();
 	}
 	
 	
@@ -43,7 +45,7 @@ public class DogSkill_GUI : MonoBehaviour {
 			
 			skillOneReady = true;
 			
-			GameObject dog =  GameObject.Find(PlayerPrefs.GetString("email"));
+			GameObject dog =  GameObject.Find(ClientID);
 			
 			Vector3 spawnPos = dog.transform.position;
 			Quaternion rotationdog = dog.transform.rotation;
@@ -67,7 +69,7 @@ public class DogSkill_GUI : MonoBehaviour {
 			skillTwoReady = true;
 			
 			Debug.Log("clicked 2 man");
-			GameObject dog =  GameObject.Find(PlayerPrefs.GetString("email"));
+			GameObject dog =  GameObject.Find(ClientID);
 			
 			Vector3 spawnPos = dog.transform.position;
 			Quaternion rotationdog = dog.transform.rotation;
@@ -110,15 +112,13 @@ public class DogSkill_GUI : MonoBehaviour {
 			if (Physics.Raycast (ray, out hiterone, Mathf.Infinity) && hiterone.collider.tag == "FLOOR" ) {
 				
 				
-				if(skillOneReady ==true){ 
-					
+				if(skillOneReady ==true){
 					//Debug.Log(""+skillfire.ToString());
-					GameObject dog =  GameObject.Find(PlayerPrefs.GetString("email"));
+					GameObject dog =  GameObject.Find(ClientID);
 					
 					dog.transform.LookAt(hiterone.point);
 					
-					skillfire = dog.GetComponent<FireSkill> ();
-					
+					skillfire = dog.GetComponent<FireSkill> ();					
 					skillfire.Fireman();
 					
 					//destroy gameobject]
@@ -131,12 +131,9 @@ public class DogSkill_GUI : MonoBehaviour {
 					
 					
 				}//skill 1 ready true
-				
-				
+
 				if(skillTwoReady == true){
-					
-					
-					GameObject dog =  GameObject.Find(PlayerPrefs.GetString("email"));
+					GameObject dog =  GameObject.Find(ClientID);
 					
 					dog.transform.LookAt(hiterone.point);
 					
@@ -145,13 +142,9 @@ public class DogSkill_GUI : MonoBehaviour {
 					dog.transform.position = Vector3.MoveTowards(dog.transform.position, clickendpoint, step);
 					
 					skillTwoReady = false;
-					
-					
-					
+
 					GameObject skill1 =  GameObject.Find("secondskill");
 					Destroy (skill1);	
-					
-					
 				}
 				
 				
