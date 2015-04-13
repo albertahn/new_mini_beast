@@ -4,6 +4,8 @@ using System.Collections;
 public class ClientState : MonoBehaviour {
 	public static string id;
 	public static bool isMaster;
+	public static string room;
+	public static int order;
 	// Use this for initialization
 
 	void Awake(){

@@ -16,8 +16,8 @@ public class startUI : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		if (GUI.Button (new Rect (bx, by, bw, bh), "Start")) {
-			Application.LoadLevel("scMulty");
+		if (GUI.Button (new Rect (bx, by, bw, bh), "Multy")) {
+			Application.LoadLevel("scWait");
 		}
 		if(GUI.Button (new Rect(bx,by+bw+10,bw,bh),"Logout")){
 			
