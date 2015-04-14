@@ -25,16 +25,17 @@ public class FireCtrl : MonoBehaviour {
 
 	}
 
-	public void Fire(){
+	public void Fire(string _target){
 		if ((Time.time - birth) > duration) {
-						StartCoroutine (this.CreateBullet ());
+						StartCoroutine (this.CreateBullet (_target));
 						StartCoroutine (this.ShowMuzzleFlash ());
 			birth = Time.time;
 		}
 	}
 
-	IEnumerator CreateBullet(){
-		Instantiate(bullet,firePos.position,firePos.rotation);
+	IEnumerator CreateBullet(string _target){
+		GameObject a =(GameObject)Instantiate(bullet,firePos.position,firePos.rotation);
+		a.GetComponent<BulletCtrl> ().setTarget(_target);
 		yield return null;
 	}
 

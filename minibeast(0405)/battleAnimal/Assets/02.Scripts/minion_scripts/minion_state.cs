@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class minion_state : MonoBehaviour {
-
-	
 	
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
@@ -22,41 +20,31 @@ public class minion_state : MonoBehaviour {
 		
 		
 	}
-	
-	
-	void OnTriggerEnter(Collider coll){
+
+	public void Heated(GameObject obj){
+		Collider coll = obj.collider;
 		
-		if (coll.gameObject.tag == "BULLET_BALL") {
-			
-			//Debug.Log("building hit!");
-			
-			
-			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
-			
+		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 		
-				
-				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
-				//Debug.Log("hi hp:"+hp);
-				
-				
-				//emit to the server the hp
-				
-				string data = this.name+":" + hp.ToString()+"";
-				SocketStarter.Socket.Emit ("attackMinion", data);
-				
 		
-			
-			
-			if(hp<=0)
-			{
-				minionDie();
-			}
-			
-			
+		
+		hp -= obj.GetComponent<BulletCtrl>().damage;
+		
+		string data = this.name+":" + hp.ToString()+"";
+		SocketStarter.Socket.Emit ("attackMinion", data);			
+		
+		if(hp<=0)
+		{
+			hp=0;
+			minionDie();
 		}
-	}//end
+		
+		Destroy (obj.gameObject);
+	}
 
 	void minionDie(){
+		this.collider.enabled = false;
+		GetComponent<minionCtrl> ().isDie = true;
 
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 
@@ -65,12 +53,11 @@ public class minion_state : MonoBehaviour {
 		if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
 			
 			
-			GameObject.Find (PlayerPrefs.GetString("email")).GetComponent<DogLevel_up>().switchToEvol=true;
+			GameObject.Find (ClientState.id).GetComponent<DogLevel_up>().switchToEvol=true;
 			
 			//PlayerPrefs.SetString("evolved", "true");
 			
 		}
-
 		Destroy (this.gameObject, 3.0f);
 
 	}

@@ -35,6 +35,7 @@ public class MainFortress : MonoBehaviour {
 			if(coll.gameObject.tag == "BULLET_BALL"){
 
 				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
+				if(hp<=0)hp=0;
 						//Debug.Log("hi hp:"+hp);
 
 
@@ -42,7 +43,6 @@ public class MainFortress : MonoBehaviour {
 
 				string data = this.name+":" + hp.ToString()+"";
 				SocketStarter.Socket.Emit ("attackBuilding", data);
-
 			}
 
 

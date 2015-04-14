@@ -19,7 +19,7 @@ public class minionCtrl : MonoBehaviour {
 	public float traceDist;
 	public float attackDist;
 
-	private bool isDie;
+	public bool isDie;
 	private bool isPlayer;
 	private bool isTrace;
 
@@ -134,7 +134,8 @@ public class minionCtrl : MonoBehaviour {
 		while (!isDie) {
 			yield return new WaitForSeconds(0.2f);
 			if(isPlayer){
-				dist = Vector3.Distance(playerTr.position,minionTr.position);
+				if(playerTr!=null)
+					dist = Vector3.Distance(playerTr.position,minionTr.position);
 			}else{
 				dist = 1000.0f;
 			}

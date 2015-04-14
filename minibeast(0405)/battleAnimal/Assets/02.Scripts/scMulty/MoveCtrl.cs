@@ -35,6 +35,8 @@ public class MoveCtrl : MonoBehaviour {
 	public Vector3 attackPoint;
 	
 	public bool isMoveAndAttack;
+
+	public GameObject targetObj;
 	
 	// Use this for initialization
 	void Start () {
@@ -129,13 +131,15 @@ public class MoveCtrl : MonoBehaviour {
 									move();
 								}
 					else if(hitman.collider.tag =="BUILDING" || hitman.collider.tag =="MINION"||hitman.collider.tag =="Player"){
+						string targetName = hitman.collider.name;
+						Debug.Log("target = "+targetName);
 									Vector3 target = hitman.point;
 									target.y=50.0f;
 									attackPoint = target;
 									
-									string data = ClientID + ":" + attackPoint.x + "," + attackPoint.y + "," + attackPoint.z;
-									SocketStarter.Socket.Emit ("attackREQ", data);//내위치를 서버에 알린다.	
-									attack();								
+									string data = ClientID + ":" + targetName;
+									SocketStarter.Socket.Emit ("attackREQ", data);	
+									attack(targetName);								
 								}
 							} ///raycasr
 						}//mousedown
@@ -144,7 +148,7 @@ public class MoveCtrl : MonoBehaviour {
 
 		//ifmove
 		if (playermoving) {
-			tr.LookAt (clickendpoint); 	
+			tr.LookAt (clickendpoint);
 			if (clickendpoint != tr.position) {
 				float step = 5 * Time.deltaTime;
 				tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
@@ -152,8 +156,22 @@ public class MoveCtrl : MonoBehaviour {
 		}
 
 		if (isAttack) {
-			tr.LookAt (attackPoint);			
-			_fireCtrl.Fire();
+			if(targetObj!=null){
+				if(targetObj.GetComponent<minionCtrl>()!=null){
+				if(targetObj.GetComponent<minionCtrl>().isDie==true)
+					idle ();
+				else{
+					tr.LookAt (targetObj.transform.position);			
+					_fireCtrl.Fire(targetObj.name);
+
+					if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
+						clickendpoint=targetObj.transform.position;
+						isMoveAndAttack = true;
+						playermoving = true;
+					}
+				}
+				}
+			}
 		}
 		
 		if(clickendpoint == tr.position) {
@@ -161,16 +179,17 @@ public class MoveCtrl : MonoBehaviour {
 		}
 
 		if (isMoveAndAttack) {
-			if(Vector3.Distance (tr.position, attackPoint) <= _fireCtrl.distance){
+			if(Vector3.Distance (tr.position, targetObj.transform.position) <= _fireCtrl.distance){
 				isMoveAndAttack = false;
-				attack ();
+				attack (targetObj.name);
 			}
 		}
 
 	}//end update
-	public void attack(){
-		if (Vector3.Distance (tr.position, attackPoint) > _fireCtrl.distance) {
-			clickendpoint=attackPoint;
+	public void attack(string _targetName){
+		targetObj = GameObject.Find(_targetName);
+		if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
+			clickendpoint=targetObj.transform.position;
 			isMoveAndAttack = true;
 			playermoving = true;
 			//moveAndAttack ();
@@ -190,7 +209,12 @@ public class MoveCtrl : MonoBehaviour {
 		playermoving = true;
 		isAttack = false;
 		isMoveAndAttack = false;
-	}	
+	}
+	public void idle(){
+		playermoving = false;
+		isAttack = false;
+		isMoveAndAttack = false;
+	}
 	
 	bool isSame(Transform a,Vector3 b){
 		if (a.position.x == b.x &&

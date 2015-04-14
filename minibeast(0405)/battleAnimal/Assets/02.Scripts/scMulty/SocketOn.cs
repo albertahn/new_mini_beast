@@ -22,6 +22,7 @@ public class SocketOn : MonoBehaviour {
 		
 	private string attackID;
 	private bool attackSwitch;
+	private string attackTarget;
 	private bool moveSyncSwitch;
 	private bool loadlevelSwitch;
 
@@ -33,6 +34,7 @@ public class SocketOn : MonoBehaviour {
 	private bool building_health_change;
 	private string building_name;
 	private int building_hp_int;
+
 
 	// Use this for initialization
 	void Start () {
@@ -221,10 +223,8 @@ public class SocketOn : MonoBehaviour {
 		{
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			attackID = temp[0];
-			string[] resPos = temp[1].Split(',');
-			attackPos = new Vector3(float.Parse(resPos[0]),
-			                     float.Parse(resPos[1]),
-			                     float.Parse(resPos[2]));
+			attackTarget = temp[1];
+
 			attackSwitch=true;
 		});
 
@@ -280,8 +280,7 @@ public class SocketOn : MonoBehaviour {
 		}
 
 		if (attackSwitch) {
-			GameObject.Find(attackID).GetComponent<MoveCtrl>().attackPoint = attackPos;
-			GameObject.Find(attackID).GetComponent<MoveCtrl>().attack();
+			GameObject.Find(attackID).GetComponent<MoveCtrl>().attack(attackTarget);
 			attackSwitch=false;
 		}
 
