@@ -53,7 +53,7 @@ public class minion_state : MonoBehaviour {
 		if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
 			
 			
-			GameObject.Find (ClientState.id).GetComponent<DogLevel_up>().switchToEvol=true;
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().switchToEvol=true;
 			
 			//PlayerPrefs.SetString("evolved", "true");
 			
