@@ -36,6 +36,10 @@ public class SocketOn : MonoBehaviour {
 	private int building_hp_int;
 
 
+	private bool minion_health_change;
+	private string minion_name;
+	private int minion_hp_int;
+
 	// Use this for initialization
 	void Start () {
 		_spawnPlayer = GetComponent<SpawnPlayer> ();
@@ -236,18 +240,17 @@ public class SocketOn : MonoBehaviour {
 		});
 
 		//building attack
-		SocketStarter.Socket.On ("attackMinion", (data) =>{	
-			
+		SocketStarter.Socket.On ("attackMinion", (data) =>{
 			
 			string[] temp = data.Json.args[0].ToString().Split(':');
-			building_name = temp[0];
-			building_hp_int = int.Parse(temp[1]);
+			minion_name = temp[0];
+			minion_hp_int = int.Parse(temp[1]);
 			
+			Debug.Log("attack: " + minion_name+":"+minion_hp_int);
 			
-			Debug.Log("attack: " + building_name+":"+building_hp_int);
-			
-			building_health_change= true;
+			minion_health_change= true;
 		});
+
 
 
 		//building attack
@@ -306,6 +309,12 @@ public class SocketOn : MonoBehaviour {
 	void change_building_health(){
 		GameObject buildingnow = GameObject.Find (building_name);
 		buildingnow.GetComponent<MainFortress>().hp = building_hp_int;
+		
+	}
+	//change minion health
+	void change_minion_health(){
+		GameObject mininow = GameObject.Find (""+minion_name);
+		mininow.GetComponent<minion_state>().hp = minion_hp_int;
 		
 	}
 
