@@ -170,7 +170,17 @@ public class MoveCtrl : MonoBehaviour {
 						playermoving = true;
 					}
 				}
-				}
+				}else{//non minions
+					tr.LookAt (targetObj.transform.position);			
+					_fireCtrl.Fire(targetObj.name);
+					
+					if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
+						clickendpoint=targetObj.transform.position;
+						isMoveAndAttack = true;
+						playermoving = true;
+					}
+					
+				}//npnmins
 			}
 		}
 		
