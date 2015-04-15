@@ -94,7 +94,7 @@ public class SocketOn : MonoBehaviour {
 			}
 		});
 
-		SocketStarter.Socket.On("createMinionRES",(data) =>
+		SocketStarter.Socket.On("createRedMinionRES",(data) =>
 		{
 			string temp = data.Json.args[0].ToString();
 			string[] pos;
@@ -109,10 +109,31 @@ public class SocketOn : MonoBehaviour {
 			                       float.Parse(pos[1]),
 			                       float.Parse(pos[2]));
 
-			while(_spawnMinion.spawnSwitch==true){
+			while(_spawnMinion.REDspawnSwitch==true){
 			}
-			_spawnMinion.setSpawn(id,spawnPos);//해당 user를 instantiate한다.
+			_spawnMinion.REDsetSpawn(id,spawnPos);//해당 user를 instantiate한다.
 		});
+
+		SocketStarter.Socket.On("createBlueMinionRES",(data) =>
+		                        {
+			string temp = data.Json.args[0].ToString();
+			string[] pos;
+			Vector3 spawnPos;
+			string id;
+			
+			pos = temp.Split(':');
+			id = pos[0];//접속한 유저의 아이디
+			pos = pos[1].Split(',');
+			
+			spawnPos = new Vector3(float.Parse(pos[0]),
+			                       float.Parse(pos[1]),
+			                       float.Parse(pos[2]));
+			
+			while(_spawnMinion.BLUEspawnSwitch==true){
+			}
+			_spawnMinion.BLUEsetSpawn(id,spawnPos);//해당 user를 instantiate한다.
+		});
+
 		SocketStarter.Socket.On ("preuser1RES", (data) => {			
 			string temp = data.Json.args[0].ToString();
 			string[] list;
@@ -134,9 +155,15 @@ public class SocketOn : MonoBehaviour {
 					spawnPos = new Vector3(float.Parse(pos[0]),
 					                       float.Parse(pos[1]),
 					                       float.Parse(pos[2]));
-					while(_spawnMinion.spawnSwitch==true){
+					if(id[0]=='r'){
+						while(_spawnMinion.REDspawnSwitch==true){
+						}
+						_spawnMinion.REDsetSpawn(id,spawnPos);
+					}else if(id[0]=='b'){
+						while(_spawnMinion.BLUEspawnSwitch==true){
+						}
+						_spawnMinion.BLUEsetSpawn(id,spawnPos);
 					}
-					_spawnMinion.setSpawn(id,spawnPos);
 				}
 			}
 		});
@@ -320,7 +347,7 @@ public class SocketOn : MonoBehaviour {
 
 	void minionSync(){
 		if (minionID != null) {
-			GameObject a = GameObject.Find ("redMinions/" + minionID);
+			GameObject a = GameObject.Find (minionID);
 			if(a!=null){
 				a.transform.position = minionPos;
 				a.transform.LookAt (minionTg);

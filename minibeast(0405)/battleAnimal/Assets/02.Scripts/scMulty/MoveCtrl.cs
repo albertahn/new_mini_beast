@@ -188,15 +188,18 @@ public class MoveCtrl : MonoBehaviour {
 	}//end update
 	public void attack(string _targetName){
 		targetObj = GameObject.Find(_targetName);
-		if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
-			clickendpoint=targetObj.transform.position;
-			isMoveAndAttack = true;
-			playermoving = true;
-			//moveAndAttack ();
-		} else {
-				isAttack = true;
-				playermoving = false;
+		if (targetObj != null) {
+				if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
+					clickendpoint = targetObj.transform.position;
+					isMoveAndAttack = true;
+					playermoving = true;
+								//moveAndAttack ();
+					} else {
+						isAttack = true;
+						playermoving = false;
+				}
 		}
+
 	}
 
 	private void moveAndAttack(){

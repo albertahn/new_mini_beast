@@ -32,7 +32,6 @@ public class minionCtrl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		traceDist = 5.0f;
 		attackDist = 2.0f;
 
@@ -50,8 +49,8 @@ public class minionCtrl : MonoBehaviour {
 		speed = 2;
 		minionTr = gameObject.GetComponent<Transform> ();
 
-		int number = int.Parse(gameObject.name[2]+"");
-		Debug.Log (number);
+
+		int number = extractNum(gameObject.name);
 
 		if (number % 3 == 0) {
 			point = GameObject.Find ("redMovePoints/route1").GetComponentsInChildren<Transform> ();
@@ -109,6 +108,17 @@ public class minionCtrl : MonoBehaviour {
 			}
 
 		}
+	}
+
+	int extractNum(string a){
+		string temp=null;
+
+		for (int i=0; i<name.Length-2; i++) {
+			temp += a[2+i];
+		}
+		
+		int number = int.Parse(temp+"");
+		return number;
 	}
 
 	public void move(){

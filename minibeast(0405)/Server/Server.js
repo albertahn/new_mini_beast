@@ -17,6 +17,9 @@ var buildingHP = {};
 
 var isRun = false;
 
+var timer1;
+var timer2;
+
 io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ����Ǵ�???? ���???? �Լ��� �����Ѵ�.
     //socket.emit('news', { hello: 'world' });		//Ŭ���̾�Ʈ���� news���???? �̸����� JSON��Ʈ���� �����Ѵ�.
 
@@ -39,9 +42,16 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
                 }
              }
          }
-         
+         /*
+            for(var i in minionNames){
+                delete(minionNames[i]);
+            }
+            
+            for(var i in minionPos){
+                delete(minionPos[i])              
+            }
+           */ 
          socket.join(temp[1]);
-        // socketRoom[socket.id] = socket.id;
          socketRoom[socket.id] = temp[1];
          socket.emit('createRoomRES',temp[0]);
          console.log("i'm first socket.id = "+socket.id);
@@ -52,23 +62,36 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
          createMinion();
         
          function createMinion(){
-            var timer = setInterval(sender,1000);
-            var maxMinion =10;
+            timer1 = setInterval(redSender,1000);
+            timer2= setInterval(blueSender,1000);
+            var maxMinion =50;
             var currMinion=0;
-            var idx=0;
-            var data;
-            function sender(){
-                idx++;
-                data = "29.0,50.0,30.0";
-                minionNames[idx] = "rm"+idx;
-                minionPos["rm"+idx] = data;
-                
-                data = "rm"+idx+":"+data;
-                
-                 io.sockets.in(socketRoom[socket.id]).emit("createMinionRES",data);
+            var redIdx=0;
+            var blueIdx=0;
+            
+            function redSender(){
+                redIdx++;
+                var data = "29.0,50.0,30.0";
+                minionNames[redIdx] = "rm"+redIdx;
+                minionPos["rm"+redIdx] = data;                
+                data = "rm"+redIdx+":"+data;         
+                //console.log("data = "+data);
+                 io.sockets.in(socketRoom[socket.id]).emit("createRedMinionRES",data);
                  currMinion++;
                  if(currMinion>=maxMinion)
-                    clearInterval(timer);
+                    clearInterval(timer1);
+            }
+            
+            function blueSender(){
+                blueIdx++;
+                var data = "75.0,50.0,70.0";
+                minionNames[blueIdx] = "bm"+blueIdx;
+                minionPos["bm"+blueIdx] = data;
+                data = "bm"+blueIdx+":"+data;                
+                 io.sockets.in(socketRoom[socket.id]).emit("createBlueMinionRES",data);
+                 currMinion++;
+                 if(currMinion>=maxMinion)
+                    clearInterval(timer2);
             }
         }
     });
@@ -133,13 +156,25 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         key = '/'+key;
         //console.log("key = "+key);
         if(rooms[key].length<=1){
-            for(var i in minionNames){                
-                delete(minionNames[i])
+            for(var i in minionNames){
+                delete(minionNames[i]);
             }
+            
             for(var i in minionPos){
-                delete(minionPos[i])                
+                delete(minionPos[i])              
             }
+            for(var i in userNames){               
+                 delete(userNames[i]);
+            }
+            
+                for(var i in userPos){               
+                 delete(userPos[i]);
+            }
+                        
+            clearInterval(timer1);
+            clearInterval(timer2);
         } 
+       // console.log("minionNames length = "+minionNames.length);
             
         var ret = userNames[socket.id];
         io.sockets.in(socketRoom[socket.id]).emit("imoutRES", ret);

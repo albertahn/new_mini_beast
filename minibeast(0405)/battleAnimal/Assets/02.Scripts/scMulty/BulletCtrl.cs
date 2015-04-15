@@ -39,8 +39,10 @@ public class BulletCtrl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider coll){
 		if (target != null) {
-			if(target.tag=="MINION")
-				target.GetComponent<minion_state>().Heated(gameObject);
+			if(target.name==coll.name){
+				if(target.tag=="MINION")
+					target.GetComponent<minion_state>().Heated(gameObject);
+			}
 		}
 	}
 }

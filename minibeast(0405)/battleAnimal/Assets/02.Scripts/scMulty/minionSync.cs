@@ -26,13 +26,18 @@ public class minionSync: MonoBehaviour {
 				redMinions = GameObject.FindGameObjectsWithTag ("MINION");
 				
 				for(int i=0;i<redMinions.Length;i++){
-					Vector3 dest = redMinions[i].GetComponent<minionCtrl>().syncTarget;
+					Vector3 dest;
+					if(redMinions[i].name[0]=='r')
+						dest = redMinions[i].GetComponent<minionCtrl>().syncTarget;
+					else
+						dest = redMinions[i].GetComponent<blueMinionCtrl>().syncTarget;
+
 					data = data+redMinions[i].name+":"+redMinions[i].transform.position.x+","
 						+redMinions[i].transform.position.y+","
 							+redMinions[i].transform.position.z
 							+":"
 							+dest.x+","+dest.y+","+dest.z
-							+"|";
+									+"|";
 				}
 				SocketStarter.Socket.Emit("minionSyncREQ",data);
 				startTime =Time.time;

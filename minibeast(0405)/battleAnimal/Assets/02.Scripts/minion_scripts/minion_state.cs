@@ -24,9 +24,7 @@ public class minion_state : MonoBehaviour {
 	public void Heated(GameObject obj){
 		Collider coll = obj.collider;
 		
-		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
-		
-		
+		StartCoroutine (this.CreateBloodEffect(coll.transform.position));		
 		
 		hp -= obj.GetComponent<BulletCtrl>().damage;
 		
