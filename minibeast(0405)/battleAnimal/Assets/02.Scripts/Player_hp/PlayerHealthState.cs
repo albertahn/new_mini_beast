@@ -7,7 +7,7 @@ public class PlayerHealthState : MonoBehaviour {
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
 	
-	public int hp = 100;
+	public int hp = 1100;
 
 
 	// Use this for initialization
@@ -21,12 +21,15 @@ public class PlayerHealthState : MonoBehaviour {
 	}
 
 	public void Heated(GameObject obj){
+
+		Debug.Log ("playerhp: "+hp);
+
 		Collider coll = obj.collider;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 
 
-		Debug.Log ("playerhp: "+hp);
+
 		
 		
 		hp -= obj.GetComponent<BulletCtrl>().damage;

@@ -28,6 +28,8 @@ public class BulletCtrl : MonoBehaviour {
 	void Update () {
 		if (target != null) {
 			Vector3 targetPosition=target.transform.position;
+			targetPosition.y= 51.0f;
+
 			if (targetPosition != tr.position) {
 				float step = speed* Time.deltaTime;
 				tr.position = Vector3.MoveTowards(tr.position, targetPosition, step);
@@ -40,8 +42,15 @@ public class BulletCtrl : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
 		if (target != null) {
 			if(target.name==coll.name){
-				if(target.tag=="MINION")
+				if(target.tag=="MINION"){
 					target.GetComponent<minion_state>().Heated(gameObject);
+				}
+
+				if(target.tag=="Player"){
+
+					target.GetComponent<PlayerHealthState>().Heated(gameObject);
+				}
+
 			}
 		}
 	}

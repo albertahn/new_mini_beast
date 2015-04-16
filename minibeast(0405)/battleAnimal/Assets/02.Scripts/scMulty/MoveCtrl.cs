@@ -100,8 +100,19 @@ public class MoveCtrl : MonoBehaviour {
 					
 					tr.LookAt(hit3.point); 
 					myxpos	=hit3.point.x; //Input.touches [0].position.x;
-					myypos	=hit3.point.z;  //Input.touches [0].position.y;										
-				}
+					myypos	=hit3.point.z;  //Input.touches [0].position.y;	
+
+			}else if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
+						string targetName = hit3.collider.name;
+						Debug.Log("target = "+targetName);
+						Vector3 target = hit3.point;
+						target.y=50.0f;
+						attackPoint = target;
+						
+						string data = ClientID + ":" + targetName;
+						SocketStarter.Socket.Emit ("attackREQ", data);	
+						attack(targetName);								
+					}//else hit player
 			}			
 			
 		}		

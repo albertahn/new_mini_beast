@@ -8,6 +8,8 @@ public class waitSocketOn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.SetResolution(480, 800, true);
+
 		clientID = ClientState.id;
 		_waitGUI = GetComponent<waitGUI> ();
 

@@ -5,7 +5,8 @@ public class Cam_gui : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		Screen.SetResolution(480, 800, true);
+
 	}
 
 

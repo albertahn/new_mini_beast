@@ -37,7 +37,7 @@ public class CameraTouch : MonoBehaviour {
 
 		if (Input.touchCount == 2)
 		{
-			Debug.Log("2touched man!");
+			//Debug.Log("2touched man!");
 			// Store both touches.
 			Touch touchZero = Input.GetTouch(0);
 			Touch touchOne = Input.GetTouch(1);
@@ -60,7 +60,7 @@ public class CameraTouch : MonoBehaviour {
 				camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 				
 				// Make sure the orthographic size never drops below zero.
-				camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
+				camera.orthographicSize = Mathf.Max(camera.orthographicSize, 5.1f);
 			}
 			else
 			{
@@ -68,7 +68,7 @@ public class CameraTouch : MonoBehaviour {
 				camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
 				
 				// Clamp the field of view to make sure it's between 0 and 180.
-				camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
+				camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 5.1f, 79.9f);
 			}
 		}		
 		#else

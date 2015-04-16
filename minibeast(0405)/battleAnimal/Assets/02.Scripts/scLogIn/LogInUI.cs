@@ -11,6 +11,8 @@ public class LogInUI : MonoBehaviour {
 	private DBManager _dbManager;
 	// Use this for initialization
 	void Start () {
+		Screen.SetResolution(480, 800, true);
+
 		lw = 100;lh = 50; lx = 10;ly = 10;
 		tw = 100;th = 50;tx = 110;ty = 10;
 		bw = 50;bh = 50;bx = 110;by = 130;
