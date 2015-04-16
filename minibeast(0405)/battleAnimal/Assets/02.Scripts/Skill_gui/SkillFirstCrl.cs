@@ -3,14 +3,14 @@ using System.Collections;
 
 public class SkillFirstCrl : MonoBehaviour {
 
-	private int damage;
+	public int damage;
 	private float speed;
 	public float birth;
 	private float durationTime;
 	
 	// Use this for initialization
 	void Start () {
-		damage = 20;
+		damage = 120;
 		speed = 1000.0f;
 		rigidbody.AddForce (transform.forward * speed);
 		birth = Time.time;
@@ -22,4 +22,19 @@ public class SkillFirstCrl : MonoBehaviour {
 		if ((Time.time - birth) > durationTime)
 			Destroy (this.gameObject);	
 	}
+
+	void OnTriggerEnter(Collider coll){
+
+		if (coll.gameObject.tag == "MINION") {
+
+			Debug.Log("skill first hit min");
+
+			coll.gameObject.GetComponent<minion_state>().Heated(gameObject);
+			Destroy (this.gameObject);
+
+				}
+
+	}
+
+
 }

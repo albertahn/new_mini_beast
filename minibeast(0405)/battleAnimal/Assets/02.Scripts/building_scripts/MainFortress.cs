@@ -32,7 +32,7 @@ public class MainFortress : MonoBehaviour {
 
 			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 			
-			if(coll.gameObject.tag == "BULLET_BALL"){
+
 
 				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
 				if(hp<=0)hp=0;
@@ -43,7 +43,7 @@ public class MainFortress : MonoBehaviour {
 
 				string data = this.name+":" + hp.ToString()+"";
 				SocketStarter.Socket.Emit ("attackBuilding", data);
-			}
+
 
 
 			if(hp<=0)

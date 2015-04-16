@@ -41,9 +41,15 @@ public class BulletCtrl : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
 		if (target != null) {
 			if(target.name==coll.name){
-				if(target.tag=="MINION")
+				if(target.tag=="MINION"){
 					target.GetComponent<minion_state>().Heated(gameObject);
 				Destroy (this.gameObject);
+				}else if(target.tag=="Player"){
+
+					target.GetComponent<PlayerHealthState>().Heated(gameObject);
+					Destroy (this.gameObject);
+
+				}//hit player
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Desktop\minibeast(0416)\battleAnimal\Assets\02.Scripts\scWait\waitGUI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/scMulty/BulletCtrl.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scStart\startUI.cs" Line="33" Column="4" />
-      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="48" Column="26" />
-      <File FileName="..\..\..\..\..\Desktop\minibeast(0416)\battleAnimal\Assets\02.Scripts\scWait\waitGUI.cs" Line="32" Column="3" />
+      <File FileName="Assets/02.Scripts/scMulty/MoveCtrl.cs" Line="155" Column="54" />
+      <File FileName="Assets/02.Scripts/scMulty/BulletCtrl.cs" Line="16" Column="15" />
+      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="4" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
