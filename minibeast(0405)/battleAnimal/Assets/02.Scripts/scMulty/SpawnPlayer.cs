@@ -6,11 +6,14 @@ public class SpawnPlayer : MonoBehaviour {
 	public bool spawnSwitch;//socket.on에서 instantiate를 하면 에러가 나서 업데이트 문에서 쓰기위한 꼼수
 	Vector3 spawnPos;
 	private string ClientID;//접속한 사람의 id	
+	private string team;
+
+	public GameObject Rteam, Bteam;
 
 	public IEnumerator CreatePlayer(){
 		spawnSwitch = false;
 
-		string data = ClientState.id+":25.0,50,25:"+ClientState.character;//접속한 유저의 아이디와 생성할 위치를 서버에 전송
+		string data = ClientState.id+":25.0,50,25:"+ClientState.character+":"+ClientState.team;//접속한 유저의 아이디와 생성할 위치를 서버에 전송
 		SocketStarter.Socket.Emit("createPlayerREQ",data);
 		yield return null;
 	}
@@ -21,19 +24,24 @@ public class SpawnPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ClientID = ClientState.id;
+		Rteam = GameObject.Find ("RedTeam");
+		Bteam = GameObject.Find ("BlueTeam");
 
 		PlayerPrefs.SetString("evolved", "false");
 		//StartCoroutine (CreatePlayer());
 		spawnSwitch = false;
 	}
 
-	public void setSpawn(string _id,Vector3 pos,string _char){
+	public void setSpawn(string _id,Vector3 pos,string _char,string _team){
 		id = _id;
 		spawnPos = pos;
 		character = _char;
+		team = _team;
+
 		spawnSwitch=true;
 	}
-
+	
+	//a.transform.parent = rms.transform;
 	// Update is called once per frame
 	void Update () {
 		if (spawnSwitch) {
@@ -41,6 +49,11 @@ public class SpawnPlayer : MonoBehaviour {
 			player = (GameObject)Resources.Load(character);
 			a = (GameObject)Instantiate(player,spawnPos,Quaternion.identity);
 			a.name=id;
+			if(team =="red"){
+				a.transform.parent = Rteam.transform;
+			}else{
+				a.transform.parent = Bteam.transform;
+			}
 			//a.GetComponentInChildren<HP_Bar>().target = a.transform;
 			spawnSwitch=false;
 		}

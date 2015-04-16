@@ -9,6 +9,7 @@ var socketRoom = {};
 var userNames = {};
 var userPos = {};
 var userCharacter = {};
+var userTeam={};
 
 var minionNames={};
 var minionPos = {};
@@ -104,10 +105,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         userNames[socket.id] = ret[0];
 	userPos[ret[0]] = ret[1];
         userCharacter[ret[0]] = ret[2];
-        
-        for(var key in userNames){
-            console.log(userNames[key]);
-        }
+        userTeam[ret[0]] = ret[3];
     });
     
     socket.on("preuserREQ", function(data){
@@ -119,7 +117,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         }
         
         for(var key in userNames){
-            ret2 += userNames[key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+"_";
+            ret2 += userNames[key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+":"+userTeam[userNames[key]]+"_";
         }
         console.log(ret2);
         io.sockets.in(socketRoom[socket.id]).emit("preuser1RES",ret1);

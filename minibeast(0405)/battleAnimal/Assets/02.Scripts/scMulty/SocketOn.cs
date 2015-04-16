@@ -71,11 +71,13 @@ public class SocketOn : MonoBehaviour {
 			string[] pos;
 			Vector3 spawnPos;
 			string _char;
+			string team;
 			
 			temp2 = temp.Split(':');
 			addId = temp2[0];//접속한 유저의 아이디
 			pos = temp2[1].Split(',');
 			_char = temp2[2];
+			team = temp2[3];
 			
 			spawnPos = new Vector3(float.Parse(pos[0]),
 			                       float.Parse(pos[1]),
@@ -83,7 +85,7 @@ public class SocketOn : MonoBehaviour {
 
 			while(_spawnPlayer.spawnSwitch==true){
 			}
-			_spawnPlayer.setSpawn(addId,spawnPos,_char);//해당 user를 instantiate한다.
+			_spawnPlayer.setSpawn(addId,spawnPos,_char,team);//해당 user를 instantiate한다.
 
 			if(ClientID==addId){
 				while(true){
@@ -177,6 +179,7 @@ public class SocketOn : MonoBehaviour {
 			string[] temp3;
 			Vector3 spawnPos;
 			string _char;
+			string team;
 
 			string[] temp2 = temp.Split('=');
 			sender = temp2[0];
@@ -191,9 +194,10 @@ public class SocketOn : MonoBehaviour {
 					                       float.Parse(pos[1]),
 					                       float.Parse(pos[2]));
 					_char = temp3[2];
+					team = temp3[3];
 					while(_spawnPlayer.spawnSwitch==true){
 					}
-						_spawnPlayer.setSpawn(id,spawnPos,_char);
+						_spawnPlayer.setSpawn(id,spawnPos,_char,team);
 				}
 			}
 		});
