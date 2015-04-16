@@ -1,6 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Desktop\minibeast(0416)\battleAnimal\Assets\02.Scripts\scWait\waitGUI.cs">
+    <Files>
+      <File FileName="Assets\02.Scripts\scStart\startUI.cs" Line="33" Column="4" />
+      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="48" Column="26" />
+      <File FileName="..\..\..\..\..\Desktop\minibeast(0416)\battleAnimal\Assets\02.Scripts\scWait\waitGUI.cs" Line="32" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

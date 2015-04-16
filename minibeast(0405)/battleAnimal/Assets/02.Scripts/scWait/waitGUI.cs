@@ -104,6 +104,10 @@ public class waitGUI : MonoBehaviour {
 		}
 
 		if (GUI.Button (new Rect (200, 500, 100, 50), "Ready")) {
+			if(0<=ClientState.order && ClientState.order<=2){
+				ClientState.team = "red";
+			}else
+				ClientState.team = "blue";
 			Application.LoadLevel("scMulty");
 		}
 
@@ -116,6 +120,7 @@ public class waitGUI : MonoBehaviour {
 		GUI.Label(new Rect(200,70,50,50),"room = "+ClientState.room);
 		GUI.Label(new Rect(200,130,50,50),"order = "+ClientState.order);
 		GUI.Label(new Rect(200,190,50,50),"character = "+ClientState.character);
+		GUI.Label(new Rect(200,250,50,50),"team = "+ClientState.team);
 	}
 
 	public void setCharacter(int _order,string _char){
