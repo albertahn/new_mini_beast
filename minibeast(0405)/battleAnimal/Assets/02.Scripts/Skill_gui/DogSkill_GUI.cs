@@ -9,7 +9,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	
 	
-	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird;
+	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird, xfourth ;
 	
 	public MoveCtrl myMoveCtrl;
 	
@@ -25,9 +25,10 @@ public class DogSkill_GUI : MonoBehaviour {
 	void Start () {
 		ClientID = ClientState.id;
 		
-		xfirst = 10;  yfirst = 400;
+		xfirst = 10;  yfirst = 470;
 		xsecond = 10 + stexture1.width;
-		xthird = 10 + stexture1.width + stexture2.width;
+		xthird = 20 + stexture1.width + stexture2.width;
+		xfourth = 30 + stexture1.width + stexture2.width+stexture3.width;
 		
 		//Get game object
 		myMoveCtrl = GetComponent<MoveCtrl> ();
@@ -40,59 +41,71 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	void OnGUI(){
 		
-		if (GUI.Button (new Rect (xfirst, yfirst, stexture1.width, stexture1.height), stexture1)) {
-			
-			
-			skillOneReady = true;
-			
-			GameObject dog =  GameObject.Find(ClientID);
-			
-			Vector3 spawnPos = dog.transform.position;
-			Quaternion rotationdog = dog.transform.rotation;
-			
-			GameObject a;
-			a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
-			a.name="firstskill";
-			
-			a.transform.parent = dog.transform;
+		if (this.gameObject.name == PlayerPrefs.GetString ("email")) {
 			
 			
 			
 			
-			//fixiate dog  select area to shoot  playermoving =false
+			if (GUI.Button (new Rect (xfirst, yfirst, stexture1.width, stexture1.height), stexture1)) {
+				
+				
+				skillOneReady = true;
+				
+				GameObject dog =  GameObject.Find(ClientID);
+				
+				Vector3 spawnPos = dog.transform.position;
+				Quaternion rotationdog = dog.transform.rotation;
+				
+				GameObject a;
+				a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
+				a.name="firstskill";
+				
+				a.transform.parent = dog.transform;
+				
+				
+				//fixiate dog  select area to shoot  playermoving =false
+				
+			}
 			
-		}
-		
-		
-		if (GUI.Button (new Rect (xsecond, yfirst, stexture2.width, stexture2.height), stexture2)) {
 			
-			skillTwoReady = true;
+			if (GUI.Button (new Rect (xsecond, yfirst, stexture2.width, stexture2.height), stexture2)) {
+				
+				skillTwoReady = true;
+				
+				Debug.Log("clicked 2 man");
+				GameObject dog =  GameObject.Find(ClientID);
+				
+				Vector3 spawnPos = dog.transform.position;
+				Quaternion rotationdog = dog.transform.rotation;
+				
+				GameObject a;
+				a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
+				a.name="secondskill";
+				
+				a.transform.parent = dog.transform;
+				
+				
+			}
 			
-			Debug.Log("clicked 2 man");
-			GameObject dog =  GameObject.Find(ClientID);
+			if (GUI.Button (new Rect (xthird, yfirst, stexture3.width, stexture3.height), stexture3)) {
+				
+				Debug.Log("clickedman");
+				
+				//myMoveCtrl.skill_touch = true;
+				
+			}//endthrid
 			
-			Vector3 spawnPos = dog.transform.position;
-			Quaternion rotationdog = dog.transform.rotation;
+			if (GUI.Button (new Rect (xfourth, yfirst, stexture3.width, stexture3.height), "items")) {
+				
+				Debug.Log("clickedman");
+				
+				//myMoveCtrl.skill_touch = true;
+				
+			}
 			
-			GameObject a;
-			a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
-			a.name="secondskill";
 			
-			a.transform.parent = dog.transform;
-			
-			
-		}
-		
-		if (GUI.Button (new Rect (xthird, yfirst, stexture3.width, stexture3.height), stexture3)) {
-			
-			Debug.Log("clickedman");
-			
-			//myMoveCtrl.skill_touch = true;
-			
-		}
-		
-		
-	}
+		}//if is mine
+	}//end gui
 	
 	// Update is called once per frame
 	void Update () {
@@ -129,9 +142,8 @@ public class DogSkill_GUI : MonoBehaviour {
 					Destroy (skill1);	
 					
 					
-					
 				}//skill 1 ready true
-
+				
 				if(skillTwoReady == true){
 					GameObject dog =  GameObject.Find(ClientID);
 					
@@ -142,7 +154,7 @@ public class DogSkill_GUI : MonoBehaviour {
 					dog.transform.position = Vector3.MoveTowards(dog.transform.position, clickendpoint, step);
 					
 					skillTwoReady = false;
-
+					
 					GameObject skill1 =  GameObject.Find("secondskill");
 					Destroy (skill1);	
 				}

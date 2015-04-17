@@ -9,7 +9,7 @@ public class waitSocketStarter : MonoBehaviour
 	
 	void Awake()
 	{
-		url = "http://127.0.0.1:8080/";//"http://119.9.76.77:3000/";
+		url = "http://119.9.76.77:3000/";//"http://127.0.0.1:8080/";//"http://119.9.76.77:3000/";
 		Socket = new Client(url);
 		Socket.Opened += SocketOpened;
 		Socket.Connect();
