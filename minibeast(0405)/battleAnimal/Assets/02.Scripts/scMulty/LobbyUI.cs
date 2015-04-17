@@ -25,10 +25,10 @@ public class LobbyUI : MonoBehaviour {
 						Application.Quit ();
 		}*/
 		
-		GUI.Label(new Rect(200,10,50,50),"id = "+ClientState.id);
+	/*	GUI.Label(new Rect(200,10,50,50),"id = "+ClientState.id);
 		GUI.Label(new Rect(200,70,50,50),"room = "+ClientState.room);
 		GUI.Label(new Rect(200,130,50,50),"order = "+ClientState.order);
 		GUI.Label(new Rect(200,190,50,50),"character = "+ClientState.character);
-		GUI.Label(new Rect(200,250,50,50),"team = "+ClientState.team);
+		GUI.Label(new Rect(200,250,50,50),"team = "+ClientState.team);*/
 	}
 }

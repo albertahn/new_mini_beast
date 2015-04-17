@@ -9,9 +9,13 @@ public class MainFortress : MonoBehaviour {
 
 	public int hp = 400;
 
+	public bool buildingDead;
+
 	// Use this for initialization
 	void Start () {
 	
+		buildingDead = false;
+
 	}
 	
 	// Update is called once per frame
@@ -20,6 +24,33 @@ public class MainFortress : MonoBehaviour {
 
 
 	
+	}
+
+	void OnGUI(){
+
+		if (this.gameObject.name == "blue_building" && buildingDead==true ) {
+		
+						if (GUI.Button (new Rect (300, 200, 450, 300), "Red Team Win")) {
+			
+								PlayerPrefs.SetString ("email", "");
+								PlayerPrefs.SetString ("username", "");
+								PlayerPrefs.SetString ("user_index", "");
+			
+								Application.LoadLevel ("scLogin");
+			
+						}
+		}else if(this.gameObject.name == "red_building" && buildingDead==true){
+
+			if (GUI.Button (new Rect (300, 0, 50, 30), "Blue Team Win")) {
+				
+				PlayerPrefs.SetString ("email", "");
+				PlayerPrefs.SetString ("username", "");
+				PlayerPrefs.SetString ("user_index", "");
+				
+				Application.LoadLevel ("scLogin");
+				
+			}
+		}
 	}
 
 
@@ -48,7 +79,7 @@ public class MainFortress : MonoBehaviour {
 
 			if(hp<=0)
 			{
-				//MonsterDie();
+				buildingDie();
 			}
 		
 
@@ -70,5 +101,11 @@ public class MainFortress : MonoBehaviour {
 		Destroy (_blood2, 5.0f);
 		
 		yield return null;
+	}
+
+	public void buildingDie(){
+
+		buildingDead = true;
+
 	}
 }

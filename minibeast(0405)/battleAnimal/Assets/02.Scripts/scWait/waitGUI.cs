@@ -104,7 +104,8 @@ public class waitGUI : MonoBehaviour {
 		}
 
 		if (GUI.Button (new Rect (200, 500, 100, 50), "Ready")) {
-			if(0<=ClientState.order && ClientState.order<=2){
+			//if(0<=ClientState.order && ClientState.order<=2){
+			if(ClientState.order %2 ==0){
 				ClientState.team = "red";
 			}else
 				ClientState.team = "blue";

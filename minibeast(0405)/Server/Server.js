@@ -65,7 +65,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
          function createMinion(){
             timer1 = setInterval(redSender,1000);
             timer2= setInterval(blueSender,1000);
-            var maxMinion =50;
+            var maxMinion =10;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;

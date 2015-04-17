@@ -49,7 +49,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 	void playerDie(){
 		this.collider.enabled = false;
-		GetComponent<minionCtrl> ().isDie = true;
+		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 		

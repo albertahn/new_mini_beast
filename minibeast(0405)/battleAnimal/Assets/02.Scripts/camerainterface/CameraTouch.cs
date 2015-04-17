@@ -16,11 +16,18 @@ public class CameraTouch : MonoBehaviour {
 	public float speed;
 	void Start () {
 
-		speed  = 0.1F;
+		speed  = 0.5F;
 
-		camera = GameObject.Find ("Main Camera").camera;
+
 		h = 0.0f;
 		v = 0.0f;
+
+		camera = GameObject.Find ("Main Camera").camera;
+		/*
+			GameObject a = GameObject.Find (PlayerPrefs.GetString("email"));
+
+		camera.transform.LookAt(a.transform.position);*/
+
 	}
 	
 	// Update is called once per frame
