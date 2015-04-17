@@ -73,7 +73,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
             function redSender(){
                 redIdx++;
                 var data = "29.0,50.0,30.0";
-                minionNames[redIdx] = "rm"+redIdx;
+                minionNames["rm"+redIdx] = "rm"+redIdx;
                 minionPos["rm"+redIdx] = data;                
                 data = "rm"+redIdx+":"+data;         
                 //console.log("data = "+data);
@@ -86,7 +86,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
             function blueSender(){
                 blueIdx++;
                 var data = "75.0,50.0,70.0";
-                minionNames[blueIdx] = "bm"+blueIdx;
+                minionNames["bm"+blueIdx] = "bm"+blueIdx;
                 minionPos["bm"+blueIdx] = data;
                 data = "bm"+blueIdx+":"+data;                
                  io.sockets.in(socketRoom[socket.id]).emit("createBlueMinionRES",data);
@@ -119,6 +119,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         for(var key in userNames){
             ret2 += userNames[key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+":"+userTeam[userNames[key]]+"_";
         }
+        console.log(ret1);
         console.log(ret2);
         io.sockets.in(socketRoom[socket.id]).emit("preuser1RES",ret1);
         io.sockets.in(socketRoom[socket.id]).emit("preuser2RES",ret2);

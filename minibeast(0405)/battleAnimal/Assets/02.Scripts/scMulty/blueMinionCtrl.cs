@@ -164,4 +164,11 @@ public class blueMinionCtrl : MonoBehaviour {
 			}
 		}
 	}
+
+	
+	
+	public void setSync(Vector3 _pos,Vector3 _tg){
+		transform.position=Vector3.Lerp(transform.position,_pos,Time.deltaTime*1.0f);
+		transform.LookAt (_tg);
+	}
 }

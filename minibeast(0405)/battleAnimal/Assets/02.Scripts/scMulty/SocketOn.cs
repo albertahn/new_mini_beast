@@ -26,11 +26,6 @@ public class SocketOn : MonoBehaviour {
 	private bool moveSyncSwitch;
 	private bool loadlevelSwitch;
 
-	public string minionID;
-	private Vector3 minionPos;
-	private Vector3 minionTg;
-	private bool minionSyncSwitch;
-
 	private bool building_health_change;
 	private string building_name;
 	private int building_hp_int;
@@ -40,6 +35,9 @@ public class SocketOn : MonoBehaviour {
 	private string minion_name;
 	private int minion_hp_int;
 
+	private string minionID;
+	private Vector3 minionPos, minionTg;
+	private bool minionSyncSwitch;
 	// Use this for initialization
 	void Start () {
 		Screen.SetResolution(480, 800, true);
@@ -53,6 +51,7 @@ public class SocketOn : MonoBehaviour {
 		outUserSwitch = false;
 		attackSwitch = false;
 		moveSyncSwitch = false;
+		minionSyncSwitch = false;
 
 		SocketStarter.Socket.On ("createRoomRES", (data) =>{
 			string temp = data.Json.args[0].ToString();
@@ -246,12 +245,10 @@ public class SocketOn : MonoBehaviour {
 					minionTg = new Vector3(float.Parse(resPos[0]),
 					                       float.Parse(resPos[1]),
 					                       float.Parse(resPos[2]));
-					
-					while(true){
-						if(minionSyncSwitch==false)
-							break;
-					}				 	
-					minionSyncSwitch = true;
+					while(minionSyncSwitch){
+
+					}
+					minionSyncSwitch=true;
 				}
 			}
 		});
@@ -333,7 +330,13 @@ public class SocketOn : MonoBehaviour {
 		}
 
 		if (minionSyncSwitch) {
-			minionSync();
+			GameObject a = GameObject.Find (minionID);
+			if(a!=null){
+				if(a.name[0]=='r')
+				a.GetComponent<minionCtrl>().setSync(minionPos,minionTg);
+				else
+					a.GetComponent<blueMinionCtrl>().setSync(minionPos,minionTg);
+			}
 			minionSyncSwitch=false;
 		}
 	}
@@ -349,17 +352,6 @@ public class SocketOn : MonoBehaviour {
 		GameObject mininow = GameObject.Find (""+minion_name);
 		mininow.GetComponent<minion_state>().hp = minion_hp_int;
 		
-	}
-
-	void minionSync(){
-		if (minionID != null) {
-			GameObject a = GameObject.Find (minionID);
-			if(a!=null){
-				a.transform.position = minionPos;
-				a.transform.LookAt (minionTg);
-			}
-			minionID=null;
-		}
 	}
 
 	void moveUser(){

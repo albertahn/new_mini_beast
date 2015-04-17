@@ -30,6 +30,10 @@ public class minionCtrl : MonoBehaviour {
 
 	public bool isMaster;
 
+	private string minionID;
+	private Vector3 minionPos, minionTg;
+	private bool minionSyncSwitch;
+
 	// Use this for initialization
 	void Start () {
 		traceDist = 5.0f;
@@ -98,16 +102,15 @@ public class minionCtrl : MonoBehaviour {
 		}
 
 		if (isTrace) {
-
 			if(playerTr !=null){
 				syncTarget = target = playerTr.position;
 				minionTr.LookAt(target);
 				float step = speed * Time.deltaTime;
 				minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);
-
 			}
-
 		}
+		if (minionSyncSwitch)
+			moveSync ();
 	}
 
 	int extractNum(string a){
@@ -164,5 +167,25 @@ public class minionCtrl : MonoBehaviour {
 					moveKey = true;
 			}
 		}
+	}
+
+	void moveSync(){		
+		float step = 4* Time.deltaTime;
+		
+		transform.position = Vector3.MoveTowards(transform.position, minionPos, step);
+		
+		transform.LookAt(minionPos);
+		
+		
+		if (transform.position == minionPos) {
+			minionSyncSwitch = false;			
+		}// arrived switch
+	}
+
+	public void setSync(Vector3 _pos,Vector3 _tg){
+		minionPos = _pos;
+		minionTg = _tg;
+
+		minionSyncSwitch = true;
 	}
 }
