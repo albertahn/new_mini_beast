@@ -42,8 +42,11 @@ public class BulletCtrl : MonoBehaviour {
 		if (target != null) {
 			if(target.name==coll.name){
 				if(target.tag=="MINION"){
+					if(target.name[0]=='r')
 					target.GetComponent<minion_state>().Heated(gameObject);
-				Destroy (this.gameObject);
+					else
+					target.GetComponent<blue_minion_state>().Heated(gameObject);
+					Destroy (this.gameObject);
 				}else if(target.tag=="Player"){
 
 					target.GetComponent<PlayerHealthState>().Heated(gameObject);

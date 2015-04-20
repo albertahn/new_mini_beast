@@ -1,6 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\minion_scripts\blue_minion_state.cs">
+    <Files>
+      <File FileName="Assets\02.Scripts\minion_scripts\blue_minion_HP.cs" Line="15" Column="18" />
+      <File FileName="Assets\02.Scripts\minion_scripts\minion_state.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\user_interface\My_inteface_hp_bar.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\Player_hp\PlayerHealthState.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\minion_scripts\blue_minion_state.cs" Line="114" Column="1" />
+      <File FileName="Assets\02.Scripts\minion_scripts\minion_HP.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\BulletCtrl.cs" Line="48" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

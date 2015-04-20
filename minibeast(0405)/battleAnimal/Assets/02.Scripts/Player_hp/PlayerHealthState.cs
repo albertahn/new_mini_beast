@@ -27,9 +27,6 @@ public class PlayerHealthState : MonoBehaviour {
 		Collider coll = obj.collider;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
-
-
-
 		
 		
 		hp -= obj.GetComponent<BulletCtrl>().damage;
