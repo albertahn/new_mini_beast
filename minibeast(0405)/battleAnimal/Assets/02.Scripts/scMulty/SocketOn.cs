@@ -39,7 +39,15 @@ public class SocketOn : MonoBehaviour {
 	private Vector3 minionPos, minionTg;
 	private bool minionSyncSwitch;
 	// Use this for initialization
+
+	public GameObject nmanager; // = GameObject.Find("NetworkManager");
+	public Skill_socket_reciever skill_reciever;
+
 	void Start () {
+
+		skill_reciever = GameObject.Find("NetworkManager").GetComponent<Skill_socket_reciever> ();
+		//skill_reciever = nmanager.GetComponent<Skill_socket_reciever> ();
+
 		Screen.SetResolution(480, 800, true);
 
 		_spawnPlayer = GetComponent<SpawnPlayer> ();
@@ -298,7 +306,48 @@ public class SocketOn : MonoBehaviour {
 		});
 		
 		SocketStarter.Socket.Emit ("createRoomREQ", ClientID+":"+ClientState.room);
-	}
+//skills sync
+
+	
+		//skill attack
+		SocketStarter.Socket.On ("SkillAttack", (data) =>{	
+
+
+			/*string[] temp = data.Json.args[0].ToString().Split(':');
+			resID = temp[0];
+			string[] resPos = temp[1].Split(',');
+			newPos = new Vector3(float.Parse(resPos[0]),
+			                     float.Parse(resPos[1]),
+			                     float.Parse(resPos[2]));
+			if(ClientID!=resID){
+				moveUserSwitch=true;
+			}
+			Debug.Log("hithere: " + data.ToString());
+*/
+
+
+
+			skill_reciever.skillShot(data.Json.args[0].ToString());
+
+
+	
+
+
+			//what character
+			
+			/*string[] temp = data.Json.args[0].ToString().Split(':');
+			building_name = temp[0];
+			building_hp_int = int.Parse(temp[1]);
+			
+			
+			Debug.Log("attack: " + building_name+":"+building_hp_int);
+			//building_health_change= true;*/
+		});
+
+
+
+
+	}//end start
 	
 	// Update is called once per frame
 	void Update () {

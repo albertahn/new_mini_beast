@@ -23,6 +23,7 @@ public class TurtleSkill : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
 				ClientID = ClientState.id;
 		
 				xfirst = 10;
@@ -144,6 +145,11 @@ public class TurtleSkill : MonoBehaviour {
 					
 					GameObject skill1 =  GameObject.Find("firstskill");
 					Destroy (skill1);	
+
+					Vector3	clickendpoint= hiterone.point;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					
+					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
 					
 				}//skill 1 ready true

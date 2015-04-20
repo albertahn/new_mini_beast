@@ -198,4 +198,10 @@ socket.on('attackMinion', function(data){
         io.sockets.in(socketRoom[socket.id]).emit("attackBuilding", data);
     });
 
+ socket.on('SkillAttack', function(data){
+            
+        io.sockets.in(socketRoom[socket.id]).emit("SkillAttack", data);
+    });
+
+
 });

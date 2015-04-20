@@ -6,6 +6,8 @@ public class PlayerHealthState : MonoBehaviour {
 
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
+
+	public int maxhp = 1100;
 	
 	public int hp = 1100;
 
@@ -22,7 +24,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 	public void Heated(GameObject obj){
 
-		Debug.Log ("playerhp: "+hp);
+		//Debug.Log ("playerhp: "+hp);
 
 		Collider coll = obj.collider;
 		
@@ -40,7 +42,7 @@ public class PlayerHealthState : MonoBehaviour {
 			playerDie();
 		}
 		
-		Destroy (obj.gameObject);
+		//Destroy (obj.gameObject);
 	}//end heated
 
 
@@ -60,7 +62,7 @@ public class PlayerHealthState : MonoBehaviour {
 			//PlayerPrefs.SetString("evolved", "true");
 			
 		}*/
-		Destroy (this.gameObject, 3.0f);
+	//	Destroy (this.gameObject, 3.0f);
 		
 	}
 	

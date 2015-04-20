@@ -43,24 +43,22 @@ public class DogSkill_GUI : MonoBehaviour {
 		
 		if (this.gameObject.name == PlayerPrefs.GetString ("email")) {
 			
-			
-			
-			
+
 			if (GUI.Button (new Rect (xfirst, yfirst, stexture1.width, stexture1.height), stexture1)) {
 				
 				
 				skillOneReady = true;
 				
-				GameObject dog =  GameObject.Find(ClientID);
+				GameObject dogy =  GameObject.Find(ClientID);
 				
-				Vector3 spawnPos = dog.transform.position;
-				Quaternion rotationdog = dog.transform.rotation;
+				Vector3 spawnPos = dogy.transform.position;
+				Quaternion rotationdog = dogy.transform.rotation;
 				
 				GameObject a;
 				a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
 				a.name="firstskill";
 				
-				a.transform.parent = dog.transform;
+				a.transform.parent = dogy.transform;
 				
 				
 				//fixiate dog  select area to shoot  playermoving =false
@@ -73,16 +71,16 @@ public class DogSkill_GUI : MonoBehaviour {
 				skillTwoReady = true;
 				
 				Debug.Log("clicked 2 man");
-				GameObject dog =  GameObject.Find(ClientID);
+				GameObject dogy =  GameObject.Find(ClientID);
 				
-				Vector3 spawnPos = dog.transform.position;
-				Quaternion rotationdog = dog.transform.rotation;
+				Vector3 spawnPos = dogy.transform.position;
+				Quaternion rotationdog = dogy.transform.rotation;
 				
 				GameObject a;
 				a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
 				a.name="secondskill";
 				
-				a.transform.parent = dog.transform;
+				a.transform.parent = dogy.transform;
 				
 				
 			}
@@ -126,6 +124,7 @@ public class DogSkill_GUI : MonoBehaviour {
 				
 				
 				if(skillOneReady ==true){
+
 					//Debug.Log(""+skillfire.ToString());
 					GameObject dog =  GameObject.Find(ClientID);
 					
@@ -133,18 +132,23 @@ public class DogSkill_GUI : MonoBehaviour {
 					
 					skillfire = dog.GetComponent<FireSkill> ();					
 					skillfire.Fireman();
-					
 					//destroy gameobject]
 					
 					skillOneReady = false;
 					
 					GameObject skill1 =  GameObject.Find("firstskill");
 					Destroy (skill1);	
+
+					Vector3	clickendpoint= hiterone.point;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+
+					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
 					
 				}//skill 1 ready true
 				
 				if(skillTwoReady == true){
+
 					GameObject dog =  GameObject.Find(ClientID);
 					
 					dog.transform.LookAt(hiterone.point);
