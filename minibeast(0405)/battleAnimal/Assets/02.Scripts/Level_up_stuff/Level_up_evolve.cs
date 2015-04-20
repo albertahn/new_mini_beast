@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Level_up_evolve : MonoBehaviour {
-
+	
 	public int currentlevel;
 	
 	public int killint;
@@ -12,20 +12,20 @@ public class Level_up_evolve : MonoBehaviour {
 	public bool switchToEvol;
 	
 	public bool evol_already;
-
-
+	
+	
 	// Use this for initialization
 	void Start () {
 		
 		switchToEvol = false;
 		
 		evol_already = false;
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 		
 		killint= PlayerPrefs.GetInt ("minions_killed");
 		
@@ -50,10 +50,10 @@ public class Level_up_evolve : MonoBehaviour {
 			switchToEvol=false;
 			evol_already = true;
 		}
-
-
+		
+		
 	} //end update
-
+	
 	
 	void OnGUI(){
 		
@@ -86,12 +86,15 @@ public class Level_up_evolve : MonoBehaviour {
 			aa = (GameObject)Instantiate(firstEvolvPlayer, pastpos, Quaternion.identity);
 			
 			aa.name= PlayerPrefs.GetString("email");
-			
+			if(ClientState.team=="red")				
+				aa.transform.parent =  GameObject.Find ("RedTeam").transform;
+			else				
+				aa.transform.parent =  GameObject.Find ("BlueTeam").transform;
 		}
 		
 		PlayerPrefs.SetString ("evolved", "true");
 		evol_already = true;
 		
 	}//end evolution
-
+	
 }

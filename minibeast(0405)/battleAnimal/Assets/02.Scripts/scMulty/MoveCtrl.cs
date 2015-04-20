@@ -109,10 +109,9 @@ public class MoveCtrl : MonoBehaviour {
 						SocketStarter.Socket.Emit ("attackREQ", data);	
 						attack(targetName);								
 					}//else hit player
-				}			
-				
-			}		
-			
+				}				
+			}
+
 			#else
 		
 		
@@ -121,11 +120,12 @@ public class MoveCtrl : MonoBehaviour {
 						Debug.DrawRay (ray.origin, ray.direction * 100.0f, Color.green);
 		
 						RaycastHit hitman;
+						RaycastHit hitman2;
 		
-		
-						if (Input.GetMouseButtonDown (0)) {			
-							if (Physics.Raycast (ray, out hitman, Mathf.Infinity)) {
-								if(hitman.collider.tag =="FLOOR"){
+			
+			if (Input.GetMouseButtonDown (0)) {	
+						if (Physics.Raycast (ray, out hitman, Mathf.Infinity,1<<LayerMask.NameToLayer("FLOOR"))) {
+
 									myxpos = hitman.point.x; //Input.touches [0].position.x;
 									myypos = hitman.point.y;  //Input.touches [0].position.y;
 									myzpos = hitman.point.z;
@@ -137,14 +137,16 @@ public class MoveCtrl : MonoBehaviour {
 										
 									move();
 								}
-					else if(hitman.collider.tag =="BUILDING" || hitman.collider.tag =="MINION"||hitman.collider.tag =="Player"){
-						string targetName = hitman.collider.name;
-						if(hitman.collider.tag=="Player"){
-							string parentName = hitman.collider.gameObject.transform.parent.name;
+					
+					if(Physics.Raycast (ray, out hitman2, Mathf.Infinity)){
+						if(hitman2.collider.tag =="BUILDING" || hitman2.collider.tag =="MINION"||hitman2.collider.tag =="Player"){
+						string targetName = hitman2.collider.name;
+						if(hitman2.collider.tag=="Player"){
+							string parentName = hitman2.collider.gameObject.transform.parent.name;
 
 							if(ClientState.team=="red"&&parentName=="BlueTeam"
 							   ||ClientState.team=="blue"&&parentName=="RedTeam"){
-								Vector3 target = hitman.point;
+								Vector3 target = hitman2.point;
 								attackPoint = target;
 
 								string data = ClientID + ":" + targetName;
@@ -154,7 +156,7 @@ public class MoveCtrl : MonoBehaviour {
 						}else{
 							if(ClientState.team=="red"&&targetName[0]=='b'
 							   ||ClientState.team=="blue"&&targetName[0]=='r'){
-								Vector3 target = hitman.point;
+								Vector3 target = hitman2.point;
 								attackPoint = target;
 							
 								string data = ClientID + ":" + targetName;
@@ -163,8 +165,8 @@ public class MoveCtrl : MonoBehaviour {
 							}
 						}
 					}
+				}
 				} ///raycasr
-			}//mousedown
 						#endif
 		}
 
@@ -179,10 +181,11 @@ public class MoveCtrl : MonoBehaviour {
 
 		if (isAttack) {
 			if(targetObj!=null){
-				if(targetObj.GetComponent<minionCtrl>()!=null){
-				if(targetObj.GetComponent<minionCtrl>().isDie==true)
+				//if(targetObj.GetComponent<minionCtrl>()!=null){
+				if(targetObj.name[0]=='b'){
+					if(targetObj.GetComponent<blueMinionCtrl>().isDie==true)
 					idle ();
-				else{
+					else{
 					tr.LookAt (targetObj.transform.position);			
 					_fireCtrl.Fire(targetObj.name);
 
@@ -191,7 +194,20 @@ public class MoveCtrl : MonoBehaviour {
 						isMoveAndAttack = true;
 						playermoving = true;
 					}
-				}
+					}
+				}else if(targetObj.name[0]=='r'){
+					if(targetObj.GetComponent<minionCtrl>().isDie==true)
+						idle ();
+					else{
+						tr.LookAt (targetObj.transform.position);			
+						_fireCtrl.Fire(targetObj.name);
+						
+						if (Vector3.Distance (tr.position, targetObj.transform.position) > _fireCtrl.distance) {
+							clickendpoint=targetObj.transform.position;
+							isMoveAndAttack = true;
+							playermoving = true;
+						}
+					}
 				}else{//non minions
 					tr.LookAt (targetObj.transform.position);			
 					_fireCtrl.Fire(targetObj.name);
@@ -216,6 +232,7 @@ public class MoveCtrl : MonoBehaviour {
 			}
 		}
 	}//end update
+
 	public void attack(string _targetName){
 		targetObj = GameObject.Find(_targetName);
 		if (targetObj != null) {
