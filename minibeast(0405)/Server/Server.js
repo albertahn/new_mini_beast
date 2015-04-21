@@ -1,4 +1,4 @@
-var io = require("socket.io").listen(3000);
+﻿var io = require("socket.io").listen(3000);
 
 io.configure(function(){  
     io.set('log level', 2);
@@ -119,8 +119,6 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         for(var key in userNames){
             ret2 += userNames[key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+":"+userTeam[userNames[key]]+"_";
         }
-        console.log(ret1);
-        console.log(ret2);
         io.sockets.in(socketRoom[socket.id]).emit("preuser1RES",ret1);
         io.sockets.in(socketRoom[socket.id]).emit("preuser2RES",ret2);
     });
@@ -185,12 +183,11 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
     });
 
 
-socket.on('attackMinion', function(data){
- var ret2 = data.split(":");
+    socket.on('attackMinion', function(data){
+        var ret2 = data.split(":");
         buildingHP[ret2[0]] = ret2[1];         
         io.sockets.in(socketRoom[socket.id]).emit("attackMinion", data);
-
-});
+    });
 
     socket.on('attackBuilding', function(data){
         var ret2 = data.split(":");
@@ -198,9 +195,9 @@ socket.on('attackMinion', function(data){
         io.sockets.in(socketRoom[socket.id]).emit("attackBuilding", data);
     });
 
- socket.on('SkillAttack', function(data){
+    socket.on('SkillAttack', function(data){
             
-        io.sockets.in(socketRoom[socket.id]).emit("SkillAttack", data);
+       io.sockets.in(socketRoom[socket.id]).emit("SkillAttack", data);
     });
 
 

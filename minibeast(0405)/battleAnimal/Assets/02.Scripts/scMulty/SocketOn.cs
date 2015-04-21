@@ -253,6 +253,7 @@ public class SocketOn : MonoBehaviour {
 					minionTg = new Vector3(float.Parse(resPos[0]),
 					                       float.Parse(resPos[1]),
 					                       float.Parse(resPos[2]));
+
 					while(minionSyncSwitch){
 
 					}
@@ -411,18 +412,13 @@ public class SocketOn : MonoBehaviour {
 	void moveSync(){
 		GameObject a = GameObject.Find (resID);
 		//a.GetComponent<Transform> ().position = newPos;
-
 		
 		float step = 4* Time.deltaTime;
-		
 		a.transform.position = Vector3.MoveTowards(a.transform.position, newPos, step);
-		
 		a.transform.LookAt(newPos);
-		
 		
 		if (a.GetComponent<Transform> ().position == newPos) {
 			moveSyncSwitch = false;
-			
 		}// arrived switch
 	}
 }

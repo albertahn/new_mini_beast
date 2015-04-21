@@ -35,6 +35,9 @@ public class blueMinionCtrl : MonoBehaviour {
 	public bool isAttack;
 	public bool isMaster;
 	
+	private Vector3 minionPos, minionTg;
+	private bool minionSyncSwitch;
+	
 	
 	public GameObject targetObj;
 	
@@ -42,7 +45,9 @@ public class blueMinionCtrl : MonoBehaviour {
 	void Start () {
 		traceDist = 10.0f;
 		attackDist = 5.0f;
-		
+
+		minionSyncSwitch = false;
+
 		moveKey = true;
 		traceKey = false;
 		attackKey = false;
@@ -125,6 +130,9 @@ public class blueMinionCtrl : MonoBehaviour {
 				_fireCtrl.Fire(targetObj.name);				
 			}
 		}
+
+		if (minionSyncSwitch)
+			moveSync ();
 	}
 	
 	public void move(){
@@ -182,9 +190,22 @@ public class blueMinionCtrl : MonoBehaviour {
 			
 		}
 	}
+	void moveSync(){		
+		float step = 4* Time.deltaTime;
+		
+		transform.position = Vector3.MoveTowards(transform.position, minionPos, step);
+		
+		transform.LookAt(minionPos);		
+		
+		if (transform.position == minionPos) {
+			minionSyncSwitch = false;			
+		}// arrived switch
+	}
 	
 	public void setSync(Vector3 _pos,Vector3 _tg){
-		transform.position=Vector3.Lerp(transform.position,_pos,Time.deltaTime*1.0f);
-		transform.LookAt (_tg);
+		minionPos = _pos;
+		minionTg = _tg;
+		
+		minionSyncSwitch = true;
 	}
 }
