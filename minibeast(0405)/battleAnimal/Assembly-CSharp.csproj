@@ -64,6 +64,7 @@
      <Compile Include="Assets\02.Scripts\minion_scripts\blue_outer_collider.cs" />
      <Compile Include="Assets\02.Scripts\minion_scripts\mBulletCtrl.cs" />
      <Compile Include="Assets\02.Scripts\minion_scripts\mFireCtrl.cs" />
+     <Compile Include="Assets\02.Scripts\minion_scripts\minionAttackReceiver.cs" />
      <Compile Include="Assets\02.Scripts\minion_scripts\minion_HP.cs" />
      <Compile Include="Assets\02.Scripts\minion_scripts\minion_state.cs" />
      <Compile Include="Assets\02.Scripts\minion_scripts\red_outer_collider.cs" />

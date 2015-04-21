@@ -139,6 +139,10 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         io.sockets.in(socketRoom[socket.id]).emit("moveSyncRES", data);
     });
     
+    socket.on("minionAttackREQ",function(data){
+        io.sockets.in(socketRoom[socket.id]).emit("minionAttackRES", data); 
+    });
+    
     socket.on("minionSyncREQ",function(data){  
         if(data !=null){//edit?   
             io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
