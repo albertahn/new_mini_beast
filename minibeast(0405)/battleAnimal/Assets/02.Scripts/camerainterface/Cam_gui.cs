@@ -21,14 +21,6 @@ public class Cam_gui : MonoBehaviour {
 
 		
 	}
-	
-	void Awake(){
-		www= new WWW(url);
-		
-	
-
-	
-	}
 
 
 	void OnGUI(){
@@ -44,8 +36,8 @@ public class Cam_gui : MonoBehaviour {
 			Application.LoadLevel ("scLogin");
 			
 				}
-
-		if (www.isDone == true) {
+		//www= new WWW(url);
+	/*	if (www.isDone == true) {
 			texTmp = new Texture2D (200, 200);
 			www.LoadImageIntoTexture (texTmp);
 		}
@@ -57,7 +49,7 @@ public class Cam_gui : MonoBehaviour {
 
 		}//doanloaded image
 
-
+*/
 
 
 		}//end gui

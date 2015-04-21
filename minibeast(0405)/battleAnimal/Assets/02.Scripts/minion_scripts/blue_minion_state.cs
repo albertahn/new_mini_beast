@@ -7,6 +7,8 @@ public class blue_minion_state : MonoBehaviour {
 	public GameObject bloodDecal;
 	
 	public int hp = 100;
+
+	public string firedbyname;
 	
 	// Use this for initialization
 	void Start () {
@@ -37,13 +39,7 @@ public class blue_minion_state : MonoBehaviour {
 			hp -= coll.gameObject.GetComponent<SkillFirstCrl>().damage;
 			Debug.Log("SKILL ONE");
 			
-			
-			//emit to the server the hp
-			
-			/*string data = this.name+":" + hp.ToString()+"";
-			SocketStarter.Socket.Emit ("attackBuilding", data);
-			*/
-			
+
 			
 			if(hp<=0)
 			{
@@ -56,8 +52,10 @@ public class blue_minion_state : MonoBehaviour {
 	}
 	
 	
-	public void Heated(GameObject obj){
+	public void Heated(string firedby, GameObject obj){
 		Collider coll = obj.collider;
+
+		firedbyname = firedby;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));		
 		
@@ -65,8 +63,19 @@ public class blue_minion_state : MonoBehaviour {
 		//if obj.name
 		
 		if (obj.tag == "BULLET_BALL") {
+
+			Component minionbullet = obj.GetComponent<mBulletCtrl> ();
+			Component playerbullet = obj.GetComponent<BulletCtrl> ();
+
+			if(minionbullet !=null){
+
+				hp -= obj.GetComponent<mBulletCtrl> ().damage;
+
+			}else{
+				hp -= obj.GetComponent<BulletCtrl> ().damage;
+			}
 			
-			hp -= obj.GetComponent<BulletCtrl> ().damage;
+
 			
 		} else if (coll.gameObject.tag == "SKILL_FIRST") {
 			
@@ -92,18 +101,16 @@ public class blue_minion_state : MonoBehaviour {
 		this.collider.enabled = false;
 		GetComponent<blueMinionCtrl> ().isDie = true;
 		
-		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 		
-		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
-		
-		if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
+		if(ClientState.id==firedbyname){
 			
+			int oldInt = PlayerPrefs.GetInt ("minions_killed");
+			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 			
-			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().switchToEvol=true;
-			
-			//PlayerPrefs.SetString("evolved", "true");
-			
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().checkLevelUp();
 		}
+
+
 		Destroy (this.gameObject, 3.0f);
 		
 	}

@@ -17,7 +17,7 @@ public class moveSync: MonoBehaviour {
 	void Update () {		
 		if (ClientState.id == gameObject.name) {
 				if(Time.time-startTime>duration){
-					Debug.Log ("it's different");
+					//Debug.Log ("it's different");
 					string data = ClientState.id+":"+tr.position.x+","+tr.position.y+","+tr.position.z;
 					SocketStarter.Socket.Emit("moveSyncREQ",data);
 					startTime =Time.time;

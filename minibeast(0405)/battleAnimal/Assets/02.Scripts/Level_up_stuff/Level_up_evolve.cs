@@ -20,28 +20,15 @@ public class Level_up_evolve : MonoBehaviour {
 		switchToEvol = false;
 		
 		evol_already = false;
+
+		PlayerPrefs.SetInt ("minions_killed", 0);
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		
-		killint= PlayerPrefs.GetInt ("minions_killed");
-		
-		if (1 < killint && killint <= 3) {
-			
-			currentlevel = 1;
-			
-		} else if (3 < killint && killint <= 6) {
-			
-			currentlevel = 2;
-			
-			//StartEvolution();
-			
-			//switchToEvol = true;
-		}//ifelse
-		
+
 		
 		if(switchToEvol==true && PlayerPrefs.GetString("evolved") =="false"){
 			
@@ -53,7 +40,29 @@ public class Level_up_evolve : MonoBehaviour {
 		
 		
 	} //end update
-	
+
+	public void checkLevelUp(){
+		
+		Debug.Log ("chechlevel");
+		
+
+		
+		killint = PlayerPrefs.GetInt ("minions_killed");
+		
+		if (1 < killint && killint <= 3) {
+			
+			currentlevel = 1;
+			
+		} else if (3 < killint && killint <= 6) {
+			
+			currentlevel = 2;
+			
+			//StartEvolution();
+			
+			switchToEvol = true;
+		}//ifels
+		
+	}//check level
 	
 	void OnGUI(){
 		
