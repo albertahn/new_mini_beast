@@ -26,7 +26,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 		//Debug.Log ("playerhp: "+hp);
 
-		Collider coll = obj.collider;
+		Collider coll = obj.GetComponent<Collider>();
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 		
@@ -47,7 +47,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 
 	void playerDie(){
-		this.collider.enabled = false;
+		this.GetComponent<Collider>().enabled = false;
 		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");

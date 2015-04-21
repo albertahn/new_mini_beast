@@ -1,0 +1,34 @@
+Initialize engine version: 4.5.4f1 (e036f44c54c9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     0 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll (this message is harmless)
+Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll into Unity Child Domain
+- Completed reload, in  0.615 seconds
+desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.

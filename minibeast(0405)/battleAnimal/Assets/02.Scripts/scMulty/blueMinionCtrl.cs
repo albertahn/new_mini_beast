@@ -11,7 +11,7 @@ public class blueMinionCtrl : MonoBehaviour {
 	public Vector3 target;
 	public Vector3 syncTarget;
 	
-	public mFireCtrl _fireCtrl;
+	private mFireCtrl _fireCtrl;
 	
 	private int idx;
 	private int speed;
@@ -126,11 +126,8 @@ public class blueMinionCtrl : MonoBehaviour {
 		
 		if (isAttack) {
 			if(targetObj!=null){
-				minionTr.LookAt (targetObj.transform.position);
-				_fireCtrl.Fire(targetObj.name);
-				
-				string data = gameObject.name + ":" + targetObj.name;
-				SocketStarter.Socket.Emit ("minionAttackREQ", data);
+				minionTr.LookAt (targetObj.transform.position);			
+				_fireCtrl.Fire(targetObj.name);				
 			}
 		}
 
@@ -194,7 +191,7 @@ public class blueMinionCtrl : MonoBehaviour {
 		}
 	}
 	void moveSync(){		
-		float step = speed*2* Time.deltaTime;
+		float step = 4* Time.deltaTime;
 		
 		transform.position = Vector3.MoveTowards(transform.position, minionPos, step);
 		

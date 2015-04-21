@@ -1,23 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LogInUI : MonoBehaviour {
 	public string id,password,username;
+	public InputField ID, PW;
 
-	float lw,lh,lx,ly;
-	float tw,th,tx,ty;
-	float bw,bh,bx,by;
-	int size;
 	private DBManager _dbManager;
 	// Use this for initialization
 	void Start () {
 		Screen.SetResolution(480, 800, true);
-
-		lw = 100;lh = 50; lx = 10;ly = 10;
-		tw = 100;th = 50;tx = 110;ty = 10;
-		bw = 50;bh = 50;bx = 110;by = 130;
-	
-		size = 20;
 
 		_dbManager = GetComponent<DBManager> ();
 	}
@@ -27,26 +19,26 @@ public class LogInUI : MonoBehaviour {
 	
 	}
 
+	public void Login()
+	{
+		id = (string)ID.text;
+		password = (string)PW.text;
+		StartCoroutine (GetLoginData((string)ID.text,(string)PW.text));
+	}
+
+	public void Cancel()
+	{
+		Application.LoadLevel ("scPreStart");
+	}
+
 	void OnGUI(){
-		GUI.Label (new Rect(lx,ly,lw,lh),"<size="+size+">ID :</size>");
-		GUI.Label (new Rect(lx,ly+(lh+10),lw,lh),"<size="+size+">Password :</size>");
 
-		id = GUI.TextArea (new Rect(tx,ty,tw,th),id,25);
-		password = GUI.PasswordField (new Rect(tx,ty+(th+10),tw,th),password,"*"[0],25);
-
-		if (GUI.Button (new Rect (bx,by,bw,bh), "Log-In")) {
-			StartCoroutine (GetLoginData(id,password));			
-		}	
-
-		if (GUI.Button (new Rect (bx+bw+10,by,bw,bh), "Cancel")) {
-			Application.LoadLevel ("scPreStart");
-		}
 	}
 
 	
 	private IEnumerator GetLoginData (string email, string password)
 	{		
-		yield return StartCoroutine (_dbManager.LoginUser(id, password));
+		yield return StartCoroutine (_dbManager.LoginUser(id, password)); // id를 Email로 바꿔야 하지 않을까
 		
 		string emailman = _dbManager.fuckdata.GetString ("password");
 		

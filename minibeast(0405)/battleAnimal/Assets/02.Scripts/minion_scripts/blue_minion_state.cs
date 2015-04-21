@@ -57,7 +57,7 @@ public class blue_minion_state : MonoBehaviour {
 	
 	
 	public void Heated(GameObject obj){
-		Collider coll = obj.collider;
+		Collider coll = obj.GetComponent<Collider>();
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));		
 		
@@ -89,7 +89,7 @@ public class blue_minion_state : MonoBehaviour {
 	}
 	
 	void minionDie(){
-		this.collider.enabled = false;
+		this.GetComponent<Collider>().enabled = false;
 		GetComponent<blueMinionCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");

@@ -22,7 +22,7 @@ public class CameraTouch : MonoBehaviour {
 		h = 0.0f;
 		v = 0.0f;
 
-		camera = GameObject.Find ("Main Camera").camera;
+		camera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 		/*
 			GameObject a = GameObject.Find (PlayerPrefs.GetString("email"));
 

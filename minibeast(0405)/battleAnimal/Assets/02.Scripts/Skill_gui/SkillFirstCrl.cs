@@ -12,7 +12,7 @@ public class SkillFirstCrl : MonoBehaviour {
 	void Start () {
 		damage = 120;
 		speed = 1000.0f;
-		rigidbody.AddForce (transform.forward * speed);
+		GetComponent<Rigidbody>().AddForce (transform.forward * speed);
 		birth = Time.time;
 		durationTime = 5.0f;
 	}
