@@ -28,6 +28,12 @@ public class blue_outer_collider : MonoBehaviour {
 				_ctrl.playerTr = coll.transform;
 				_ctrl.traceKey = true;
 			}
+		}else if (coll.tag == "BUILDING") {		
+			if (coll.name [0] == 'r') {
+				_ctrl.targetObj = coll.gameObject;
+				_ctrl.playerTr = coll.transform;
+				_ctrl.traceKey = true;
+			}
 		}
 	}
 }

@@ -1,13 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/minion_scripts/minion_state.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scWait\waitSocketStarter.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/minion_scripts/blue_minion_state.cs" Line="54" Column="2" />
-      <File FileName="Assets/02.Scripts/Level_up_stuff/Level_up_evolve.cs" Line="63" Column="11" />
-      <File FileName="Assets/02.Scripts/minion_scripts/minion_state.cs" Line="66" Column="3" />
-      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="36" Column="48" />
-      <File FileName="Assets/02.Scripts/minion_scripts/mBulletCtrl.cs" Line="51" Column="61" />
-      <File FileName="Assets/02.Scripts/scMulty/BulletCtrl.cs" Line="57" Column="79" />
+      <File FileName="Assets\02.Scripts\scMulty\minionCtrl.cs" Line="10" Column="22" />
+      <File FileName="Assets\02.Scripts\scMulty\blueMinionCtrl.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\SocketStarter.cs" Line="12" Column="28" />
+      <File FileName="Assets\02.Scripts\scWait\waitSocketOn.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scWait\waitSocketStarter.cs" Line="12" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -44,7 +44,7 @@ public class blueMinionCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		traceDist = 10.0f;
-		attackDist = 5.0f;
+		attackDist = 10.0f;
 
 		minionSyncSwitch = false;
 
@@ -84,58 +84,60 @@ public class blueMinionCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (isMaster) {
-			if (moveKey) {
-				moveKey = false;
+		if (!isDie) {
+						if (isMaster) {
+								if (moveKey) {
+										moveKey = false;
 				
-				move ();
-			}
-			if (traceKey) {
-				traceKey = false;
-				trace ();
-			}
-			if(attackKey){
-				attackKey = false;
-				attack();
-			}
-		}
+										move ();
+								}
+								if (traceKey) {
+										traceKey = false;
+										trace ();
+								}
+								if (attackKey) {
+										attackKey = false;
+										attack ();
+								}
+						}
 		
-		if (isMove){
-			minionTr.LookAt(dest);
-			if (dest != minionTr.position) {
-				float step = speed * Time.deltaTime;
-				minionTr.position = Vector3.MoveTowards (minionTr.position, dest, step);
-			} else {
-				if(isMaster){
-					if (idx < point.Length - 1){
-						syncTarget = dest = point [++idx].position;
-						moveKey=true;
-					}
-				}
-			}
-		}
+						if (isMove) {
+								minionTr.LookAt (dest);
+								if (dest != minionTr.position) {
+										float step = speed * Time.deltaTime;
+										minionTr.position = Vector3.MoveTowards (minionTr.position, dest, step);
+								} else {
+										if (isMaster) {
+												if (idx < point.Length - 1) {
+														syncTarget = dest = point [++idx].position;
+														moveKey = true;
+												}
+										}
+								}
+						}
 		
-		if (isTrace) {
-			if(playerTr !=null){
-				syncTarget = target = playerTr.position;
-				minionTr.LookAt(target);
-				float step = speed * Time.deltaTime;
-				minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);
-			}
-		}
+						if (isTrace) {
+								if (playerTr != null) {
+										syncTarget = target = playerTr.position;
+										minionTr.LookAt (target);
+										float step = speed * Time.deltaTime;
+										minionTr.position = Vector3.MoveTowards (minionTr.position, target, step);
+								}
+						}
 		
-		if (isAttack) {
-			if(targetObj!=null){
-				minionTr.LookAt (targetObj.transform.position);
-				_fireCtrl.Fire(targetObj.name);
+						if (isAttack) {
+								if (targetObj != null) {
+										minionTr.LookAt (targetObj.transform.position);
+										_fireCtrl.Fire (targetObj.name);
 				
-				string data = gameObject.name + ":" + targetObj.name;
-				SocketStarter.Socket.Emit ("minionAttackREQ", data);
-			}
-		}
+										string data = gameObject.name + ":" + targetObj.name;
+										SocketStarter.Socket.Emit ("minionAttackREQ", data);
+								}
+						}
 
-		if (minionSyncSwitch)
-			moveSync ();
+						if (minionSyncSwitch)
+								moveSync ();
+				}
 	}
 	
 	public void move(){

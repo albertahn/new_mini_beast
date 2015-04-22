@@ -20,10 +20,6 @@ public class MainFortress : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
-	
 	}
 
 	void OnGUI(){
@@ -57,32 +53,25 @@ public class MainFortress : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
 
 		if (coll.gameObject.tag == "BULLET_BALL") {
-
-			//Debug.Log("building hit!");
-
-
 			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
-			
-
-
 				hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
-				if(hp<=0)hp=0;
-						//Debug.Log("hi hp:"+hp);
-
-
-//emit to the server the hp
-
 				string data = this.name+":" + hp.ToString()+"";
 				SocketStarter.Socket.Emit ("attackBuilding", data);
-
-
-
 			if(hp<=0)
 			{
+				hp=0;
 				buildingDie();
 			}
-		
-
+		}else if(coll.gameObject.tag == "M_BULLET_BALL"){
+			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
+			hp -= coll.gameObject.GetComponent<mBulletCtrl>().damage;
+			string data = this.name+":" + hp.ToString()+"";
+			SocketStarter.Socket.Emit ("attackBuilding", data);
+			if(hp<=0)
+			{
+				hp=0;
+				buildingDie();
+			}
 		}
 	}
 

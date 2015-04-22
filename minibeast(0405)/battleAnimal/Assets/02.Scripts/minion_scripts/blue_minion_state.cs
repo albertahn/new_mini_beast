@@ -45,6 +45,9 @@ public class blue_minion_state : MonoBehaviour {
 			{
 				hp=0;
 				minionDie();
+				
+				string data2 = ClientState.id+":"+this.name;
+				SocketStarter.Socket.Emit ("minionDieREQ", data2);
 			}
 			
 			
@@ -62,7 +65,7 @@ public class blue_minion_state : MonoBehaviour {
 		
 		//if obj.name
 		
-		if (obj.tag == "BULLET_BALL") {
+		if (obj.tag == "BULLET_BALL"||obj.tag == "M_BULLET_BALL") {
 
 			Component minionbullet = obj.GetComponent<mBulletCtrl> ();
 			Component playerbullet = obj.GetComponent<BulletCtrl> ();
@@ -92,12 +95,15 @@ public class blue_minion_state : MonoBehaviour {
 		{
 			hp=0;
 			minionDie();
+			
+			string data2 = ClientState.id+":"+this.name;
+			SocketStarter.Socket.Emit ("minionDieREQ", data2);
 		}
 		
 		Destroy (obj.gameObject);
 	}
 	
-	void minionDie(){
+	public void minionDie(){
 		this.collider.enabled = false;
 		GetComponent<blueMinionCtrl> ().isDie = true;
 		

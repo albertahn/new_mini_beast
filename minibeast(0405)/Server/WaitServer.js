@@ -12,10 +12,9 @@ var userNum={};//position in waitRoom
 var thrashNum=[];//shoud be at the each room
 var thrashIdx=0;//shoud be at the each room
 
-for(thrashIdx=0;thrashIdx<6;thrashIdx++){
-    thrashNum[thrashIdx] = 5-thrashIdx;
-}
-thrashIdx--;
+  thrashNum[0]=5;thrashNum[1]=2;thrashNum[2]=4;
+  thrashNum[3]=1;thrashNum[4]=3;thrashNum[5]=0;
+  thrashIdx=5;
 
 io.sockets.on('connection', function (socket) {	      
     console.log("A user connected !");    
@@ -96,10 +95,10 @@ socket.on("createRoomREQ",function(data){
                     delete(userNum[i])                     
                 } 
                 
-                for(thrashIdx=0;thrashIdx<6;thrashIdx++){
-                    thrashNum[thrashIdx] = 5-thrashIdx;
-                }
-                thrashIdx--;
+  thrashNum[0]=5;thrashNum[1]=2;thrashNum[2]=4;
+  thrashNum[3]=1;thrashNum[4]=3;thrashNum[5]=0;
+  thrashIdx=5;
+  
             }else{
                 var ret = userNum[userNames[socket.id]];
                 thrashIdx++;

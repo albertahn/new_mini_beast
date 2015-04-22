@@ -185,6 +185,13 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         socket.leave(key);
         }
     });
+    
+    socket.on("minionDieREQ",function(data){
+        var ret = data.split(":");
+        delete(minionNames[ret[1]]);
+        delete(minionPos[ret[1]]);
+            io.sockets.in(socketRoom[socket.id]).emit("minionDieRES", data);
+    });
 
 
     socket.on('attackMinion', function(data){

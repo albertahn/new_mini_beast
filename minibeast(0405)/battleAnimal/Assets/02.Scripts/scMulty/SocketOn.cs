@@ -43,10 +43,12 @@ public class SocketOn : MonoBehaviour {
 	public GameObject nmanager; // = GameObject.Find("NetworkManager");
 	public Skill_socket_reciever skill_reciever;
 
-	private minionAttackReceiver _MAReceiver;
+	private minionAttackReceiver _mAttackReceiver;
+	private minionDieReceiver _mDieReceiver;
 
 	void Start () {
-		_MAReceiver = GetComponent<minionAttackReceiver>();
+		_mAttackReceiver = GetComponent<minionAttackReceiver>();
+		_mDieReceiver = GetComponent<minionDieReceiver> ();
 
 		skill_reciever = GameObject.Find("NetworkManager").GetComponent<Skill_socket_reciever> ();
 		//skill_reciever = nmanager.GetComponent<Skill_socket_reciever> ();
@@ -268,7 +270,7 @@ public class SocketOn : MonoBehaviour {
 		SocketStarter.Socket.On ("minionAttackRES", (data) =>
 		{
 			if(ClientState.isMaster==false){
-				_MAReceiver.receive(data.Json.args[0].ToString());
+				_mAttackReceiver.receive(data.Json.args[0].ToString());
 			}
 		});
 
@@ -315,8 +317,16 @@ public class SocketOn : MonoBehaviour {
 			
 			building_health_change= true;
 		});
+
+		SocketStarter.Socket.On ("minionDieRES", (data) =>{
+			string[] temp = data.Json.args[0].ToString().Split(':');
+			if(temp[0]!=ClientID){
+				if(temp[0][0] =='r')
+					_mDieReceiver.receive(temp[1]);
+			}
+		});
 		
-		SocketStarter.Socket.Emit ("createRoomREQ", ClientID+":"+ClientState.room);
+
 //skills sync
 
 	
@@ -324,6 +334,8 @@ public class SocketOn : MonoBehaviour {
 		SocketStarter.Socket.On ("SkillAttack", (data) =>{
 			skill_reciever.skillShot(data.Json.args[0].ToString());
 		});
+
+		SocketStarter.Socket.Emit ("createRoomREQ", ClientID+":"+ClientState.room);
 
 
 

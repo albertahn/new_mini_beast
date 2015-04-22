@@ -12,8 +12,15 @@ public class SpawnPlayer : MonoBehaviour {
 
 	public IEnumerator CreatePlayer(){
 		spawnSwitch = false;
-
-		string data = ClientState.id+":25.0,50,25:"+ClientState.character+":"+ClientState.team;//접속한 유저의 아이디와 생성할 위치를 서버에 전송
+		string data;
+		if(ClientState.team=="red"){
+			GameObject.Find ("CameraWrap").transform.position= new Vector3(26.0f,73.67f,4.21f);
+			data = ClientState.id+":25.0,50,25:"+ClientState.character+":"+ClientState.team;
+			//접속한 유저의 아이디와 생성할 위치를 서버에 전송
+		}else{
+			GameObject.Find ("CameraWrap").transform.position= new Vector3(72.0f,73.67f,43.21f);
+			data = ClientState.id+":70.0,50,70:"+ClientState.character+":"+ClientState.team;
+		}
 		SocketStarter.Socket.Emit("createPlayerREQ",data);
 		yield return null;
 	}
