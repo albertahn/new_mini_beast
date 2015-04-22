@@ -55,66 +55,71 @@ public class MoveCtrl : MonoBehaviour {
 	void Update () {
 		if (ClientID == gameObject.name) {//id가 내 캐릭터 일때
 			#if UNITY_ANDROID||UNITY_IPHONE
-			if (Input.touchCount == 1 && Input.touchCount > 0) {
-				if (Input.touchCount > 0) {
-					var touch = Input.GetTouch(0);				
-					
-					switch (touch.phase) {
-						// Record initial touch position.
-					case TouchPhase.Began:
-						timeOfTouch = Time.time;
-						break;					
-						// Determine direction by comparing the current touch position with the initial one.
-					case TouchPhase.Moved:
-						direction = touch.position - startPos;
-						break;					
-						// Report that a direction has been chosen when the finger is lifted.
-					case TouchPhase.Ended:					
-						if(Time.time - timeOfTouch>0.1f){
-							directionChosen = true;						
-						}else{
-							directionChosen = false;						
-						}					
-						break;
-					}
+			if (Input.touchCount == 1 && Input.touchCount  <2) {
+				
+				var touch = Input.GetTouch(0);				
+				
+				switch (touch.phase) {
+					// Record initial touch position.
+				case TouchPhase.Began:
+					timeOfTouch = Time.time;
+					break;					
+					// Determine direction by comparing the current touch position with the initial one.
+				case TouchPhase.Moved:
+					direction = touch.position - startPos;
+					break;					
+					// Report that a direction has been chosen when the finger is lifted.
+				case TouchPhase.Ended:					
+					if(Time.time - timeOfTouch>0.8f){
+						//directionChosen = true;						
+					}else{
+						//directionChosen = false;	
+						
+						
+						//move
+						
+						if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved ) {
+							Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
+							RaycastHit hit3;				
+							if(Physics.Raycast(ray3, out hit3, Mathf.Infinity)&& hit3.collider.tag=="FLOOR"){
+								
+								Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
+								
+								clickendpoint = hit3.point;
+								
+								//mark the plack  moveToPointMark
+								//moveToPointMark(clickendpoint);
+								
+								move();
+								
+								playermoving = true;
+								
+								tr.LookAt(hit3.point); 
+								myxpos	=hit3.point.x; //Input.touches [0].position.x;
+								myypos	=hit3.point.z;  //Input.touches [0].position.y;	
+								
+							}else if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
+								string targetName = hit3.collider.name;
+								Debug.Log("target = "+targetName);
+								Vector3 target = hit3.point;
+								target.y=50.0f;
+								attackPoint = target;
+								
+								string data = ClientID + ":" + targetName;
+								SocketStarter.Socket.Emit ("attackREQ", data);	
+								attack(targetName);								
+							}//else hit player
+						}//if
+						
+						
+					}	//				
+					break;
 				}
 				
 				
-				//move
 				
-				if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved && directionChosen == false) {
-					Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
-					RaycastHit hit3,hit4;				
-					if(Physics.Raycast(ray3, out hit3, Mathf.Infinity,1<<LayerMask.NameToLayer("FLOOR"))){
-						
-						Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
-						
-						clickendpoint = hit3.point;
-						move();
-						
-						playermoving = true;
-						
-						tr.LookAt(hit3.point); 
-						myxpos	=hit3.point.x; //Input.touches [0].position.x;
-						myypos	=hit3.point.z;  //Input.touches [0].position.y;	
-						
-					}
-					if(Physics.Raycast (ray3, out hit4, Mathf.Infinity)){
-					if(hit4.collider.tag =="BUILDING" || hit4.collider.tag =="MINION"||hit4.collider.tag =="Player"){
-						string targetName = hit4.collider.name;
-						Debug.Log("target = "+targetName);
-						Vector3 target = hit4.point;
-						target.y=50.0f;
-						attackPoint = target;
-						
-						string data = ClientID + ":" + targetName;
-						SocketStarter.Socket.Emit ("attackREQ", data);	
-						attack(targetName);								
-					}//else hit player
-					}
-				}				
-			}
-
+				
+			}// if touchcount
 			#else
 		
 		
@@ -259,6 +264,9 @@ public class MoveCtrl : MonoBehaviour {
 	}
 
 	public void move(){
+		//mark the plack  moveToPointMark
+		moveToPointMark(clickendpoint);
+
 		playermoving = true;
 		isAttack = false;
 		isMoveAndAttack = false;
@@ -285,4 +293,17 @@ public class MoveCtrl : MonoBehaviour {
 		a.z = t.position.z;
 		return a;
 	}
+	public void moveToPointMark(Vector3 point){
+		GameObject pastmovetomark = GameObject.Find ("MoveMark"); 
+		
+		Destroy (pastmovetomark);
+		
+		
+		GameObject movetomark = (GameObject)Resources.Load("moveToMark");
+		
+		GameObject mark = (GameObject)Instantiate(movetomark,point,Quaternion.identity);
+		mark.name="MoveMark";
+		
+	}
+
 }

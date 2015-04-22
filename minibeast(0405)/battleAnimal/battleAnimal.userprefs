@@ -1,13 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\MoveCtrl.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../../Volumes/albertstuff/minionsync_new_mini_beast_21new/minibeast(0405)/battleAnimal/Assets/02.Scripts/scMulty/MoveCtrl.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\MoveCtrl.cs" Line="102" Column="30" />
-      <File FileName="Assets\02.Scripts\scMulty\minionCtrl.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scMulty\blueMinionCtrl.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scMulty\SocketStarter.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scWait\waitSocketOn.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scWait\waitSocketStarter.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/user_interface/My_inteface_hp_bar.cs" Line="26" Column="4" />
+      <File FileName="../../../../../../../Volumes/albertstuff/minionsync_new_mini_beast_21new/minibeast(0405)/battleAnimal/Assets/02.Scripts/user_interface/My_inteface_hp_bar.cs" Line="26" Column="4" />
+      <File FileName="Assets/02.Scripts/scMulty/MoveCtrl.cs" Line="268" Column="34" />
+      <File FileName="../../../../../../../Volumes/albertstuff/minionsync_new_mini_beast_21new/minibeast(0405)/battleAnimal/Assets/02.Scripts/scMulty/MoveCtrl.cs" Line="270" Column="21" />
+      <File FileName="Assets/02.Scripts/scMulty/SocketStarter.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
