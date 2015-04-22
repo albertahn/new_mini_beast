@@ -22,16 +22,20 @@ public class PlayerHealthState : MonoBehaviour {
 	
 	}
 
-	public void Heated(GameObject obj){
+	public void Heated(string firedby,GameObject obj){
 
 		//Debug.Log ("playerhp: "+hp);
 
-		Collider coll = obj.GetComponent<Collider>();
+		Collider coll = obj.collider;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 		
-		
-		hp -= obj.GetComponent<BulletCtrl>().damage;
+		if(firedby=="minion"){
+			hp -= obj.GetComponent<mBulletCtrl>().damage;
+		}else{
+			hp -= obj.GetComponent<BulletCtrl>().damage;
+		}
+
 		
 		string data = this.name+":" + hp.ToString()+"";
 		SocketStarter.Socket.Emit ("attackMinion", data);			
@@ -47,7 +51,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 
 	void playerDie(){
-		this.GetComponent<Collider>().enabled = false;
+		this.collider.enabled = false;
 		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");

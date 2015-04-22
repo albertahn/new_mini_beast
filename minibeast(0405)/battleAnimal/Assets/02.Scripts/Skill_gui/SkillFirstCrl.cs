@@ -12,7 +12,7 @@ public class SkillFirstCrl : MonoBehaviour {
 	void Start () {
 		damage = 120;
 		speed = 1000.0f;
-		GetComponent<Rigidbody>().AddForce (transform.forward * speed);
+		rigidbody.AddForce (transform.forward * speed);
 		birth = Time.time;
 		durationTime = 5.0f;
 	}
@@ -29,7 +29,7 @@ public class SkillFirstCrl : MonoBehaviour {
 
 			Debug.Log("skill first hit min");
 
-			coll.gameObject.GetComponent<minion_state>().Heated(gameObject);
+			coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject);
 			Destroy (this.gameObject);
 
 				}

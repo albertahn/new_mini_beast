@@ -35,7 +35,7 @@ public class mFireCtrl : MonoBehaviour {
 	
 	IEnumerator CreateBullet(string _target){
 		GameObject a =(GameObject)Instantiate(bullet,firePos.position,firePos.rotation);
-		a.GetComponent<BulletCtrl> ().setTarget(_target);
+		a.GetComponent<mBulletCtrl> ().setTarget(_target);
 		yield return null;
 	}
 	

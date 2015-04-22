@@ -43,7 +43,10 @@ public class SocketOn : MonoBehaviour {
 	public GameObject nmanager; // = GameObject.Find("NetworkManager");
 	public Skill_socket_reciever skill_reciever;
 
+	private minionAttackReceiver _MAReceiver;
+
 	void Start () {
+		_MAReceiver = GetComponent<minionAttackReceiver>();
 
 		skill_reciever = GameObject.Find("NetworkManager").GetComponent<Skill_socket_reciever> ();
 		//skill_reciever = nmanager.GetComponent<Skill_socket_reciever> ();
@@ -262,6 +265,13 @@ public class SocketOn : MonoBehaviour {
 			}
 		});
 
+		SocketStarter.Socket.On ("minionAttackRES", (data) =>
+		{
+			if(ClientState.isMaster==false){
+				_MAReceiver.receive(data.Json.args[0].ToString());
+			}
+		});
+
 		SocketStarter.Socket.On ("attackRES", (data) =>
 		{
 			string[] temp = data.Json.args[0].ToString().Split(':');
@@ -278,14 +288,14 @@ public class SocketOn : MonoBehaviour {
 			outUserSwitch=true;
 		});
 
-		//building attack
+
 		SocketStarter.Socket.On ("attackMinion", (data) =>{
 			
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			minion_name = temp[0];
 			minion_hp_int = int.Parse(temp[1]);
 			
-			Debug.Log("attack: " + minion_name+":"+minion_hp_int);
+			//Debug.Log("attack: " + minion_name+":"+minion_hp_int);
 			
 			minion_health_change= true;
 		});
@@ -301,7 +311,7 @@ public class SocketOn : MonoBehaviour {
 			building_hp_int = int.Parse(temp[1]);
 			
 			
-			Debug.Log("attack: " + building_name+":"+building_hp_int);
+			//Debug.Log("attack: " + building_name+":"+building_hp_int);
 			
 			building_health_change= true;
 		});
@@ -311,38 +321,8 @@ public class SocketOn : MonoBehaviour {
 
 	
 		//skill attack
-		SocketStarter.Socket.On ("SkillAttack", (data) =>{	
-
-
-			/*string[] temp = data.Json.args[0].ToString().Split(':');
-			resID = temp[0];
-			string[] resPos = temp[1].Split(',');
-			newPos = new Vector3(float.Parse(resPos[0]),
-			                     float.Parse(resPos[1]),
-			                     float.Parse(resPos[2]));
-			if(ClientID!=resID){
-				moveUserSwitch=true;
-			}
-			Debug.Log("hithere: " + data.ToString());
-*/
-
-
-
+		SocketStarter.Socket.On ("SkillAttack", (data) =>{
 			skill_reciever.skillShot(data.Json.args[0].ToString());
-
-
-	
-
-
-			//what character
-			
-			/*string[] temp = data.Json.args[0].ToString().Split(':');
-			building_name = temp[0];
-			building_hp_int = int.Parse(temp[1]);
-			
-			
-			Debug.Log("attack: " + building_name+":"+building_hp_int);
-			//building_health_change= true;*/
 		});
 
 
@@ -409,16 +389,19 @@ public class SocketOn : MonoBehaviour {
 		a.GetComponent<MoveCtrl>().clickendpoint = newPos;
 		a.GetComponent<MoveCtrl>().move ();
 	}
+
 	void moveSync(){
-		GameObject a = GameObject.Find (resID);
-		//a.GetComponent<Transform> ().position = newPos;
+		if (ClientID != resID) {
+				GameObject a = GameObject.Find (resID);
+				//a.GetComponent<Transform> ().position = newPos;
 		
-		float step = 4* Time.deltaTime;
-		a.transform.position = Vector3.MoveTowards(a.transform.position, newPos, step);
-		a.transform.LookAt(newPos);
+				float step = 4 * Time.deltaTime;
+				a.transform.position = Vector3.MoveTowards (a.transform.position, newPos, step);
+				a.transform.LookAt (newPos);
 		
-		if (a.GetComponent<Transform> ().position == newPos) {
-			moveSyncSwitch = false;
-		}// arrived switch
+				if (a.GetComponent<Transform> ().position == newPos) {
+					moveSyncSwitch = false;
+				}// arrived switch
+		}
 	}
 }

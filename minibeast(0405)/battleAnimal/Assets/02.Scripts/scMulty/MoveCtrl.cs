@@ -182,6 +182,7 @@ public class MoveCtrl : MonoBehaviour {
 		if (isAttack) {
 			if(targetObj!=null){
 				//if(targetObj.GetComponent<minionCtrl>()!=null){
+				if(targetObj.tag=="MINION"){
 				if(targetObj.name[0]=='b'){
 					if(targetObj.GetComponent<blueMinionCtrl>().isDie==true)
 					idle ();
@@ -193,6 +194,7 @@ public class MoveCtrl : MonoBehaviour {
 						clickendpoint=targetObj.transform.position;
 						isMoveAndAttack = true;
 						playermoving = true;
+					}
 					}
 					}
 				}else if(targetObj.name[0]=='r'){

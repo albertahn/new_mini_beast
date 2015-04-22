@@ -6,29 +6,124 @@ Direct3D:
     Vendor:   Intel
     VRAM:     0 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll into Unity Child Domain
-Platform assembly: C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll (this message is harmless)
-Loading C:\Users\dongheon\Desktop\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll into Unity Child Domain
-- Completed reload, in  0.615 seconds
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SimpleJson.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SocketIO.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Common.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Core.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Protocol.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\SuperSocket.ClientEngine.Proxy.dll into Unity Child Domain
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll (this message is harmless)
+Loading C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\WebSocket4Net.dll into Unity Child Domain
+- Completed reload, in  0.158 seconds
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 0.364138 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 167.
+Total: 0.904097 ms (FindLiveObjects: 0.011156 ms CreateObjectMapping: 0.015618 ms MarkObjects: 0.156186 ms  DeleteObjects: 0.005354 ms)
+
+fucking:  aa
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fucking:  aa
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+{"index":"3","0":"3","username":"Alfred tmorrow","1":"Alfred tmorrow","password":"a7e84c4fb390284abde5417b5c3014ae76c6d1afeb1bac9f3c486e5b1f828204","2":"a7e84c4fb390284abde5417b5c3014ae76c6d1afeb1bac9f3c486e5b1f828204","email":"aa","3":"aa","org_email":"","4":"","profile":"","5":"","profile_picture":"","6":"","usertype":"","7":"","modify_date":"2015-04-14 06:50:50","8":"2015-04-14 06:50:50","FID":"","9":"","points":"0","10":"0","first_time":"1","11":"1","publish":"0","12":"0","level":"","13":""}
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+loggedin fucker : aa
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 0.340486 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 173.
+Total: 0.869736 ms (FindLiveObjects: 0.012941 ms CreateObjectMapping: 0.012941 ms MarkObjects: 0.148600 ms  DeleteObjects: 0.004016 ms)
+
+UnloadTime: 0.305679 ms
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\Mono.Security.dll (this message is harmless)
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\System.Core.dll (this message is harmless)
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 175.
+Total: 1.016105 ms (FindLiveObjects: 0.016064 ms CreateObjectMapping: 0.012494 ms MarkObjects: 0.302555 ms  DeleteObjects: 0.007586 ms)
+
+Platform assembly: C:\Users\dongheon\Documents\github1\new_mini_beast\minibeast(0405)\battleAnimal\Untitled_Data\Managed\System.Runtime.Serialization.dll (this message is harmless)
+Socket Opened!
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1783)
+
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1783)
+
+UnloadTime: 34.346794 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 1936.
+Total: 2.272739 ms (FindLiveObjects: 0.161095 ms CreateObjectMapping: 0.051318 ms MarkObjects: 0.666247 ms  DeleteObjects: 0.644381 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at My_inteface_hp_bar.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+WARNING: Shader Unsupported: 'Hidden/TerrainEngine/Details/BillboardWavingDoublePass' - Pass '' shader state not supported
+Socket Opened!
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+i'am Master
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+clickedman
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+clicked 2 man
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+clicked 2 man
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+UnloadTime: 7.469293 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 925 unused Assets to reduce memory usage. Loaded Objects now: 183.
+Total: 5.840935 ms (FindLiveObjects: 0.060689 ms CreateObjectMapping: 0.035699 ms MarkObjects: 0.477485 ms  DeleteObjects: 4.445073 ms)
+
+UnloadTime: 0.827343 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 179.
+Total: 3.269210 ms (FindLiveObjects: 0.032576 ms CreateObjectMapping: 0.041054 ms MarkObjects: 1.062515 ms  DeleteObjects: 0.199918 ms)
+

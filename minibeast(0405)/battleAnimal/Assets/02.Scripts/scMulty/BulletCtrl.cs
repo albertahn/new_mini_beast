@@ -8,6 +8,7 @@ public class BulletCtrl : MonoBehaviour {
 	private float durationTime;
 	public GameObject target;
 	private Transform tr;
+	public string firedbyname;
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +21,12 @@ public class BulletCtrl : MonoBehaviour {
 		durationTime = 5.0f;
 	}
 
-	public void setTarget(string _name){
+//set target
+	public void setTarget(string firedby, string _name){
 		target = GameObject.Find(_name);
+		firedbyname = firedby;
+
+		//Debug.Log ("fired by: "+ firedbyname);
 	}
 
 	// Update is called once per frame
@@ -43,13 +48,13 @@ public class BulletCtrl : MonoBehaviour {
 			if(target.name==coll.name){
 				if(target.tag=="MINION"){
 					if(target.name[0]=='r')
-					target.GetComponent<minion_state>().Heated(gameObject);
+						target.GetComponent<minion_state>().Heated(firedbyname, gameObject);
 					else
-					target.GetComponent<blue_minion_state>().Heated(gameObject);
+						target.GetComponent<blue_minion_state>().Heated(firedbyname, gameObject);
 					Destroy (this.gameObject);
 				}else if(target.tag=="Player"){
 
-					target.GetComponent<PlayerHealthState>().Heated(gameObject);
+					target.GetComponent<PlayerHealthState>().Heated(firedbyname, gameObject);
 					Destroy (this.gameObject);
 
 				}//hit player
