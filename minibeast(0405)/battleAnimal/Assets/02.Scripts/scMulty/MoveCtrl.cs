@@ -84,8 +84,8 @@ public class MoveCtrl : MonoBehaviour {
 				
 				if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved && directionChosen == false) {
 					Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
-					RaycastHit hit3;				
-					if(Physics.Raycast(ray3, out hit3, Mathf.Infinity)&& hit3.collider.tag=="FLOOR"){
+					RaycastHit hit3,hit4;				
+					if(Physics.Raycast(ray3, out hit3, Mathf.Infinity,1<<LayerMask.NameToLayer("FLOOR"))){
 						
 						Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
 						
@@ -98,10 +98,12 @@ public class MoveCtrl : MonoBehaviour {
 						myxpos	=hit3.point.x; //Input.touches [0].position.x;
 						myypos	=hit3.point.z;  //Input.touches [0].position.y;	
 						
-					}else if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
-						string targetName = hit3.collider.name;
+					}
+					if(Physics.Raycast (ray3, out hit4, Mathf.Infinity)){
+					if(hit4.collider.tag =="BUILDING" || hit4.collider.tag =="MINION"||hit4.collider.tag =="Player"){
+						string targetName = hit4.collider.name;
 						Debug.Log("target = "+targetName);
-						Vector3 target = hit3.point;
+						Vector3 target = hit4.point;
 						target.y=50.0f;
 						attackPoint = target;
 						
@@ -109,6 +111,7 @@ public class MoveCtrl : MonoBehaviour {
 						SocketStarter.Socket.Emit ("attackREQ", data);	
 						attack(targetName);								
 					}//else hit player
+					}
 				}				
 			}
 
