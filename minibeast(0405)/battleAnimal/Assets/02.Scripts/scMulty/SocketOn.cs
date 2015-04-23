@@ -13,7 +13,7 @@ public class SocketOn : MonoBehaviour {
 	private string addId;
 	
 	public string resID;
-	public Vector3 newPos;
+	public Vector3 newPos,HelloPos;
 	public Vector3 attackPos;
 	private bool moveUserSwitch;
 
@@ -221,7 +221,7 @@ public class SocketOn : MonoBehaviour {
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			resID = temp[0];
 			string[] resPos = temp[1].Split(',');
-			newPos = new Vector3(float.Parse(resPos[0]),
+			HelloPos = new Vector3(float.Parse(resPos[0]),
 			                     float.Parse(resPos[1]),
 			                     float.Parse(resPos[2]));
 			if(ClientID!=resID){
@@ -305,8 +305,7 @@ public class SocketOn : MonoBehaviour {
 
 
 		//building attack
-		SocketStarter.Socket.On ("attackBuilding", (data) =>{	
-			
+		SocketStarter.Socket.On ("attackBuilding", (data) =>{
 			
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			building_name = temp[0];
@@ -346,7 +345,7 @@ public class SocketOn : MonoBehaviour {
 	void Update () {
 		if (moveUserSwitch) {
 			moveUser();
-			moveUserSwitch=false;
+			//moveUserSwitch=false;
 		}
 
 		if (moveSyncSwitch) {
@@ -398,15 +397,24 @@ public class SocketOn : MonoBehaviour {
 
 	void moveUser(){
 		GameObject a = GameObject.Find (resID);
-		a.GetComponent<MoveCtrl>().clickendpoint = newPos;
-		a.GetComponent<MoveCtrl>().move ();
-	}
 
+		if(a!=null){
+			float step = 4 * Time.deltaTime;
+			a.transform.position = Vector3.MoveTowards (a.transform.position, HelloPos, step);
+			a.transform.LookAt (HelloPos);
+			
+			if (a.GetComponent<Transform> ().position == HelloPos) {
+				moveUserSwitch = false;
+			}// arrived switch
+		}
+	}
+	
 	void moveSync(){
 		if (ClientID != resID) {
 				GameObject a = GameObject.Find (resID);
 				//a.GetComponent<Transform> ().position = newPos;
 		
+			if(a!=null){
 				float step = 4 * Time.deltaTime;
 				a.transform.position = Vector3.MoveTowards (a.transform.position, newPos, step);
 				a.transform.LookAt (newPos);
@@ -414,6 +422,7 @@ public class SocketOn : MonoBehaviour {
 				if (a.GetComponent<Transform> ().position == newPos) {
 					moveSyncSwitch = false;
 				}// arrived switch
+			}
 		}
 	}
 }

@@ -39,7 +39,7 @@ public class minionSync: MonoBehaviour {
 							+dest.x+","+dest.y+","+dest.z
 									+"|";
 				}
-				SocketStarter.Socket.Emit("minionSyncREQ",data);
+				//SocketStarter.Socket.Emit("minionSyncREQ",data);
 				startTime =Time.time;
 			}
 		}

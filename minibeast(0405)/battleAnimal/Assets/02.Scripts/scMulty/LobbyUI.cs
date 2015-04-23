@@ -30,5 +30,7 @@ public class LobbyUI : MonoBehaviour {
 		GUI.Label(new Rect(200,130,50,50),"order = "+ClientState.order);
 		GUI.Label(new Rect(200,190,50,50),"character = "+ClientState.character);
 		GUI.Label(new Rect(200,250,50,50),"team = "+ClientState.team);*/
+		
+		GUI.Label(new Rect(200,10,50,50),"master = "+ClientState.isMaster);
 	}
 }
