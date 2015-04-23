@@ -37,7 +37,7 @@ public class CameraTouch : MonoBehaviour {
 
 			Vector3 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-			speed  = 0.05F;
+			speed  = 0.55F;
 
 			transform.Translate(-touchDeltaPosition.x * speed,0, -touchDeltaPosition.y * speed);
 		}

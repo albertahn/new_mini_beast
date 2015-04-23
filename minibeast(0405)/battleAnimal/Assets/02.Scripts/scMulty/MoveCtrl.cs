@@ -18,7 +18,7 @@ public class MoveCtrl : MonoBehaviour {
 	public float myypos, myxpos,myzpos;	
 	
 	public Vector3 clickendpoint;	
-	public bool playermoving =false;
+	public bool playermoving = false;
 	
 	private bool screenmoveonly;
 	public Vector2 startPos;
@@ -33,6 +33,9 @@ public class MoveCtrl : MonoBehaviour {
 	public bool isMoveAndAttack;
 
 	public GameObject targetObj;
+
+	public bool swiped;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -49,6 +52,8 @@ public class MoveCtrl : MonoBehaviour {
 		directionChosen = false;
 		isAttack = false;
 		isMoveAndAttack=false;
+
+		swiped = false;
 	}	
 
 	// Update is called once per frame
@@ -65,67 +70,78 @@ public class MoveCtrl : MonoBehaviour {
 					// Record initial touch position.
 				case TouchPhase.Began:
 					timeOfTouch = Time.time;
+
+					swiped = false;
+
 					break;					
 					// Determine direction by comparing the current touch position with the initial one.
 				case TouchPhase.Moved:
 					direction = touch.position - startPos;
+
+					swiped = true;
+
+				Debug.Log("swiped");
+
 					break;					
 					// Report that a direction has been chosen when the finger is lifted.
-				case TouchPhase.Ended:					
-					if(Time.time - timeOfTouch>1.8f){
-						//directionChosen = true;						
+				case TouchPhase.Ended:		
+
+					if(Time.time - timeOfTouch>3.0f || swiped ==true){
+						directionChosen = true;	
+
 					}else{
-						//directionChosen = false;	
-						
-						
-						//move
-						
-						if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved ) {
-							Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
-							RaycastHit hit3;				
-							if(Physics.Raycast(ray3, out hit3, Mathf.Infinity)&& hit3.collider.tag=="FLOOR"){
-								
-								Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
-								
-								clickendpoint = hit3.point;
-								
-								//mark the plack  moveToPointMark
-								//moveToPointMark(clickendpoint);
+						directionChosen = false;	
 
-								string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
-
-								SocketStarter.Socket.Emit ("movePlayerREQ", data);
-								
-								move();
-								
-								playermoving = true;
-								
-								tr.LookAt(hit3.point); 
-								myxpos	=hit3.point.x; //Input.touches [0].position.x;
-								myypos	=hit3.point.z;  //Input.touches [0].position.y;	
-								
-							}else if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
-								string targetName = hit3.collider.name;
-								Debug.Log("target = "+targetName);
-								Vector3 target = hit3.point;
-								target.y=50.0f;
-								attackPoint = target;
-								
-								string data = ClientID + ":" + targetName;
-								SocketStarter.Socket.Emit ("attackREQ", data);	
-								attack(targetName);								
-							}//else hit player
-						}//if
+						swiped = false;
 						
-						
+					
 					}	//				
 					break;
-				}
+				}//end switch
+
+			}
+
+			if (Input.touchCount == 1  && Input.GetTouch(0).phase != TouchPhase.Moved  && directionChosen ==false) {
+			Ray ray3 = Camera.main.ScreenPointToRay (Input.touches [0].position);
+			RaycastHit hit3;				
+			if(Physics.Raycast(ray3, out hit3, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))){//&& hit3.collider.tag=="FLOOR"){
+				
+				Vector3 target = new Vector3(hit3.point.x, 0 , hit3.point.z);
+				
+				clickendpoint = hit3.point;
+				
+				//mark the plack  moveToPointMark
+				//moveToPointMark(clickendpoint);
+				
+				string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+				
+				SocketStarter.Socket.Emit ("movePlayerREQ", data);
+				
+				move();
+				
+				//playermoving = true;
+				
+				tr.LookAt(hit3.point); 
+				myxpos	=hit3.point.x; //Input.touches [0].position.x;
+				myypos	=hit3.point.z;  //Input.touches [0].position.y;	
+				
+			}else if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
+				string targetName = hit3.collider.name;
+				Debug.Log("target = "+targetName);
+				Vector3 target = hit3.point;
+				target.y=50.0f;
+				attackPoint = target;
+				
+				string data = ClientID + ":" + targetName;
+				SocketStarter.Socket.Emit ("attackREQ", data);	
+				attack(targetName);								
+			}//else hit player
+			}//if
 				
 				
 				
 				
-			}// if touchcount
+			//}// if touchcount 1
 			#else
 		
 		
@@ -187,10 +203,10 @@ public class MoveCtrl : MonoBehaviour {
 		//ifmove
 		if (playermoving) {
 			tr.LookAt (clickendpoint);
-			if (clickendpoint != tr.position) {
+			//if (clickendpoint != tr.position) {
 				float step = 5 * Time.deltaTime;
 				tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
-			}
+			//}
 		}
 
 		if (isAttack) {
@@ -313,5 +329,17 @@ public class MoveCtrl : MonoBehaviour {
 		mark.name="MoveMark";
 		
 	}
+
+
+	/*void OnGUI(){
+
+		if (GUI.Button (new Rect (100, 110, 180, 180), "moving: "+playermoving )) {
+
+		}//doanloaded image
+	
+	}
+*/
+	//gui test
+
 
 }

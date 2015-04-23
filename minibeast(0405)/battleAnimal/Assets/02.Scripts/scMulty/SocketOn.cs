@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class SocketOn : MonoBehaviour {
 	private SpawnPlayer _spawnPlayer;
 	private SpawnMinion _spawnMinion;
-	private MoveCtrl _moveCtrl;
+	//private MoveCtrl _moveCtrl;
 	private LobbyUI _lobbyUI;
 
 	public string ClientID;
@@ -362,10 +362,10 @@ public class SocketOn : MonoBehaviour {
 			//moveSyncSwitch=false;
 		}*/
 
-		if (attackSwitch) {
+		/*if (attackSwitch) {
 			GameObject.Find(attackID).GetComponent<MoveCtrl>().attack(attackTarget);
 			attackSwitch=false;
-		}
+		}*/
 
 		if (outUserSwitch) {
 			GameObject a = GameObject.Find(outID);

@@ -4,8 +4,8 @@ using System.Collections;
 public class Cam_gui : MonoBehaviour {
 
 
-	public string url = "http://tanggoal.com/public/uploads/members_pic/3b617cd38f01d9b1cbb6737f24cf881a.jpg";
-	public WWW www;
+	//public string url = "http://tanggoal.com/public/uploads/members_pic/3b617cd38f01d9b1cbb6737f24cf881a.jpg";
+	//public WWW www;
 	Texture2D tex;
 	Texture profiletexture;
 	Texture2D texTmp ;
@@ -16,7 +16,7 @@ public class Cam_gui : MonoBehaviour {
 		Screen.SetResolution(480, 800, true);
 
 
-		www= new WWW(url);
+	//	www= new WWW(url);
 
 
 		
@@ -48,8 +48,8 @@ public class Cam_gui : MonoBehaviour {
 				
 
 		}//doanloaded image
-
 */
+
 
 
 		}//end gui
