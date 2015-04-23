@@ -348,10 +348,10 @@ public class SocketOn : MonoBehaviour {
 			//moveUserSwitch=false;
 		}
 
-		if (moveSyncSwitch) {
+		/*if (moveSyncSwitch) {
 			moveSync();
 			//moveSyncSwitch=false;
-		}
+		}*/
 
 		if (attackSwitch) {
 			GameObject.Find(attackID).GetComponent<MoveCtrl>().attack(attackTarget);
@@ -398,8 +398,9 @@ public class SocketOn : MonoBehaviour {
 	void moveUser(){
 		GameObject a = GameObject.Find (resID);
 
-		if(a!=null){
-			float step = 4 * Time.deltaTime;
+
+		if(a!=null && ClientID  != resID){
+			float step = 5 * Time.deltaTime;
 			a.transform.position = Vector3.MoveTowards (a.transform.position, HelloPos, step);
 			a.transform.LookAt (HelloPos);
 			
@@ -407,9 +408,10 @@ public class SocketOn : MonoBehaviour {
 				moveUserSwitch = false;
 			}// arrived switch
 		}
+
 	}
 	
-	void moveSync(){
+	/*void moveSync(){
 		if (ClientID != resID) {
 				GameObject a = GameObject.Find (resID);
 				//a.GetComponent<Transform> ().position = newPos;
@@ -424,5 +426,5 @@ public class SocketOn : MonoBehaviour {
 				}// arrived switch
 			}
 		}
-	}
+	}*/
 }

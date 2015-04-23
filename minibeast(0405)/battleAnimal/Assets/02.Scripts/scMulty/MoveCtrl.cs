@@ -141,7 +141,7 @@ public class MoveCtrl : MonoBehaviour {
 									clickendpoint = hitman.point;
 						
 									string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
-									//SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.							
+									SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.							
 										
 									move();
 								}

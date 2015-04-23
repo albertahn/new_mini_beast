@@ -14,7 +14,8 @@ public class moveSync: MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {		
+	void Update () {
+		/*
 		if (ClientState.id == gameObject.name) {
 				if(Time.time-startTime>duration){
 					//Debug.Log ("it's different");
@@ -22,6 +23,6 @@ public class moveSync: MonoBehaviour {
 					SocketStarter.Socket.Emit("moveSyncREQ",data);
 					startTime =Time.time;
 				}
-		}
+		}*/
 	}
 }
