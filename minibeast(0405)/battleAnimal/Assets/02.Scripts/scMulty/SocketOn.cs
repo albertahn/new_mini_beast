@@ -12,7 +12,7 @@ public class SocketOn : MonoBehaviour {
 	public string ClientID;
 	private string addId;
 	
-	public string resID;
+	public string resID, otherPlayer;
 	public Vector3 newPos,HelloPos;
 	public Vector3 attackPos;
 	private bool moveUserSwitch;
@@ -221,15 +221,24 @@ public class SocketOn : MonoBehaviour {
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			resID = temp[0];
 			string[] resPos = temp[1].Split(',');
-			HelloPos = new Vector3(float.Parse(resPos[0]),
-			                     float.Parse(resPos[1]),
-			                     float.Parse(resPos[2]));
+
+
 			if(ClientID!=resID){
-				moveUserSwitch=true;
+
+				Debug.Log (":moveres:"+moveUserSwitch);
+
+				HelloPos = new Vector3(float.Parse(resPos[0]),
+				                       float.Parse(resPos[1]),
+				                       float.Parse(resPos[2]));
+
+				otherPlayer = resID;
+				moveUserSwitch = true;
+
+				Debug.Log (otherPlayer+":moveres:"+moveUserSwitch);
 			}
 		});
 
-		SocketStarter.Socket.On ("moveSyncRES", (data) =>
+		/*SocketStarter.Socket.On ("moveSyncRES", (data) =>
 		{
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			resID = temp[0];
@@ -240,7 +249,7 @@ public class SocketOn : MonoBehaviour {
 			if(ClientID!=resID){
 				moveSyncSwitch=true;
 			}
-		});
+		});*/
 
 		SocketStarter.Socket.On ("minionSyncRES", (data) =>
 		                         {
@@ -396,18 +405,31 @@ public class SocketOn : MonoBehaviour {
 	}
 
 	void moveUser(){
-		GameObject a = GameObject.Find (resID);
+
+		//if (ClientID != resID) {
+						GameObject a = GameObject.Find (otherPlayer);
 
 
-		if(a!=null && ClientID  != resID){
-			float step = 5 * Time.deltaTime;
-			a.transform.position = Vector3.MoveTowards (a.transform.position, HelloPos, step);
-			a.transform.LookAt (HelloPos);
+
+			Debug.Log (otherPlayer+":"+resID+ "HelloPos: "+ HelloPos);
+
+						if (a != null ) {
+								float step = 5 * Time.deltaTime;
+								a.transform.position = Vector3.MoveTowards (a.transform.position, HelloPos, step);
+								a.transform.LookAt (HelloPos);
 			
-			if (a.GetComponent<Transform> ().position == HelloPos) {
-				moveUserSwitch = false;
-			}// arrived switch
-		}
+								if (a.GetComponent<Transform> ().position == HelloPos) {
+										moveUserSwitch = false;
+
+					//Debug.Log ("moveUserSwitch: "+ moveUserSwitch);
+
+
+
+
+
+								}// arrived switch
+						}//if a null
+				//}//if
 
 	}
 	

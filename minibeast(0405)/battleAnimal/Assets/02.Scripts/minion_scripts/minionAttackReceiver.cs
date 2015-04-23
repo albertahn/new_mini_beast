@@ -24,7 +24,7 @@ public class minionAttackReceiver : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (switch_) {
-			Debug.Log ("from "+from+" to "+to);
+			//Debug.Log ("from "+from+" to "+to);
 			GameObject go = GameObject.Find(from);
 			if(go!=null)
 				go.GetComponent<mFireCtrl>().Fire(to);

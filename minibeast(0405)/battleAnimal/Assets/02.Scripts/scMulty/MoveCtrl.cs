@@ -53,7 +53,9 @@ public class MoveCtrl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (ClientID == gameObject.name) {//id가 내 캐릭터 일때
+		if (ClientID == gameObject.name) {
+
+			//id가 내 캐릭터 일때
 			#if UNITY_ANDROID||UNITY_IPHONE
 			if (Input.touchCount == 1 && Input.touchCount  <2) {
 				
@@ -70,7 +72,7 @@ public class MoveCtrl : MonoBehaviour {
 					break;					
 					// Report that a direction has been chosen when the finger is lifted.
 				case TouchPhase.Ended:					
-					if(Time.time - timeOfTouch>0.8f){
+					if(Time.time - timeOfTouch>1.8f){
 						//directionChosen = true;						
 					}else{
 						//directionChosen = false;	
@@ -89,6 +91,10 @@ public class MoveCtrl : MonoBehaviour {
 								
 								//mark the plack  moveToPointMark
 								//moveToPointMark(clickendpoint);
+
+								string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+
+								SocketStarter.Socket.Emit ("movePlayerREQ", data);
 								
 								move();
 								
@@ -176,7 +182,7 @@ public class MoveCtrl : MonoBehaviour {
 				}
 				} ///raycasr
 						#endif
-		}
+		
 
 		//ifmove
 		if (playermoving) {
@@ -241,6 +247,8 @@ public class MoveCtrl : MonoBehaviour {
 				attack (targetObj.name);
 			}
 		}
+
+		}//end only if mine
 	}//end update
 
 	public void attack(string _targetName){
@@ -294,11 +302,11 @@ public class MoveCtrl : MonoBehaviour {
 		return a;
 	}
 	public void moveToPointMark(Vector3 point){
+
 		GameObject pastmovetomark = GameObject.Find ("MoveMark"); 
 		
 		Destroy (pastmovetomark);
-		
-		
+
 		GameObject movetomark = (GameObject)Resources.Load("moveToMark");
 		
 		GameObject mark = (GameObject)Instantiate(movetomark,point,Quaternion.identity);
