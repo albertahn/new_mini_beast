@@ -79,6 +79,10 @@ public class blueMinionCtrl : MonoBehaviour {
 		
 		if (isMaster) {
 			StartCoroutine (this.CheckMonsterState ());
+			
+			string data = gameObject.name + ":" +
+				dest.x+","+dest.y+","+dest.z;
+			SocketStarter.Socket.Emit ("moveMinionREQ", data);
 		}
 	}
 	
@@ -110,8 +114,12 @@ public class blueMinionCtrl : MonoBehaviour {
 										if (isMaster) {
 												if (idx < point.Length - 1) {
 														syncTarget = dest = point [++idx].position;
-														moveKey = true;
-												}
+															moveKey = true;
+							
+														string data = gameObject.name + ":" +
+														dest.x+","+dest.y+","+dest.z;
+														SocketStarter.Socket.Emit ("moveMinionREQ", data);
+						}
 										}
 								}
 						}
@@ -129,9 +137,6 @@ public class blueMinionCtrl : MonoBehaviour {
 								if (targetObj != null) {
 										minionTr.LookAt (targetObj.transform.position);
 										_fireCtrl.Fire (targetObj.name);
-				
-										string data = gameObject.name + ":" + targetObj.name;
-										SocketStarter.Socket.Emit ("minionAttackREQ", data);
 								}
 						}
 
@@ -180,8 +185,12 @@ public class blueMinionCtrl : MonoBehaviour {
 			}
 			
 			if(dist<=attackDist){
-				if(isAttack==false)
-					attackKey = true;
+				if(isAttack==false){
+					attackKey = true;					
+					
+					string data = gameObject.name + ":" + targetObj.name;
+					SocketStarter.Socket.Emit ("minionAttackREQ", data);
+				}
 			}
 			else if(dist<=traceDist)
 			{
@@ -189,8 +198,13 @@ public class blueMinionCtrl : MonoBehaviour {
 					traceKey = true;
 			}else
 			{
-				if(isMove==false)
+				if(isMove==false){
 					moveKey = true;
+										
+					string data = gameObject.name + ":" +
+						dest.x+","+dest.y+","+dest.z;
+					SocketStarter.Socket.Emit ("moveMinionREQ", data);
+				}
 			}
 			
 		}

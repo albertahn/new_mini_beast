@@ -135,13 +135,14 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
     
     socket.on("minionAttackREQ",function(data){
         io.sockets.in(socketRoom[socket.id]).emit("minionAttackRES", data); 
-    });
+    }); 
     
-    socket.on("minionSyncREQ",function(data){  
-        if(data !=null){//edit?   
-            io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
-        }
+    socket.on("moveMinionREQ",function(data){   
+        var ret = data.split(":");
+        minionPos[ret[0]] = ret[1];
+        io.sockets.in(socketRoom[socket.id]).emit("moveMinionRES", data);   
     });
+
     
     socket.on('disconnect',function(data){
         var rooms = io.sockets.manager.rooms;

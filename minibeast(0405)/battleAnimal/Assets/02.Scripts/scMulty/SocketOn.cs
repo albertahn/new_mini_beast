@@ -44,12 +44,16 @@ public class SocketOn : MonoBehaviour {
 	private minionAttackReceiver _mAttackReceiver;
 	private minionDieReceiver _mDieReceiver;
 	private movePlayerReceiver _movePlayerReceiver;
+	private playerAttackReceiver _pAttackReceiver;
+	private moveMinionReceiver _moveMinionReceiver;
 
 	void Start () {
 		_mAttackReceiver = GetComponent<minionAttackReceiver>();
 		_mDieReceiver = GetComponent<minionDieReceiver> ();
 		_movePlayerReceiver = GetComponent<movePlayerReceiver> ();
 		skill_reciever = GetComponent<Skill_socket_reciever> ();
+		_pAttackReceiver = GetComponent<playerAttackReceiver> ();
+		_moveMinionReceiver = GetComponent<moveMinionReceiver> ();
 
 		Screen.SetResolution(480, 800, true);
 
@@ -223,28 +227,13 @@ public class SocketOn : MonoBehaviour {
 			}
 		});
 
-		SocketStarter.Socket.On ("minionSyncRES", (data) =>
-		                         {
-			if(ClientState.isMaster==false){
-				string[] temp = data.Json.args[0].ToString().Split('|');
-				
-				for(int i=0;i<temp.Length-1;i++){//edit
-					string[] temp2 = temp[i].Split(':');
-					minionID = temp2[0];
-					string[] resPos = temp2[1].Split(',');				
-					minionPos = new Vector3(float.Parse(resPos[0]),
-					                        float.Parse(resPos[1]),
-					                        float.Parse(resPos[2]));
-					resPos = temp2[2].Split(',');
-					minionTg = new Vector3(float.Parse(resPos[0]),
-					                       float.Parse(resPos[1]),
-					                       float.Parse(resPos[2]));
-
-					while(minionSyncSwitch){
-
-					}
-					minionSyncSwitch=true;
-				}
+		SocketStarter.Socket.On ("moveMinionRES", (data) =>
+		{
+			string temp = data.Json.args[0].ToString();
+			string[] temp2 = temp.Split(':');
+			Debug.Log ("move moinion "+temp);
+			if(ClientID !=temp2[0]){
+				_moveMinionReceiver.receive(temp);
 			}
 		});
 
@@ -257,11 +246,11 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.On ("attackRES", (data) =>
 		{
-			string[] temp = data.Json.args[0].ToString().Split(':');
-			attackID = temp[0];
-			attackTarget = temp[1];
-
-			attackSwitch=true;
+			string temp = data.Json.args[0].ToString();
+			string[] temp2 = temp.Split(':');
+			if(ClientID !=temp2[0]){
+				_pAttackReceiver.receive(temp);
+			}
 		});
 
 		SocketStarter.Socket.On ("imoutRES", (data) =>{			
@@ -340,7 +329,7 @@ public class SocketOn : MonoBehaviour {
 			GameObject a = GameObject.Find (minionID);
 			if(a!=null){
 				if(a.name[0]=='r')
-				a.GetComponent<minionCtrl>().setSync(minionPos,minionTg);
+					a.GetComponent<minionCtrl>().setSync(minionPos,minionTg);
 				else
 					a.GetComponent<blueMinionCtrl>().setSync(minionPos,minionTg);
 			}
