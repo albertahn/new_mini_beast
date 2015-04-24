@@ -45,10 +45,12 @@ public class SocketOn : MonoBehaviour {
 
 	private minionAttackReceiver _mAttackReceiver;
 	private minionDieReceiver _mDieReceiver;
+	private movePlayerReceiver _movePlayerReceiver;
 
 	void Start () {
 		_mAttackReceiver = GetComponent<minionAttackReceiver>();
 		_mDieReceiver = GetComponent<minionDieReceiver> ();
+		_movePlayerReceiver = GetComponent<movePlayerReceiver> ();
 
 		skill_reciever = GameObject.Find("NetworkManager").GetComponent<Skill_socket_reciever> ();
 		//skill_reciever = nmanager.GetComponent<Skill_socket_reciever> ();
@@ -218,23 +220,10 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.On ("movePlayerRES", (data) =>
 		{
-			string[] temp = data.Json.args[0].ToString().Split(':');
-			resID = temp[0];
-			string[] resPos = temp[1].Split(',');
-
-
-			if(ClientID!=resID){
-
-				Debug.Log (":moveres:"+moveUserSwitch);
-
-				HelloPos = new Vector3(float.Parse(resPos[0]),
-				                       float.Parse(resPos[1]),
-				                       float.Parse(resPos[2]));
-
-				otherPlayer = resID;
-				moveUserSwitch = true;
-
-				Debug.Log (otherPlayer+":moveres:"+moveUserSwitch);
+			string temp = data.Json.args[0].ToString();
+			string[] temp2 = temp.Split(':');
+			if(ClientID !=temp2[0]){
+				_movePlayerReceiver.receive(temp);
 			}
 		});
 
@@ -345,18 +334,10 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.Emit ("createRoomREQ", ClientID+":"+ClientState.room);
 
-
-
-
 	}//end start
 	
 	// Update is called once per frame
 	void Update () {
-		if (moveUserSwitch) {
-			moveUser();
-			//moveUserSwitch=false;
-		}
-
 		/*if (moveSyncSwitch) {
 			moveSync();
 			//moveSyncSwitch=false;
@@ -402,35 +383,6 @@ public class SocketOn : MonoBehaviour {
 		GameObject mininow = GameObject.Find (""+minion_name);
 		mininow.GetComponent<minion_state>().hp = minion_hp_int;
 		
-	}
-
-	void moveUser(){
-
-		//if (ClientID != resID) {
-						GameObject a = GameObject.Find (otherPlayer);
-
-
-
-			Debug.Log (otherPlayer+":"+resID+ "HelloPos: "+ HelloPos);
-
-						if (a != null ) {
-								float step = 5 * Time.deltaTime;
-								a.transform.position = Vector3.MoveTowards (a.transform.position, HelloPos, step);
-								a.transform.LookAt (HelloPos);
-			
-								if (a.GetComponent<Transform> ().position == HelloPos) {
-										moveUserSwitch = false;
-
-					//Debug.Log ("moveUserSwitch: "+ moveUserSwitch);
-
-
-
-
-
-								}// arrived switch
-						}//if a null
-				//}//if
-
 	}
 	
 	/*void moveSync(){

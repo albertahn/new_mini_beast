@@ -198,6 +198,7 @@ public class MoveCtrl : MonoBehaviour {
 				}
 				} ///raycasr
 						#endif
+		}
 		
 
 		//ifmove
@@ -263,8 +264,6 @@ public class MoveCtrl : MonoBehaviour {
 				attack (targetObj.name);
 			}
 		}
-
-		}//end only if mine
 	}//end update
 
 	public void attack(string _targetName){
