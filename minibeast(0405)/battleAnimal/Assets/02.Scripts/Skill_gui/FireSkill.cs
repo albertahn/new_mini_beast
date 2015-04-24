@@ -25,19 +25,25 @@ public class FireSkill : MonoBehaviour {
 		
 	}
 	
-	public void Fireman(){
-		if ((Time.time - birth) > duration) {
+	public void Fireman(string firedBy){
+
+
+		Debug.Log ("fireman: "+ firedBy);
 			
-			StartCoroutine (this.CreateBullet ());
+			StartCoroutine (this.CreateBullet (firedBy));
 			StartCoroutine (this.ShowMuzzleFlash ());
 			birth = Time.time;
 
-		}
+
 	}
 	
-	IEnumerator CreateBullet(){
+	IEnumerator CreateBullet(string firedBy){
 
-		Instantiate(bulleta,firePosa.position,firePosa.rotation);
+		GameObject a = (GameObject)Instantiate(bulleta,firePosa.position,firePosa.rotation);
+
+		a.GetComponent<SkillFirstCrl> ().shotByname(firedBy);
+
+
 		yield return null;
 	}
 	

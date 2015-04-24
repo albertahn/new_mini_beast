@@ -67,7 +67,7 @@ public class minion_state : MonoBehaviour {
 
 		firedbyname = firedby;
 
-		Debug.Log ("firedbyname: "+firedbyname);
+//		Debug.Log ("firedbyname: "+firedbyname);
 
 		//if obj.name
 

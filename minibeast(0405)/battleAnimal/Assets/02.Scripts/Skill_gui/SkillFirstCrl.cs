@@ -7,6 +7,7 @@ public class SkillFirstCrl : MonoBehaviour {
 	private float speed;
 	public float birth;
 	private float durationTime;
+	public string firedByName;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,18 +24,44 @@ public class SkillFirstCrl : MonoBehaviour {
 			Destroy (this.gameObject);	
 	}
 
+	public void shotByname(string firedBy){
+		firedByName = firedBy;
+	
+	}
+
 	void OnTriggerEnter(Collider coll){
 
+	
+
+	
+
 		if (coll.gameObject.tag == "MINION") {
+			string parentName = coll.gameObject.transform.parent.name;
+
+			if(ClientState.team=="red"&&parentName=="BlueTeam"
+			   ||ClientState.team=="blue"&&parentName=="RedTeam"){
 
 			Debug.Log("skill first hit min");
 
 			coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject);
 			Destroy (this.gameObject);
+			}
+		}else if(coll.gameObject.tag=="Player"){
+			string parentName = coll.gameObject.transform.parent.name;
 
-				}
+							if(ClientState.team=="red"&&parentName=="BlueTeam"
+							   ||ClientState.team=="blue"&&parentName=="RedTeam"){
+							Debug.Log("hitskill");
+						
+							coll.gameObject.GetComponent<PlayerHealthState>().hitbySkill(firedByName, this.gameObject);
+						Destroy (this.gameObject);
+			       }//if
 
-	}
+	}//hit player
+
+
+
+	}//end colide
 
 
 }

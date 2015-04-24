@@ -112,11 +112,15 @@ public class MoveCtrl : MonoBehaviour {
 				
 				//mark the plack  moveToPointMark
 				//moveToPointMark(clickendpoint);
+
+					string data = ClientID + ":" +tr.position.x+","+tr.position.y+","+tr.position.z+
+						":"+ clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.		
 				
-				string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+			/*	string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
 				
 				SocketStarter.Socket.Emit ("movePlayerREQ", data);
-				
+				*/
 				move();
 				
 				//playermoving = true;

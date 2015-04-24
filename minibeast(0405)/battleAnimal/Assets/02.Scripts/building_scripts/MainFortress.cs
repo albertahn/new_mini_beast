@@ -72,6 +72,18 @@ public class MainFortress : MonoBehaviour {
 				hp=0;
 				buildingDie();
 			}
+		}else if(coll.gameObject.tag == "SKILL_FIRST"){
+
+			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
+			hp -= coll.gameObject.GetComponent<SkillFirstCrl>().damage;
+			string data = this.name+":" + hp.ToString()+"";
+			SocketStarter.Socket.Emit ("attackBuilding", data);
+			if(hp<=0)
+			{
+				hp=0;
+				buildingDie();
+			}
+
 		}
 	}
 

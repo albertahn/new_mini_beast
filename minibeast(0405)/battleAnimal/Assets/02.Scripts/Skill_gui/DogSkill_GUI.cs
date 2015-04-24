@@ -120,7 +120,7 @@ public class DogSkill_GUI : MonoBehaviour {
 			
 			//GUIElement	hitObject = guilayer.HitTest( Input.mousePosition );if (Physics.Raycast (ray, out hitman, Mathf.Infinity)) {
 			
-			if (Physics.Raycast (ray, out hiterone, Mathf.Infinity) && hiterone.collider.tag == "FLOOR" ) {
+			if (Physics.Raycast (ray, out hiterone, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))) { 
 				
 				
 				if(skillOneReady ==true){
@@ -131,13 +131,13 @@ public class DogSkill_GUI : MonoBehaviour {
 					dog.transform.LookAt(hiterone.point);
 					
 					skillfire = dog.GetComponent<FireSkill> ();					
-					skillfire.Fireman();
+					skillfire.Fireman(this.name);
 					//destroy gameobject]
+					//destroy all wraps
+					clearSkillWraps();
 					
 					skillOneReady = false;
-					
-					GameObject skill1 =  GameObject.Find("firstskill");
-					Destroy (skill1);	
+			
 
 					Vector3	clickendpoint= hiterone.point;
 					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
@@ -172,5 +172,22 @@ public class DogSkill_GUI : MonoBehaviour {
 		
 		
 		
-	}
+	}//end yupdate
+
+	
+	void clearSkillWraps(){
+		
+		GameObject[] skillwraps =  GameObject.FindGameObjectsWithTag("SKILL_WRAP");//Find("firstskill");
+		
+		for (var i = 0; i <  skillwraps.Length; i ++) {
+			
+			Debug.Log("die");
+			
+			Destroy (skillwraps [i]);	
+		}
+		
+		
+		
+		
+	}//clear
 }

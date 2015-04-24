@@ -1,10 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\movePlayerReceiver.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Skill_gui/FireSkill.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\MoveCtrl.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scMulty\SocketOn.cs" Line="217" Column="35" />
-      <File FileName="Assets\02.Scripts\scMulty\movePlayerReceiver.cs" Line="35" Column="2" />
+      <File FileName="Assets/02.Scripts/scMulty/SocketOn.cs" Line="317" Column="4" />
+      <File FileName="Assets/02.Scripts/Skill_gui/DogSkill_GUI.cs" Line="145" Column="1" />
+      <File FileName="Assets/02.Scripts/Skill_gui/TurtleSkill.cs" Line="152" Column="34" />
+      <File FileName="Assets/02.Scripts/Skill_gui/FireSkill.cs" Line="14" Column="2" />
+      <File FileName="Assets/02.Scripts/Skill_gui/SkillFirstCrl.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/MoveCtrl.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/building_scripts/MainFortress.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="53" Column="56" />
+      <File FileName="Assets/02.Scripts/Skill_gui/Skill_socket_reciever.cs" Line="27" Column="51" />
+      <File FileName="../../../backups/new_mini_beast_23_/minibeast(0405)/battleAnimal/Assets/02.Scripts/Skill_gui/DogSkill_GUI.cs" Line="139" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

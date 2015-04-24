@@ -132,12 +132,12 @@ public class TurtleSkill : MonoBehaviour {
 				
 				if(skillOneReady ==true){
 					//Debug.Log(""+skillfire.ToString());
-					GameObject dog =  GameObject.Find(ClientID);
+					GameObject myplayer =  GameObject.Find(ClientID);
 					
-					dog.transform.LookAt(hiterone.point);
+					myplayer.transform.LookAt(hiterone.point);
 					
-					skillfire = dog.GetComponent<FireSkill> ();					
-					skillfire.Fireman();
+					skillfire = myplayer.GetComponent<FireSkill> ();					
+					skillfire.Fireman(this.name);
 					
 					//destroy gameobject]
 					

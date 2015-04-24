@@ -49,13 +49,26 @@ public class PlayerHealthState : MonoBehaviour {
 		//Destroy (obj.gameObject);
 	}//end heated
 
+	//hit hitbySkill
+	public void hitbySkill(string firedby,GameObject obj){
+
+		Debug.Log ("skill hit: "+ firedby);
+
+		hp -= obj.GetComponent<SkillFirstCrl>().damage;
+
+		StartCoroutine (this.CreateBloodEffect(obj.transform.position));
+
+		string data = this.name+":" + hp.ToString()+"";
+		SocketStarter.Socket.Emit ("attackMinion", data);	
+
+	}
+
 
 	void playerDie(){
 		this.collider.enabled = false;
 		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
-		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 		
 		/*if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){

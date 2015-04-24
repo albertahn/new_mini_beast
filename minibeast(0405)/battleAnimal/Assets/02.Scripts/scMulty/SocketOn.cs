@@ -313,6 +313,8 @@ public class SocketOn : MonoBehaviour {
 		//skill attack
 		SocketStarter.Socket.On ("SkillAttack", (data) =>{
 			skill_reciever.skillShot(data.Json.args[0].ToString());
+
+
 		});
 
 		SocketStarter.Socket.Emit ("createRoomREQ", ClientID+":"+ClientState.room);

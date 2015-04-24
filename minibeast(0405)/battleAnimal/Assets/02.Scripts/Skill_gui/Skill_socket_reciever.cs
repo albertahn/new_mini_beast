@@ -29,7 +29,7 @@ public class Skill_socket_reciever : MonoBehaviour {
 			firedplayer.transform.LookAt(newPos);
 			
 			skillfire = firedplayer.GetComponent<FireSkill> ();					
-			skillfire.Fireman();
+			skillfire.Fireman(userID);
 
 			firedskill = false;
 
@@ -42,7 +42,7 @@ public class Skill_socket_reciever : MonoBehaviour {
 
 
 		string[] temp = data.Split(':');
-		string building_name = temp[0];
+		string username = temp[0];
 		string  building_hp_int = temp[1];
 
 		userID = temp[0];
@@ -52,7 +52,7 @@ public class Skill_socket_reciever : MonoBehaviour {
 		                     float.Parse(resPos[2]));
 
 
-		Debug.Log("attack: er" + building_name+":"+building_hp_int);
+		Debug.Log("attack: skill " + username+":"+building_hp_int);
 
 		firedskill = true;
 
