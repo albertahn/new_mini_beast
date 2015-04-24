@@ -11,9 +11,7 @@ public class SocketOn : MonoBehaviour {
 
 	public string ClientID;
 	private string addId;
-	
-	public string resID, otherPlayer;
-	public Vector3 newPos,HelloPos;
+
 	public Vector3 attackPos;
 	private bool moveUserSwitch;
 
@@ -51,9 +49,7 @@ public class SocketOn : MonoBehaviour {
 		_mAttackReceiver = GetComponent<minionAttackReceiver>();
 		_mDieReceiver = GetComponent<minionDieReceiver> ();
 		_movePlayerReceiver = GetComponent<movePlayerReceiver> ();
-
-		skill_reciever = GameObject.Find("NetworkManager").GetComponent<Skill_socket_reciever> ();
-		//skill_reciever = nmanager.GetComponent<Skill_socket_reciever> ();
+		skill_reciever = GetComponent<Skill_socket_reciever> ();
 
 		Screen.SetResolution(480, 800, true);
 
@@ -227,19 +223,6 @@ public class SocketOn : MonoBehaviour {
 			}
 		});
 
-		/*SocketStarter.Socket.On ("moveSyncRES", (data) =>
-		{
-			string[] temp = data.Json.args[0].ToString().Split(':');
-			resID = temp[0];
-			string[] resPos = temp[1].Split(',');
-			newPos = new Vector3(float.Parse(resPos[0]),
-			                     float.Parse(resPos[1]),
-			                     float.Parse(resPos[2]));
-			if(ClientID!=resID){
-				moveSyncSwitch=true;
-			}
-		});*/
-
 		SocketStarter.Socket.On ("minionSyncRES", (data) =>
 		                         {
 			if(ClientState.isMaster==false){
@@ -338,15 +321,6 @@ public class SocketOn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*if (moveSyncSwitch) {
-			moveSync();
-			//moveSyncSwitch=false;
-		}*/
-
-		/*if (attackSwitch) {
-			GameObject.Find(attackID).GetComponent<MoveCtrl>().attack(attackTarget);
-			attackSwitch=false;
-		}*/
 
 		if (outUserSwitch) {
 			GameObject a = GameObject.Find(outID);
@@ -384,21 +358,4 @@ public class SocketOn : MonoBehaviour {
 		mininow.GetComponent<minion_state>().hp = minion_hp_int;
 		
 	}
-	
-	/*void moveSync(){
-		if (ClientID != resID) {
-				GameObject a = GameObject.Find (resID);
-				//a.GetComponent<Transform> ().position = newPos;
-		
-			if(a!=null){
-				float step = 4 * Time.deltaTime;
-				a.transform.position = Vector3.MoveTowards (a.transform.position, newPos, step);
-				a.transform.LookAt (newPos);
-		
-				if (a.GetComponent<Transform> ().position == newPos) {
-					moveSyncSwitch = false;
-				}// arrived switch
-			}
-		}
-	}*/
 }

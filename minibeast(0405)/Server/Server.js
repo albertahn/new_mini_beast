@@ -133,12 +133,6 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         io.sockets.in(socketRoom[socket.id]).emit("attackRES", data); 
     });
     
-    socket.on("moveSyncREQ",function(data){  
-        var ret = data.split(":");
-        userPos[ret[0]] = ret[1];         
-        io.sockets.in(socketRoom[socket.id]).emit("moveSyncRES", data);
-    });
-    
     socket.on("minionAttackREQ",function(data){
         io.sockets.in(socketRoom[socket.id]).emit("minionAttackRES", data); 
     });
