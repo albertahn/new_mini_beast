@@ -127,7 +127,7 @@ public class TurtleSkill : MonoBehaviour {
 			
 			//GUIElement	hitObject = guilayer.HitTest( Input.mousePosition );if (Physics.Raycast (ray, out hitman, Mathf.Infinity)) {
 			
-			if (Physics.Raycast (ray, out hiterone, Mathf.Infinity) && hiterone.collider.tag == "FLOOR" ) {
+			if (Physics.Raycast (ray, out hiterone, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))) { 
 				
 				
 				if(skillOneReady ==true){
