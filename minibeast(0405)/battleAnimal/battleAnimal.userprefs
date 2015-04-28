@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\Skill_gui\SkillFirstCrl.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\Player_hp\Player_hp_bar.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scWait\waitGUI.cs" Line="35" Column="1" />
-      <File FileName="..\..\..\..\..\Desktop\new_mini_beast-GUI\minibeast(0405)\battleAnimal\Assets\02.Scripts\scWait\waitGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\02.Scripts\scWait\waitSocketOn.cs" Line="61" Column="20" />
-      <File FileName="Assets\02.Scripts\Skill_gui\SkillFirstCrl.cs" Line="45" Column="1" />
+      <File FileName="Assets\02.Scripts\Skill_gui\SkillFirstCrl.cs" Line="57" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\MoveCtrl.cs" Line="228" Column="61" />
+      <File FileName="Assets\02.Scripts\scMulty\minionCtrl.cs" Line="145" Column="3" />
+      <File FileName="Assets\02.Scripts\Player_hp\PlayerHealthState.cs" Line="71" Column="16" />
+      <File FileName="Assets\02.Scripts\Player_hp\Player_hp_bar.cs" Line="14" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

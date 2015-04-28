@@ -231,7 +231,6 @@ public class SocketOn : MonoBehaviour {
 		{
 			string temp = data.Json.args[0].ToString();
 			string[] temp2 = temp.Split(':');
-			Debug.Log ("move moinion "+temp);
 			if(ClientID !=temp2[0]){
 				_moveMinionReceiver.receive(temp);
 			}

@@ -6,8 +6,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	public Texture2D stexture1, stexture2 , stexture3 ;
 	private Transform trans;
 	private string ClientID;
-	
-	
+
 	
 	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird, xfourth ;
 	
@@ -25,11 +24,6 @@ public class DogSkill_GUI : MonoBehaviour {
 	void Start () {
 		ClientID = ClientState.id;
 		
-		xfirst = 10;  yfirst = 470;
-		xsecond = 10 + stexture1.width;
-		xthird = 20 + stexture1.width + stexture2.width;
-		xfourth = 30 + stexture1.width + stexture2.width+stexture3.width;
-		
 		//Get game object
 		myMoveCtrl = GetComponent<MoveCtrl> ();
 		guilayer = Camera.main.GetComponent<GUILayer>();
@@ -40,71 +34,42 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	
 	void OnGUI(){
-		
-		if (this.gameObject.name == PlayerPrefs.GetString ("email")) {
-			
-
-			if (GUI.Button (new Rect (xfirst, yfirst, stexture1.width, stexture1.height), stexture1)) {
-				
-				
-				skillOneReady = true;
-				
-				GameObject dogy =  GameObject.Find(ClientID);
-				
-				Vector3 spawnPos = dogy.transform.position;
-				Quaternion rotationdog = dogy.transform.rotation;
-				
-				GameObject a;
-				a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
-				a.name="firstskill";
-				
-				a.transform.parent = dogy.transform;
-				
-				
-				//fixiate dog  select area to shoot  playermoving =false
-				
-			}
-			
-			
-			if (GUI.Button (new Rect (xsecond, yfirst, stexture2.width, stexture2.height), stexture2)) {
-				
-				skillTwoReady = true;
-				
-				Debug.Log("clicked 2 man");
-				GameObject dogy =  GameObject.Find(ClientID);
-				
-				Vector3 spawnPos = dogy.transform.position;
-				Quaternion rotationdog = dogy.transform.rotation;
-				
-				GameObject a;
-				a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
-				a.name="secondskill";
-				
-				a.transform.parent = dogy.transform;
-				
-				
-			}
-			
-			if (GUI.Button (new Rect (xthird, yfirst, stexture3.width, stexture3.height), stexture3)) {
-				
-				Debug.Log("clickedman");
-				
-				//myMoveCtrl.skill_touch = true;
-				
-			}//endthrid
-			
-			if (GUI.Button (new Rect (xfourth, yfirst, stexture3.width, stexture3.height), "items")) {
-				
-				Debug.Log("clickedman");
-				
-				//myMoveCtrl.skill_touch = true;
-				
-			}
-			
-			
-		}//if is mine
-	}//end gui
 	
+
+	}//end gui
+
+	public void Skill1_bot()
+	{		
+		GameObject dogy =  GameObject.Find(ClientID);
+		
+		Vector3 spawnPos = dogy.transform.position;
+		Quaternion rotationdog = dogy.transform.rotation;
+		
+		GameObject a;
+		a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
+		a.name="firstskill";
+		
+		a.transform.parent = dogy.transform;	
+		skillOneReady = true;
+	}
+
+	public void Skill2_bot()
+	{
+		
+		Debug.Log("clicked 2 man");
+		GameObject dogy =  GameObject.Find(ClientID);
+		
+		Vector3 spawnPos = dogy.transform.position;
+		Quaternion rotationdog = dogy.transform.rotation;
+		
+		GameObject a;
+		a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
+		a.name="secondskill";
+		
+		a.transform.parent = dogy.transform;
+		skillTwoReady = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -130,8 +95,9 @@ public class DogSkill_GUI : MonoBehaviour {
 					
 					dog.transform.LookAt(hiterone.point);
 					
-					skillfire = dog.GetComponent<FireSkill> ();					
-					skillfire.Fireman(this.name);
+					skillfire = dog.GetComponent<FireSkill> ();	
+					Debug.Log("this name = "+this.name);
+					skillfire.Fireman(ClientState.id);
 					//destroy gameobject]
 					//destroy all wraps
 					clearSkillWraps();

@@ -12,7 +12,6 @@ public class Player_hp_bar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 		int hp = player.GetComponent<PlayerHealthState> ().hp;
 		Vector3 temp = new Vector3 ((float)hp / maxHP, 1, 1);
 		this.transform.localScale = temp;

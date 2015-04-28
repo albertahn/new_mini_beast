@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerHealthState : MonoBehaviour {
@@ -11,10 +11,12 @@ public class PlayerHealthState : MonoBehaviour {
 	
 	public int hp = 1100;
 
+	public bool isDie;
+
 
 	// Use this for initialization
 	void Start () {
-	
+		isDie = false;
 	}
 	
 	// Update is called once per frame
@@ -29,7 +31,8 @@ public class PlayerHealthState : MonoBehaviour {
 		Collider coll = obj.collider;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
-		
+
+
 		if(firedby=="minion"){
 			hp -= obj.GetComponent<mBulletCtrl>().damage;
 		}else{
@@ -49,26 +52,27 @@ public class PlayerHealthState : MonoBehaviour {
 		//Destroy (obj.gameObject);
 	}//end heated
 
-	//hit hitbySkill
 	public void hitbySkill(string firedby,GameObject obj){
-
+		
 		Debug.Log ("skill hit: "+ firedby);
-
+		
 		hp -= obj.GetComponent<SkillFirstCrl>().damage;
-
+		
 		StartCoroutine (this.CreateBloodEffect(obj.transform.position));
-
+		
 		string data = this.name+":" + hp.ToString()+"";
-		SocketStarter.Socket.Emit ("attackMinion", data);	
-
+		SocketStarter.Socket.Emit ("attackMinion", data);    
+		
 	}
 
 
 	void playerDie(){
 		this.collider.enabled = false;
+		isDie = true;
 		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
+		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 		
 		/*if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){

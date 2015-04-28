@@ -25,8 +25,7 @@ public class SkillFirstCrl : MonoBehaviour {
 	}
 
 	public void shotByname(string firedBy){
-		firedByName = firedBy;
-	
+		firedByName = firedBy;	
 	}
 
 	void OnTriggerEnter(Collider coll){
@@ -48,6 +47,7 @@ public class SkillFirstCrl : MonoBehaviour {
 			
 			
 		}else if(coll.gameObject.tag=="Player"){
+
 			string hitParentName = coll.transform.parent.name;
 			string firedparentName = GameObject.Find (firedByName).transform.parent.name;
 			

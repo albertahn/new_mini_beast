@@ -115,10 +115,7 @@ public class blue_minion_state : MonoBehaviour {
 			
 			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().checkLevelUp();
 		}
-
-
-		Destroy (this.gameObject, 3.0f);
-		
+		Destroy (this.gameObject, 3.0f);		
 	}
 	
 	
