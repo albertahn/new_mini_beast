@@ -23,14 +23,14 @@ public class waitSocketOn : MonoBehaviour {
 				ClientState.order = num;
 				waitSocketStarter.Socket.Emit ("preuserREQ", id);
 			}else{
-				_waitGUI.addUser(num,id);
+				_waitGUI.remoteAddUser(num,id);
 			}
 		});
 
 		waitSocketStarter.Socket.On ("imoutRES", (data) =>{
 			string temp = data.Json.args[0].ToString();	
 			int a = int.Parse(temp);
-			_waitGUI.deleteUser(a);
+			_waitGUI.remoteDeleteUser(a);
 		});
 
 		waitSocketStarter.Socket.On("preuserRES",(data) =>
@@ -46,8 +46,8 @@ public class waitSocketOn : MonoBehaviour {
 					int num = int.Parse(temp4[0]+"");
 					string id = temp4[1];
 					string character = temp4[2];
-					_waitGUI.addUser(num,id);
-					_waitGUI.setCharacter(num,character);
+					_waitGUI.remoteAddUser(num,id);
+					_waitGUI.remoteSetCharacter(num,character);
 				}
 			}
 		});
@@ -58,7 +58,7 @@ public class waitSocketOn : MonoBehaviour {
 			int order = int.Parse(temp2[0]+"");
 			string character = temp2[1];
 
-			_waitGUI.setCharacter(order,character);
+			_waitGUI.remoteSetCharacter(order,character);
 		});
 
 		waitSocketStarter.Socket.On ("createRoomRES", (data) =>{
