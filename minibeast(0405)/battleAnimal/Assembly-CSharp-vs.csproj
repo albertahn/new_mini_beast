@@ -84,6 +84,7 @@
      <Compile Include="Assets\02.Scripts\scMulty\SocketTest.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\SpawnMinion.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\SpawnPlayer.cs" />
+     <Compile Include="Assets\02.Scripts\scMulty\UIhpbar.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\animationCtrl.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\blueMinionCtrl.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\minionCtrl.cs" />

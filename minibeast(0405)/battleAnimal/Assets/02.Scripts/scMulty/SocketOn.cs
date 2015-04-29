@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class SocketOn : MonoBehaviour {
 	private SpawnPlayer _spawnPlayer;
 	private SpawnMinion _spawnMinion;
+	private UIhpbar _uihpbar;
 	//private MoveCtrl _moveCtrl;
 	private LobbyUI _lobbyUI;
 
@@ -40,7 +41,6 @@ public class SocketOn : MonoBehaviour {
 
 	public GameObject nmanager; // = GameObject.Find("NetworkManager");
 	public Skill_socket_reciever skill_reciever;
-
 	private minionAttackReceiver _mAttackReceiver;
 	private minionDieReceiver _mDieReceiver;
 	private movePlayerReceiver _movePlayerReceiver;
@@ -57,6 +57,7 @@ public class SocketOn : MonoBehaviour {
 
 		Screen.SetResolution(480, 800, true);
 
+		_uihpbar = GameObject.Find("HpBarParent").GetComponent<UIhpbar> ();
 		_spawnPlayer = GetComponent<SpawnPlayer> ();
 		_spawnMinion = GetComponent<SpawnMinion> ();
 		_lobbyUI = GameObject.Find("MultiManager").GetComponent<LobbyUI>();
@@ -109,6 +110,7 @@ public class SocketOn : MonoBehaviour {
 						break;
 				}
 				SocketStarter.Socket.Emit ("preuserREQ", addId);
+				_uihpbar.setPlayer();
 			}
 		});
 
