@@ -55,37 +55,13 @@ public class blue_minion_state : MonoBehaviour {
 	}
 	
 	
-	public void Heated(string firedby, GameObject obj){
+	public void Heated(string firedby, GameObject obj,int damage){
 		Collider coll = obj.collider;
 
 		firedbyname = firedby;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));		
-		
-		
-		//if obj.name
-		
-		if (obj.tag == "BULLET_BALL"||obj.tag == "M_BULLET_BALL") {
-
-			Component minionbullet = obj.GetComponent<mBulletCtrl> ();
-			Component playerbullet = obj.GetComponent<BulletCtrl> ();
-
-			if(minionbullet !=null){
-
-				hp -= obj.GetComponent<mBulletCtrl> ().damage;
-
-			}else{
-				hp -= obj.GetComponent<BulletCtrl> ().damage;
-			}
-			
-
-			
-		} else if (coll.gameObject.tag == "SKILL_FIRST") {
-			
-			hp -= coll.gameObject.GetComponent<SkillFirstCrl>().damage;
-			
-		}
-		
+			hp -= damage;
 		
 		
 		string data = this.name+":" + hp.ToString()+"";

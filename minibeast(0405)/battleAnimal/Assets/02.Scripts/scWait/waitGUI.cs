@@ -56,6 +56,7 @@ public class waitGUI : MonoBehaviour {
 	*/
 
 	public void remoteAddUser(int _order,string _id){
+		while (addUserSwitch) {	}
 		addUserOrder = _order;
 		addUserId = _id;
 		addUserSwitch = true;
@@ -74,6 +75,7 @@ public class waitGUI : MonoBehaviour {
 	}
 
 	public void remoteDeleteUser(int _order){
+		while (delUserSwitch) {	}
 		delUserOrder = _order;
 		delUserSwitch = true;
 	}
@@ -183,6 +185,7 @@ public class waitGUI : MonoBehaviour {
 	}
 
 	public void remoteSetCharacter(int _order,string _char){
+		while(charSelectSwitch){ }
 		charSelectOrder = _order;
 		charSelectCharacter = _char;
 		charSelectSwitch = true;

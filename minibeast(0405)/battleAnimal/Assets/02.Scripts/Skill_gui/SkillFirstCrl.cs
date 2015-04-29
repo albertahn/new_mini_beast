@@ -41,7 +41,7 @@ public class SkillFirstCrl : MonoBehaviour {
 				
 				Debug.Log("skill first hit min");
 				
-				coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject);
+				coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject,damage);
 				Destroy (this.gameObject);
 			}
 			

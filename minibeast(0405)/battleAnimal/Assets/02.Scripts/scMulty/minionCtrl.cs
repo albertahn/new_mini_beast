@@ -44,7 +44,7 @@ public class minionCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		traceDist = 20.0f;
-		attackDist = 10.0f;
+		attackDist = 7.0f;
 		
 		moveKey = true;
 		traceKey = false;

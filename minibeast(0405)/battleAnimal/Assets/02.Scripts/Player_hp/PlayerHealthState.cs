@@ -24,7 +24,7 @@ public class PlayerHealthState : MonoBehaviour {
 	
 	}
 
-	public void Heated(string firedby,GameObject obj){
+	public void Heated(string firedby,GameObject obj,int damage){
 
 		//Debug.Log ("playerhp: "+hp);
 
@@ -32,13 +32,7 @@ public class PlayerHealthState : MonoBehaviour {
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 
-
-		if(firedby=="minion"){
-			hp -= obj.GetComponent<mBulletCtrl>().damage;
-		}else{
-			hp -= obj.GetComponent<BulletCtrl>().damage;
-		}
-
+			hp -= damage;
 		
 		string data = this.name+":" + hp.ToString()+"";
 		SocketStarter.Socket.Emit ("attackMinion", data);			
