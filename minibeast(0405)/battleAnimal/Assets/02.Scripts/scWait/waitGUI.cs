@@ -67,7 +67,7 @@ public class waitGUI : MonoBehaviour {
 		userNum++;
 	}
 
-	void deleteUser(int _order){
+	public void deleteUser(int _order){
 		name [_order] = "";
 		portrait_ [_order].sprite = emptyPortrait;
 		userNum--;

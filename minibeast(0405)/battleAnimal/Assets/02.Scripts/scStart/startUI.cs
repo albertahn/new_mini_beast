@@ -15,7 +15,9 @@ public class startUI : MonoBehaviour {
 	
 	public void Multy()
 	{
-		Application.LoadLevel("scWait");
+		//Application.LoadLevel("scWait");
+
+		Application.LoadLevel("scRoomsList");
 	}
 	
 	public void Logout()
