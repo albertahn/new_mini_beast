@@ -22,6 +22,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
 		ClientID = ClientState.id;
 		
 		//Get game object
@@ -40,7 +41,9 @@ public class DogSkill_GUI : MonoBehaviour {
 
 	public void Skill1_bot()
 	{		
-		GameObject dogy =  GameObject.Find(ClientID);
+		GameObject dogy =  GameObject.Find(ClientState.id);
+
+		//Debug.Log ("client id : "+ClientID);
 		
 		Vector3 spawnPos = dogy.transform.position;
 		Quaternion rotationdog = dogy.transform.rotation;
@@ -90,8 +93,8 @@ public class DogSkill_GUI : MonoBehaviour {
 				
 				if(skillOneReady ==true){
 
-					//Debug.Log(""+skillfire.ToString());
-					GameObject dog =  GameObject.Find(ClientID);
+				//	Debug.Log("fired: skill "+skillfire.ToString());
+					GameObject dog =  GameObject.Find(ClientState.id);
 					
 					dog.transform.LookAt(hiterone.point);
 					

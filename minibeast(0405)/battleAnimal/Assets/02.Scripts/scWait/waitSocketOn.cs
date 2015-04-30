@@ -66,7 +66,12 @@ public class waitSocketOn : MonoBehaviour {
 			ClientState.room = temp;
 			waitSocketStarter.Socket.Emit ("createPlayerREQ", clientID);
 		});
-		waitSocketStarter.Socket.Emit ("createRoomREQ", clientID);
+
+
+		//waitSocketStarter.Socket.Emit ("createRoomREQ", clientID);
+
+		waitSocketStarter.Socket.Emit ("joinRoomREQ", ClientState.room);
+
 	}
 	
 	// Update is called once per frame
