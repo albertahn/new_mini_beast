@@ -47,11 +47,14 @@ public class mBulletCtrl : MonoBehaviour {
 					else
 						target.GetComponent<blue_minion_state>().Heated("minion",gameObject,damage);
 					Destroy (this.gameObject);
-				}else if(target.tag=="Player"){					
+				}else if(target.tag=="Player"){
 					target.GetComponent<PlayerHealthState>().Heated("minion", gameObject,damage);
 					Destroy (this.gameObject);					
-				}else if(target.tag=="RED_CANNON"){					
+				}else if(target.tag=="RED_CANNON"){
 					target.GetComponent<RedCannonState>().Heated("minion", gameObject,damage);
+					Destroy (this.gameObject);					
+				}else if(target.tag=="BLUE_CANNON"){
+					target.GetComponent<BlueCannonState>().Heated("minion", gameObject,damage);
 					Destroy (this.gameObject);					
 				}
 			}

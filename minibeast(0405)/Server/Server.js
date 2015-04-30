@@ -43,15 +43,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
                 }
              }
          }
-         /*
-            for(var i in minionNames){
-                delete(minionNames[i]);
-            }
-            
-            for(var i in minionPos){
-                delete(minionPos[i])              
-            }
-           */ 
+         
          socket.join(temp[1]);
          socketRoom[socket.id] = temp[1];
          socket.emit('createRoomRES',temp[0]);
@@ -63,9 +55,9 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
          createMinion();
         
          function createMinion(){
-            timer1 = setInterval(redSender,1000);
-            timer2= setInterval(blueSender,1000);
-            var maxMinion =0;
+            timer1 = setInterval(redSender,5000);
+            timer2 = setInterval(blueSender,5000);
+            var maxMinion =10000;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;
@@ -188,7 +180,6 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
             io.sockets.in(socketRoom[socket.id]).emit("minionDieRES", data);
     });
 
-
     socket.on('attackMinion', function(data){
         var ret2 = data.split(":");
         buildingHP[ret2[0]] = ret2[1];         
@@ -201,10 +192,7 @@ io.sockets.on('connection', function (socket) {		//Ŭ���̾�Ʈ�� ��
         io.sockets.in(socketRoom[socket.id]).emit("attackBuilding", data);
     });
 
-    socket.on('SkillAttack', function(data){
-            
+    socket.on('SkillAttack', function(data){            
        io.sockets.in(socketRoom[socket.id]).emit("SkillAttack", data);
-    });
-
-
+    });    
 });

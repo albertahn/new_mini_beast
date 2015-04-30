@@ -24,14 +24,11 @@ public class RedCannonCtrl : MonoBehaviour {
 			if (targetObj != null) {
 				if(targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
 					isAttack=false;
-					Debug.Log ("11");
 				}else if(targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
 					isAttack=false;
-					Debug.Log ("22");
 				}
 				if(Vector3.Distance(targetObj.transform.position,tr.position)>=attackDist){
 					isAttack=false;
-					Debug.Log ("33");
 				}
 				_fireCtrl.Fire (targetObj.name);
 			}

@@ -34,6 +34,10 @@ public class red_outer_collider : MonoBehaviour {
 				_ctrl.playerTr = coll.transform;
 				_ctrl.traceKey = true;
 			}
+		}else if (coll.tag == "BLUE_CANNON") {
+			_ctrl.targetObj = coll.gameObject;
+			_ctrl.playerTr = coll.transform;
+			_ctrl.traceKey = true;
 		}
 	}
 }
