@@ -14,9 +14,7 @@ public class minion_state : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-		
+	void Update () {	
 		
 		
 	}
@@ -60,15 +58,11 @@ public class minion_state : MonoBehaviour {
 
 
 	public void Heated(string firedby, GameObject obj,int damage){
-		Collider coll = obj.collider;
-		
-		StartCoroutine (this.CreateBloodEffect(coll.transform.position));		
-
+		Collider coll = obj.collider;		
+		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 
 		firedbyname = firedby;	
 			hp -= damage;
-
-
 		
 		string data = this.name+":" + hp.ToString()+"";
 		SocketStarter.Socket.Emit ("attackMinion", data);			
@@ -93,8 +87,8 @@ public class minion_state : MonoBehaviour {
 			
 			int oldInt = PlayerPrefs.GetInt ("minions_killed");
 			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
-			
-			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().checkLevelUp();
+
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(10);
 		}
 		Destroy (this.gameObject, 3.0f);
 

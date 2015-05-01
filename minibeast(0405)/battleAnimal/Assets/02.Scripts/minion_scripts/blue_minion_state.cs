@@ -89,7 +89,7 @@ public class blue_minion_state : MonoBehaviour {
 			int oldInt = PlayerPrefs.GetInt ("minions_killed");
 			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 			
-			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().checkLevelUp();
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(10);
 		}
 		Destroy (this.gameObject, 3.0f);		
 	}

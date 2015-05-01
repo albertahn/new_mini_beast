@@ -243,8 +243,7 @@ public class MoveCtrl : MonoBehaviour {
 						playermoving = true;
 					}
 					}
-					}
-				}else if(targetObj.name[0]=='r'){
+					}else if(targetObj.name[0]=='r'){
 					if(targetObj.GetComponent<minionCtrl>().isDie==true)
 						idle ();
 					else{
@@ -257,6 +256,7 @@ public class MoveCtrl : MonoBehaviour {
 							playermoving = true;
 						}
 					}
+				}
 				}else{//non minions
 					Vector3 tt;
 					tt= targetObj.transform.position;

@@ -135,9 +135,9 @@ public class minionCtrl : MonoBehaviour {
 							if (targetObj != null) {
 								minionTr.LookAt (targetObj.transform.position);
 								_fireCtrl.Fire (targetObj.name);	
-								if(targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
+					if(targetObj==null||targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
 									move();
-								}else if(targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
+					}else if(targetObj==null||targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
 									move ();
 								}
 										

@@ -19,6 +19,8 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	public bool skillOneReady =false;
 	public bool skillTwoReady =false;
+
+	private Level_up_evolve _lvUpEvolve;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,16 +30,18 @@ public class DogSkill_GUI : MonoBehaviour {
 		//Get game object
 		myMoveCtrl = GetComponent<MoveCtrl> ();
 		guilayer = Camera.main.GetComponent<GUILayer>();
+
 		
 		trans = GetComponent<Transform> ();
 		skillfire = GetComponent<FireSkill> ();
 	}
-	
+
+	public void setPlayer(){
+		_lvUpEvolve =  GameObject.Find (ClientState.id).GetComponent<Level_up_evolve> ();
+	}
 	
 	void OnGUI(){
-	
-
-	}//end gui
+	}
 
 	public void Skill1_bot()
 	{		
@@ -71,6 +75,14 @@ public class DogSkill_GUI : MonoBehaviour {
 		
 		a.transform.parent = dogy.transform;
 		skillTwoReady = true;
+	}
+
+	public void skill1Plus_bot(){
+		_lvUpEvolve.closeSkillPlus ();
+	}
+
+	public void skill2Plus_bot(){
+		_lvUpEvolve.closeSkillPlus ();
 	}
 
 	// Update is called once per frame
@@ -138,9 +150,6 @@ public class DogSkill_GUI : MonoBehaviour {
 		}//mousedown skillone ready 
 		
 		
-		
-		
-		
 	}//end yupdate
 
 	
@@ -153,10 +162,7 @@ public class DogSkill_GUI : MonoBehaviour {
 			Debug.Log("die");
 			
 			Destroy (skillwraps [i]);	
-		}
-		
-		
-		
+		}		
 		
 	}//clear
 }

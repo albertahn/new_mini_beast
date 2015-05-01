@@ -9,11 +9,14 @@ public class ClientState : MonoBehaviour {
 	public static string character;
 	public static string team;
 	public static int kill,death,level;
+	public static int exp;
 	// Use this for initialization
 
 	void Awake(){
 		id = PlayerPrefs.GetString ("email");
 		isMaster = false;
+		exp = 0;
+		level = 1;
 	}
 
 	// Update is called once per frame
