@@ -9,6 +9,7 @@ public class SpawnPlayer : MonoBehaviour {
 	private string team;
 
 	public GameObject Rteam, Bteam;
+	private Respawn _respawn;
 
 	public IEnumerator CreatePlayer(){
 		spawnSwitch = false;
@@ -30,6 +31,7 @@ public class SpawnPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		_respawn = GetComponent<Respawn> ();
 		ClientID = ClientState.id;
 		Rteam = GameObject.Find ("RedTeam");
 		Bteam = GameObject.Find ("BlueTeam");
@@ -62,6 +64,7 @@ public class SpawnPlayer : MonoBehaviour {
 				a.transform.parent = Bteam.transform;
 			}
 			//a.GetComponentInChildren<HP_Bar>().target = a.transform;
+			_respawn.setPlayer();
 			spawnSwitch=false;
 		}
 	}

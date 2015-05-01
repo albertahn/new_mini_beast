@@ -58,6 +58,9 @@ public class BulletCtrl : MonoBehaviour {
 				}else if(target.tag=="RED_CANNON"){
 					target.GetComponent<RedCannonState>().Heated(firedbyname, gameObject,damage);
 					Destroy (this.gameObject);
+				}else if(target.tag=="BLUE_CANNON"){
+					target.GetComponent<BlueCannonState>().Heated("minion", gameObject,damage);
+					Destroy (this.gameObject);					
 				}
 			}
 		}

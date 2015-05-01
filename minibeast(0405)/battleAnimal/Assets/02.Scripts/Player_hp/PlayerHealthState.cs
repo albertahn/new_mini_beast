@@ -3,20 +3,18 @@ using System.Collections;
 
 public class PlayerHealthState : MonoBehaviour {
 
-
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
-
-	public int maxhp = 1100;
-	
+	public int maxhp = 1100;	
 	public int hp = 1100;
-
 	public bool isDie;
+	private Respawn _respawn;
 
 
 	// Use this for initialization
 	void Start () {
 		isDie = false;
+		_respawn = GameObject.Find ("NetworkManager").GetComponent<Respawn> ();
 	}
 	
 	// Update is called once per frame
@@ -40,7 +38,8 @@ public class PlayerHealthState : MonoBehaviour {
 		if(hp<=0)
 		{
 			hp=0;
-			playerDie();
+			if(!isDie)
+				playerDie();
 		}
 		
 		//Destroy (obj.gameObject);
@@ -64,7 +63,13 @@ public class PlayerHealthState : MonoBehaviour {
 		this.collider.enabled = false;
 		isDie = true;
 		//GetComponent<MoveCtrl> ().isDie = true;
-		
+
+		if (ClientState.id == this.name) {
+			ClientState.death ++;
+			_respawn.Set();
+		}
+		this.collider.enabled = false;
+
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);

@@ -132,15 +132,16 @@ public class minionCtrl : MonoBehaviour {
 						}
 		
 						if (isAttack) {
-								if (targetObj != null) {
-										if(targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
-						move();
-										}else if(targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
-						move ();
-										}
-										minionTr.LookAt (targetObj.transform.position);
-										_fireCtrl.Fire (targetObj.name);	
+							if (targetObj != null) {
+								minionTr.LookAt (targetObj.transform.position);
+								_fireCtrl.Fire (targetObj.name);	
+								if(targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
+									move();
+								}else if(targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
+									move ();
 								}
+										
+							}
 						}
 		
 						if (minionSyncSwitch)
@@ -182,7 +183,7 @@ public class minionCtrl : MonoBehaviour {
 			yield return new WaitForSeconds(0.2f);
 			
 			if(playerTr!=null)
-				dist = Vector3.Distance(playerTr.position,minionTr.position);
+				dist = Vector3.Distance(targetObj.transform.position,minionTr.position);
 			else{
 				dist = 1000.0f;
 			}

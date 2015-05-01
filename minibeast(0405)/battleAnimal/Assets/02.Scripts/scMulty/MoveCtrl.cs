@@ -36,6 +36,8 @@ public class MoveCtrl : MonoBehaviour {
 
 	public bool swiped;
 
+	private PlayerHealthState _state;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -44,7 +46,9 @@ public class MoveCtrl : MonoBehaviour {
 		_fireCtrl = this.GetComponent<FireCtrl> ();
 		pre_tr = t2v(tr);
 		_controller = GetComponent<CharacterController> ();
-		ClientID = ClientState.id;		
+		_state = GetComponent<PlayerHealthState> ();
+		ClientID = ClientState.id;
+
 		
 		myxpos = tr.transform.position.x;
 		myypos = tr.transform.position.y;
@@ -58,7 +62,7 @@ public class MoveCtrl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (ClientID == gameObject.name) {
+		if (ClientID == gameObject.name&&_state.isDie==false){
 
 			//id가 내 캐릭터 일때
 			#if UNITY_ANDROID||UNITY_IPHONE
@@ -107,7 +111,8 @@ public class MoveCtrl : MonoBehaviour {
 			RaycastHit hit4;	
 				
 			if(Physics.Raycast (ray3, out hit3, Mathf.Infinity)){
-				if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"){
+				if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"
+					   ||hitman2.collider.tag=="BLUE_CANNON"||hitman2.collider.tag=="RED_CANNON"){
 					string targetName = hit3.collider.name;
 					Debug.Log("target = "+targetName);
 					Vector3 target = hit3.point;
@@ -164,7 +169,8 @@ public class MoveCtrl : MonoBehaviour {
 			
 			if (Input.GetMouseButtonDown (0)) {						
 					if(Physics.Raycast (ray, out hitman2, Mathf.Infinity)){
-						if(hitman2.collider.tag =="BUILDING" || hitman2.collider.tag =="MINION"||hitman2.collider.tag =="Player"){
+						if(hitman2.collider.tag =="BUILDING" || hitman2.collider.tag =="MINION"||hitman2.collider.tag =="Player"
+					   ||hitman2.collider.tag=="BLUE_CANNON"||hitman2.collider.tag=="RED_CANNON"){
 						Debug.Log("not terrain");
 						string targetName = hitman2.collider.name;
 						if(hitman2.collider.tag=="Player"){

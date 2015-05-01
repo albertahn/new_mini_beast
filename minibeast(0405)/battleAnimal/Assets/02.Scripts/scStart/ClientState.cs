@@ -8,6 +8,7 @@ public class ClientState : MonoBehaviour {
 	public static int order;
 	public static string character;
 	public static string team;
+	public static int kill,death,level;
 	// Use this for initialization
 
 	void Awake(){
