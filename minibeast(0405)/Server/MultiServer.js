@@ -1,4 +1,4 @@
-var io = require("socket.io").listen(5000);
+var io = require("socket.io").listen(8000);
 
 io.configure(function(){  
     io.set('log level', 2);
@@ -6,13 +6,13 @@ io.configure(function(){
 
 var socketRoom = {};
 
+
 var userNames = {};
 var userPos = {};
 var userCharacter = {};
 var userTeam={};
 
-var minionNames={};
-var minionPos = {};
+
 
 var buildingHP = {};
 
@@ -23,16 +23,22 @@ var timer2;
 
 
 
- var jarray = [
-    {"firstName":"John", "lastName":"Doe"}, 
-    {"firstName":"Anna", "lastName":"Smith"}, 
-    {"firstName":"Peter","lastName":"Jones"}
-];
+ var jarray ={
+     
+ };
+ 
+
+/*{  jarray["room1"]["minionnames"]
+   "room1": {"minionnames":"{"":""}", "socket":"bb"}, 
+   "room2":  {"roomid":"room1", "lastName":"Smith"}, 
+   "room3": {"roomid":"room1","lastName":"Jones"},
+   "room4":  {"roomid":"room2","lastName":"Jones"}
+    };*/
  
  
  console.log (jarray);
  
- console.log("get emp:  "+jarray[0]["firstName"]);
+ //console.log("get emp:  "+jarray["room1"]["socketif"]);
  
 
 io.sockets.on('connection', function (socket) {		
@@ -48,17 +54,24 @@ io.sockets.on('connection', function (socket) {
                  continue;
              }else{
                 var roomKey = key.replace('/','');
-                if(temp[1]==roomKey){
+                if(temp[1]== roomKey){
+                    
+                    socket.room = roomKey;
+                    jarray[socket.room] = roomKey;
                     socket.join(roomKey);
                     socket.emit('createRoomRES',temp[0]);
-                    socketRoom["roomKey"+key] = roomKey;
-                     console.log("i'm not first socket.id = "+socket.id);
+                    socketRoom[socket.id] = roomKey;
+                    console.log("i'm not first socket.id = "+jarray);
                     return;
                 }
              }
          }
          
-          console.log("rooms: "+JSON.stringify(socketRoom));
+         // console.log("rooms: "+JSON.stringify(socketRoom));
+         
+       //  console.log(" "+JSON.stringify(jarray));
+         
+       //  console.log(" roomkey: "+JSON.stringify(roomKey));
          
           //console.log("iorooms: "+JSON.stringify(rooms));
          
@@ -71,21 +84,28 @@ io.sockets.on('connection', function (socket) {
                 delete(minionPos[i])              
             }
            */ 
-         socket.join(temp[1]);
-         socketRoom[socket.id] = temp[1];
-         socket.emit('createRoomRES',temp[0]);
-         /*console.log("i'm first socket.id = "+socket.id);
-         console.log("socketRoom[socket.id] = "+socketRoom[socket.id]);
-         console.log("id = " +temp[0]);
-         */
+       
+           socket.room = temp[1];
+           socket.join(temp[1]);
+           socketRoom[socket.room ] = temp[1];
          
+         jarray[socket.room ] = socketRoom;
+         
+         socket.emit('createRoomRES',temp[0]);
+       
+        console.log(" "+JSON.stringify(jarray));
+         
+  
          socket.emit("youMaster",temp[0]);
          createMinion();
         
          function createMinion(){
-            timer1 = setInterval(redSender,5000);
-            timer2= setInterval(blueSender,5000);
-            var maxMinion =10000;
+             var minionNames={};
+             var minionPos = {};
+             
+            timer1 = setInterval(redSender,1000);
+            timer2= setInterval(blueSender,1000);
+            var maxMinion =10;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;
@@ -96,7 +116,10 @@ io.sockets.on('connection', function (socket) {
                 minionNames["rm"+redIdx] = "rm"+redIdx;
                 minionPos["rm"+redIdx] = data;   
                 
-                socketRoom["rm"+redIdx] = data;
+               jarray[socket.room].minionNames= minionNames; 
+               
+               
+               jarray[socket.room].minionPos = minionPos;
                 
                 data = "rm"+redIdx+":"+data;         
                 //console.log("data = "+data);
@@ -105,7 +128,7 @@ io.sockets.on('connection', function (socket) {
                  if(currMinion>=maxMinion)
                     clearInterval(timer1);
                 
-                 console.log("rooms: "+JSON.stringify(socketRoom));
+                 console.log(" "+JSON.stringify(jarray));
             }
             
             function blueSender(){
@@ -114,19 +137,21 @@ io.sockets.on('connection', function (socket) {
                 minionNames["bm"+blueIdx] = "bm"+blueIdx;
                 minionPos["bm"+blueIdx] = data;
                 
-                socketRoom["bm"+blueIdx] = data;
+                jarray[socket.room]["minionNames"]= minionNames;
+               
+               jarray[socket.room]["minionPos"]= minionPos;
                 
-                 console.log("rooms: "+JSON.stringify(socketRoom));
+                 console.log(" "+JSON.stringify(jarray));
                 
                 data = "bm"+blueIdx+":"+data;                
-                 io.sockets.in(socketRoom[socket.id]).emit("createBlueMinionRES",data);
+                 io.sockets.in(socket.room).emit("createBlueMinionRES",data);
                  currMinion++;
                  if(currMinion>=maxMinion)
                     clearInterval(timer2);
             }
         }//end create minion
         
-          console.log("rooms: "+JSON.stringify(socketRoom));
+          console.log(" "+JSON.stringify(jarray));
         
     });//end create room
     
@@ -137,55 +162,66 @@ io.sockets.on('connection', function (socket) {
         
         io.sockets.in(socketRoom[socket.id]).emit("createPlayerRES", data);
         
-        userNames[socket.id] = ret[0];
+        userNames[socket.id] = ret[0];        
 	userPos[ret[0]] = ret[1];
         userCharacter[ret[0]] = ret[2];
         userTeam[ret[0]] = ret[3];
+//add to player in room        
+         jarray[socket.room]["userNames"] = userNames;
+          jarray[socket.room]["userPos"] = userPos;
+           jarray[socket.room]["userCharacter"] = userCharacter;
+            jarray[socket.room]["userTeam"] = userTeam;
+         
+          console.log("createplayer: ret"+ret[0]);
+ 
+         console.log(""+JSON.stringify(jarray));
     });
     
     socket.on("preuserREQ", function(data){
         var ret1=data+'=';
         var ret2=data+'=';
        
-        for(var key in minionNames){
+        for(var key in jarray[socket.room]["minionNames"]){
             ret1 += minionNames[key]+":"+minionPos[minionNames[key]]+"_";
         }
         
-        for(var key in userNames){
-            ret2 += userNames[key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+":"+userTeam[userNames[key]]+"_";
+        for(var key in jarray[socket.room]["minionNames"]){
+            ret2 += jarray[socket.room]["userNames"][key]+":"+userPos[userNames[key]]+":"+userCharacter[userNames[key]]+":"+userTeam[userNames[key]]+"_";
         }
-        io.sockets.in(socketRoom[socket.id]).emit("preuser1RES",ret1);
-        io.sockets.in(socketRoom[socket.id]).emit("preuser2RES",ret2);
+        io.sockets.in(socket.room).emit("preuser1RES",ret1);
+        io.sockets.in(socket.room).emit("preuser2RES",ret2);
     });
     
     socket.on("movePlayerREQ",function(data){   
         var ret = data.split(":");
+        
+        
         userPos[ret[0]] = ret[1];
-        io.sockets.in(socketRoom[socket.id]).emit("movePlayerRES", data);  
+        io.sockets.in(socket.room).emit("movePlayerRES", data);  
         
        // console.log(ret[0] +": "+ret[1]);
     });
     
     socket.on("attackREQ",function(data){
-        io.sockets.in(socketRoom[socket.id]).emit("attackRES", data); 
+        io.sockets.in(socket.room).emit("attackRES", data); 
     });
     
     socket.on("moveSyncREQ",function(data){  
         var ret = data.split(":");
         userPos[ret[0]] = ret[1];         
-        io.sockets.in(socketRoom[socket.id]).emit("moveSyncRES", data);
+        io.sockets.in(socket.room).emit("moveSyncRES", data);
         
-        console.log("ret: "+ ret[0]);
+      //  console.log("ret: "+ ret[0]);
         
     });
     
     socket.on("minionAttackREQ",function(data){
-        io.sockets.in(socketRoom[socket.id]).emit("minionAttackRES", data); 
+        io.sockets.in(socket.room).emit("minionAttackRES", data); 
     });
     
     socket.on("minionSyncREQ",function(data){  
         if(data !=null){//edit?   
-            io.sockets.in(socketRoom[socket.id]).emit("minionSyncRES", data);
+            io.sockets.in(socket.room).emit("minionSyncRES", data);
         }
     });
     
@@ -215,7 +251,6 @@ io.sockets.on('connection', function (socket) {
             clearInterval(timer1);
             clearInterval(timer2);
         } 
-       // console.log("minionNames length = "+minionNames.length);
             
         var ret = userNames[socket.id];
         io.sockets.in(socketRoom[socket.id]).emit("imoutRES", ret);
