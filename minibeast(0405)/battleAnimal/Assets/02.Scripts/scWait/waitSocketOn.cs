@@ -64,7 +64,7 @@ public class waitSocketOn : MonoBehaviour {
 		waitSocketStarter.Socket.On ("createRoomRES", (data) =>{
 			string temp = data.Json.args[0].ToString();
 			ClientState.room = temp;
-			waitSocketStarter.Socket.Emit ("createPlayerREQ", clientID);
+			waitSocketStarter.Socket.Emit ("createPlayerREQ", ClientState.id);
 		});
 
 
@@ -72,7 +72,7 @@ public class waitSocketOn : MonoBehaviour {
 
 		waitSocketStarter.Socket.Emit ("joinRoomREQ", ClientState.room);
 
-	}
+	}//starts
 	
 	// Update is called once per frame
 	void Update () {

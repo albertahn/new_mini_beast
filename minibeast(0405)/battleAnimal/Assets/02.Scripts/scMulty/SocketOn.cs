@@ -71,8 +71,12 @@ public class SocketOn : MonoBehaviour {
 
 		SocketStarter.Socket.On ("createRoomRES", (data) =>{
 			string temp = data.Json.args[0].ToString();
-			if(temp==ClientID){		
-				loadlevelSwitch=true;
+
+			if(temp== ClientID){
+
+				Debug.Log("created: "+ temp);
+
+				loadlevelSwitch = true;
 			}
 		});
 
