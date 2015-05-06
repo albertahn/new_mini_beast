@@ -19,42 +19,7 @@ public class minion_state : MonoBehaviour {
 		
 	}
 
-	//COLIDE WITH SKILL1
-	void OnTriggerEnter(Collider coll){
-		//Debug.Log("skill1 hit!"+coll.gameObject.tag);
-	//	Debug.Log("minion colide!");
-		
-		if (coll.gameObject.tag == "SKILL_FIRST") {
-			
-			Debug.Log("skill1 hit!"+coll.gameObject.tag);
-			
-			
-			StartCoroutine (this.CreateBloodEffect(coll.transform.position));
 
-			
-			hp -= coll.gameObject.GetComponent<SkillFirstCrl>().damage;
-			Debug.Log("SKILL ONE");
-			
-			
-			//emit to the server the hp
-			
-			/*string data = this.name+":" + hp.ToString()+"";
-			SocketStarter.Socket.Emit ("attackBuilding", data);
-			*/
-			
-			
-			if(hp<=0)
-			{
-				hp=0;
-				minionDie();
-				
-				string data2 = ClientState.id+":"+this.name;
-				SocketStarter.Socket.Emit ("minionDieREQ", data2);
-			}
-			
-			
-		}
-	}
 
 
 	public void Heated(string firedby, GameObject obj,int damage){
@@ -89,6 +54,7 @@ public class minion_state : MonoBehaviour {
 			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 
 			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(10);
+			ClientState.money +=10;
 		}
 		Destroy (this.gameObject, 3.0f);
 

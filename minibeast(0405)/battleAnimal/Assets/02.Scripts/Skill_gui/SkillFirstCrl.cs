@@ -28,20 +28,20 @@ public class SkillFirstCrl : MonoBehaviour {
 		firedByName = firedBy;	
 	}
 
-	void OnTriggerEnter(Collider coll){
-
-		
-		if (coll.gameObject.tag == "MINION") {
-			
+	void OnTriggerEnter(Collider coll){		
+		if (coll.gameObject.tag == "MINION") {			
 			
 			string hitParentName = coll.transform.parent.name;
 			string firedparentName = GameObject.Find (firedByName).transform.parent.name;
 			
-			if( hitParentName != firedparentName){
+			if(( ClientState.team=="red" && coll.name[0]=='b')||
+			   (ClientState.team=="blue" && coll.name[0]=='r')){		
+				//Debug.Log("skill first hit min");
 				
-				Debug.Log("skill first hit min");
-				
-				coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject,damage);
+				if(coll.gameObject.name[0]=='r')
+					coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject,damage);
+				else if(coll.gameObject.name[0]=='b')
+					coll.gameObject.GetComponent<blue_minion_state>().Heated("skill", gameObject,damage);
 				Destroy (this.gameObject);
 			}
 			

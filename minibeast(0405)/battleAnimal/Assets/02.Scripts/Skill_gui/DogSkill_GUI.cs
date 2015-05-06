@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class DogSkill_GUI : MonoBehaviour {
 	
-	public Texture2D stexture1, stexture2 , stexture3 ;
+	//public Texture2D stexture1, stexture2 , stexture3 ;
 	private Transform trans;
 	private string ClientID;
 
@@ -13,8 +13,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	public Sprite skill1Blank_spr,skill2Blank_spr,skill3Blank_spr;
 
 	
-	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird, xfourth ;
-	
+	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird, xfourth ;	
 	public MoveCtrl myMoveCtrl;
 	
 	public GameObject firstskill, secondskill, thirdskill;
@@ -26,8 +25,11 @@ public class DogSkill_GUI : MonoBehaviour {
 	public bool skillTwoReady =false;
 
 	private bool[] skill_state;
-
+	private bool[] skill_live;
 	private Level_up_evolve _lvUpEvolve;
+
+	private float[] skillCool;
+	private float[] skillStartTime;
 	
 	// Use this for initialization
 	void Start (){
@@ -45,6 +47,17 @@ public class DogSkill_GUI : MonoBehaviour {
 		skill_state = new bool[3];
 		for (int i=0; i<3; i++)
 			skill_state [i] = false;
+
+		skillCool = new float[3];
+		skillCool [0] = 5.0f;
+		skillCool [1] = 5.0f;
+		skillCool [2] = 10.0f;
+
+		skillStartTime = new float[3];
+
+		skill_live = new bool[3];
+		for (int i=0; i<3; i++)
+			skill_live[i] = false;
 	}
 
 	public void setPlayer(){
@@ -52,11 +65,12 @@ public class DogSkill_GUI : MonoBehaviour {
 	}
 	
 	void OnGUI(){
+
 	}
 
 	public void Skill1_bot()
 	{
-		if (skill_state [0]) {
+		if (skill_state [0]&&Time.time-skillStartTime[0]>=skillCool[0]) {
 						GameObject dogy = GameObject.Find (ClientState.id);
 
 						//Debug.Log ("client id : "+ClientID);
@@ -70,12 +84,15 @@ public class DogSkill_GUI : MonoBehaviour {
 		
 						a.transform.parent = dogy.transform;	
 						skillOneReady = true;
+						skillStartTime[0] = Time.time;
+						skill_state [0] = false;
+						skills [0].sprite = skill1Blank_spr;
 				}
 	}
 
 	public void Skill2_bot()
 	{
-		if (skill_state [1]) {		
+		if (skill_state [1]&&Time.time-skillStartTime[1]>=skillCool[1]) {		
 						Debug.Log ("clicked 2 man");
 						GameObject dogy = GameObject.Find (ClientID);
 		
@@ -88,18 +105,23 @@ public class DogSkill_GUI : MonoBehaviour {
 		
 						a.transform.parent = dogy.transform;
 						skillTwoReady = true;
-				}
+						skillStartTime[1] = Time.time;
+						skill_state [1] = false;
+						skills [1].sprite = skill2Blank_spr;
+		}
 	}
 
 	public void skill1Plus_bot(){
 		skills [0].sprite = skill1_spr;
 		skill_state [0] = true;
+		skill_live [0] = true;
 		_lvUpEvolve.closeSkillPlus ();
 	}
 
 	public void skill2Plus_bot(){
 		skills [1].sprite = skill2_spr;
 		skill_state [1] = true;
+		skill_live [1] = true;
 		_lvUpEvolve.closeSkillPlus ();
 	}
 
@@ -107,7 +129,16 @@ public class DogSkill_GUI : MonoBehaviour {
 	void Update () {
 		
 		RaycastHit hitman;
-		
+
+		if (skill_live[0]&&Time.time - skillStartTime [0] >= skillCool [0]) {
+			skills [0].sprite = skill1_spr;
+			skill_state [0] = true;
+		}
+
+		if (skill_live[1]&&Time.time - skillStartTime [1] >= skillCool [1]) {
+			skills [1].sprite = skill2_spr;
+			skill_state [1] = true;
+		}
 		
 		if (Input.GetMouseButtonDown (0) ) {
 			
