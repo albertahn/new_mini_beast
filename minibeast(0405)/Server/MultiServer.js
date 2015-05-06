@@ -90,8 +90,8 @@ io.sockets.on('connection', function (socket) {
              var minionNames={};
              var minionPos = {};
              
-            timer1 = setInterval(redSender,1000);
-            timer2 = setInterval(blueSender,1000);
+            jarray[socket.room].timer1 = setInterval(redSender,1000);
+             jarray[socket.room].timer2 = setInterval(blueSender,1000);
             var maxMinion =10000;
             var currMinion=0;
             var redIdx=0;
@@ -206,7 +206,7 @@ var userTeam={};
  console.log("userPos: "+JSON.stringify(jarray[socket.room].userPos));
  console.log("userCharacter: "+JSON.stringify(jarray[socket.room].userCharacter));
  console.log("userTeam: "+JSON.stringify(jarray[socket.room].userTeam));
-         console.log("the array :"+JSON.stringify(jarray));
+      //   console.log("the array :"+JSON.stringify(jarray));
     }else{//no roomyet
         
          console.log("no room : "+ JSON.stringify(socket.room));
@@ -284,16 +284,17 @@ var userTeam={};
         var key = socket.room; 
         
         if(key!==null){//if client did enter the room
+
+
         key = '/'+key;
         console.log("key = "+key);
         if(rooms[key].length <=1){
-            for(var i in jarray[socket.room].minionNames){
-                delete(jarray[socket.room].minionNames[i]);
-            }
             
-            for(var i in jarray[socket.room].minionPos){
+            
+           /* for(var i in jarray[socket.room].minionPos){
                 delete(jarray[socket.room].minionPos[i]);              
             }
+            
             for(var i in jarray[socket.room].userNames){               
                  delete(jarray[socket.room].userNames[i]);
             }
@@ -301,17 +302,27 @@ var userTeam={};
                 for(var i in jarray[socket.room].userPos){               
                  delete(jarray[socket.room].userPos[i]);
             }
-                        
-            clearInterval(timer1);
-            clearInterval(timer2);
+
+            for(var i in jarray[socket.room].minionNames){
+                delete(jarray[socket.room].minionNames[i]);
+            }
+                        */
+            clearInterval(jarray[socket.room].timer1);
+            clearInterval(jarray[socket.room].timer2);
+
+            delete (jarray[socket.room]);
+        }else{
+
+                 var ret = jarray[socket.room].userNames[socket.id];
+                        io.sockets.in(socket.room).emit("imoutRES", ret);
+                        delete(jarray[socket.room].userPos[jarray[socket.room].userNames[socket.id]]);
+                        delete(jarray[socket.room].userNames[socket.id]);
+                        delete(socket.room);
+                        socket.leave(key);
+
         } 
             
-        var ret = jarray[socket.room].userNames[socket.id];
-        io.sockets.in(socket.room).emit("imoutRES", ret);
-        delete(jarray[socket.room].userPos[jarray[socket.room].userNames[socket.id]]);
-        delete(jarray[socket.room].userNames[socket.id]);
-        delete(socket.room);
-        socket.leave(key);
+       
         }
     });
 
