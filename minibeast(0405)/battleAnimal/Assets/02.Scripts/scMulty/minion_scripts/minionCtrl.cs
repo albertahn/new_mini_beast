@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class blueMinionCtrl : MonoBehaviour {
+public class minionCtrl : MonoBehaviour {
 	private Transform minionTr;
 	public Transform playerTr;
 	
@@ -22,19 +22,19 @@ public class blueMinionCtrl : MonoBehaviour {
 	public float attackDist;
 	
 	public bool isDie;
-	public bool isPlayer;
-	private bool isTrace;
+	private bool isPlayer;
+	public bool isTrace;
+	public bool isAttack;
 	
 	public float dist;
 	
-	public bool moveKey;
+	private bool moveKey;
 	public bool traceKey;
 	public bool attackKey;
 	
-	
-	public bool isAttack;
 	public bool isMaster;
 	
+	private string minionID;
 	private Vector3 minionPos, minionTg;
 	private bool minionSyncSwitch;
 	
@@ -45,34 +45,32 @@ public class blueMinionCtrl : MonoBehaviour {
 	void Start () {
 		traceDist = 20.0f;
 		attackDist = 7.0f;
-
-		minionSyncSwitch = false;
-
+		
 		moveKey = true;
 		traceKey = false;
 		attackKey = false;
 		
 		minionState = MinionState.idle;
 		
+		_fireCtrl = GetComponent<mFireCtrl>();
+		
 		isMove = false;		
 		isDie = false;
 		isPlayer = false;
 		isTrace = false;
-		isAttack = false;
 		
 		idx = 1;
 		speed = 2;
 		minionTr = gameObject.GetComponent<Transform> ();
-		_fireCtrl = GetComponent<mFireCtrl>();
 		
 		int number = extractNum(gameObject.name);
-		
+
 		if (number % 3 == 0) {
-			point = GameObject.Find ("blueMovePoints/route1").GetComponentsInChildren<Transform> ();
+			point = GameObject.Find ("redMovePoints/route1").GetComponentsInChildren<Transform> ();
 		} else if (number % 3 == 1) {
-			point = GameObject.Find ("blueMovePoints/route2").GetComponentsInChildren<Transform> ();
+			point = GameObject.Find ("redMovePoints/route2").GetComponentsInChildren<Transform> ();
 		} else if (number % 3 == 2) {
-			point = GameObject.Find ("blueMovePoints/route3").GetComponentsInChildren<Transform> ();
+			point = GameObject.Find ("redMovePoints/route3").GetComponentsInChildren<Transform> ();
 		}
 		
 		syncTarget = dest = point [idx].position;
@@ -88,7 +86,7 @@ public class blueMinionCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isDie) {
+				if (!isDie) {
 						if (isMaster) {
 								if (moveKey) {
 										moveKey = false;
@@ -110,18 +108,8 @@ public class blueMinionCtrl : MonoBehaviour {
 								if (dest != minionTr.position) {
 										float step = speed * Time.deltaTime;
 										minionTr.position = Vector3.MoveTowards (minionTr.position, dest, step);
-								} else {
-										if (isMaster) {
-												if (idx < point.Length - 1) {
-														syncTarget = dest = point [++idx].position;
-															moveKey = true;
-							
-														string data = gameObject.name + ":" +
-														dest.x+","+dest.y+","+dest.z;
-														SocketStarter.Socket.Emit ("moveMinionREQ", data);
-						}
-										}
 								}
+										
 						}
 		
 						if (isTrace) {
@@ -136,18 +124,30 @@ public class blueMinionCtrl : MonoBehaviour {
 						if (isAttack) {
 							if (targetObj != null) {
 								minionTr.LookAt (targetObj.transform.position);
-								_fireCtrl.Fire (targetObj.name);
-								if(targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
+								_fireCtrl.Fire (targetObj.name);	
+					if(targetObj==null||targetObj.tag=="Player"&&targetObj.GetComponent<PlayerHealthState>().isDie==true){
 									move();
-								}else if(targetObj.tag=="MINION"&&targetObj.GetComponent<minionCtrl>().isDie==true){
+					}else if(targetObj==null||targetObj.tag=="MINION"&&targetObj.GetComponent<blueMinionCtrl>().isDie==true){
 									move ();
 								}
+										
 							}
 						}
-
+		
 						if (minionSyncSwitch)
 								moveSync ();
 				}
+		}
+	
+	int extractNum(string a){
+		string temp=null;
+		
+		for (int i=0; i<name.Length-2; i++) {
+			temp += a[2+i];
+		}
+		
+		int number = int.Parse(temp+"");
+		return number;
 	}
 	
 	public void move(){
@@ -162,37 +162,25 @@ public class blueMinionCtrl : MonoBehaviour {
 		isAttack = false;
 	}
 	
-	
 	public void attack(){		
 		isMove=false;
 		isTrace = false;
 		isAttack = true;
 	}
 	
-	int extractNum(string a){
-		string temp=null;
-		
-		for (int i=0; i<name.Length-2; i++) {
-			temp += a[2+i];
-		}		
-		int number = int.Parse(temp+"");
-		return number;
-	}
-	
 	IEnumerator CheckMonsterState(){
 		while (!isDie) {
 			yield return new WaitForSeconds(0.2f);
 			
-			if(playerTr!=null){
+			if(playerTr!=null)
 				dist = Vector3.Distance(targetObj.transform.position,minionTr.position);
-			}else{
+			else{
 				dist = 1000.0f;
 			}
 			
 			if(dist<=attackDist){
 				if(isAttack==false){
-					attackKey = true;					
-					
+					attackKey = true;
 					string data = gameObject.name + ":" + targetObj.name;
 					SocketStarter.Socket.Emit ("minionAttackREQ", data);
 				}
@@ -205,21 +193,22 @@ public class blueMinionCtrl : MonoBehaviour {
 			{
 				if(isMove==false){
 					moveKey = true;
-										
+
 					string data = gameObject.name + ":" +
 						dest.x+","+dest.y+","+dest.z;
 					SocketStarter.Socket.Emit ("moveMinionREQ", data);
 				}
 			}
-			
 		}
 	}
+	
 	void moveSync(){		
 		float step = speed*2* Time.deltaTime;
 		
 		transform.position = Vector3.MoveTowards(transform.position, minionPos, step);
 		
-		transform.LookAt(minionPos);		
+		transform.LookAt(minionPos);
+		
 		
 		if (transform.position == minionPos) {
 			minionSyncSwitch = false;			
@@ -231,5 +220,20 @@ public class blueMinionCtrl : MonoBehaviour {
 		minionTg = _tg;
 		
 		minionSyncSwitch = true;
+	}
+
+	void OnTriggerEnter(Collider coll){
+		if (coll.tag == "RedPoint") {
+						if (isMaster) {
+								if (idx < point.Length - 1) {
+										syncTarget = dest = point [++idx].position;
+										moveKey = true;
+				
+										string data = gameObject.name + ":" +
+												dest.x + "," + dest.y + "," + dest.z;
+										SocketStarter.Socket.Emit ("moveMinionREQ", data);
+								}
+						}
+		}
 	}
 }

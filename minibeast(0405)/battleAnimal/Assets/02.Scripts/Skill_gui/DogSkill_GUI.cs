@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DogSkill_GUI : MonoBehaviour {
 	
 	public Texture2D stexture1, stexture2 , stexture3 ;
 	private Transform trans;
 	private string ClientID;
+
+	public Image[] skills;
+	public Sprite skill1_spr,skill2_spr,skill3_spr;
+	public Sprite skill1Blank_spr,skill2Blank_spr,skill3Blank_spr;
 
 	
 	public int xfirst, yfirst, xsecond, ysecond, xthird, ythird, xfourth ;
@@ -20,20 +25,26 @@ public class DogSkill_GUI : MonoBehaviour {
 	public bool skillOneReady =false;
 	public bool skillTwoReady =false;
 
+	private bool[] skill_state;
+
 	private Level_up_evolve _lvUpEvolve;
 	
 	// Use this for initialization
-	void Start () {
-
+	void Start (){
 		ClientID = ClientState.id;
 		
 		//Get game object
 		myMoveCtrl = GetComponent<MoveCtrl> ();
 		guilayer = Camera.main.GetComponent<GUILayer>();
 
-		
-		trans = GetComponent<Transform> ();
-		skillfire = GetComponent<FireSkill> ();
+		trans = GetComponent<Transform>();
+		skillfire = GetComponent<FireSkill>();
+
+		skills = GameObject.Find ("skillWindow").GetComponentsInChildren <Image>();
+
+		skill_state = new bool[3];
+		for (int i=0; i<3; i++)
+			skill_state [i] = false;
 	}
 
 	public void setPlayer(){
@@ -44,44 +55,51 @@ public class DogSkill_GUI : MonoBehaviour {
 	}
 
 	public void Skill1_bot()
-	{		
-		GameObject dogy =  GameObject.Find(ClientState.id);
+	{
+		if (skill_state [0]) {
+						GameObject dogy = GameObject.Find (ClientState.id);
 
-		//Debug.Log ("client id : "+ClientID);
+						//Debug.Log ("client id : "+ClientID);
 		
-		Vector3 spawnPos = dogy.transform.position;
-		Quaternion rotationdog = dogy.transform.rotation;
+						Vector3 spawnPos = dogy.transform.position;
+						Quaternion rotationdog = dogy.transform.rotation;
 		
-		GameObject a;
-		a = (GameObject) Instantiate(firstskill, spawnPos ,rotationdog);
-		a.name="firstskill";
+						GameObject a;
+						a = (GameObject)Instantiate (firstskill, spawnPos, rotationdog);
+						a.name = "firstskill";
 		
-		a.transform.parent = dogy.transform;	
-		skillOneReady = true;
+						a.transform.parent = dogy.transform;	
+						skillOneReady = true;
+				}
 	}
 
 	public void Skill2_bot()
 	{
+		if (skill_state [1]) {		
+						Debug.Log ("clicked 2 man");
+						GameObject dogy = GameObject.Find (ClientID);
 		
-		Debug.Log("clicked 2 man");
-		GameObject dogy =  GameObject.Find(ClientID);
+						Vector3 spawnPos = dogy.transform.position;
+						Quaternion rotationdog = dogy.transform.rotation;
 		
-		Vector3 spawnPos = dogy.transform.position;
-		Quaternion rotationdog = dogy.transform.rotation;
+						GameObject a;
+						a = (GameObject)Instantiate (secondskill, spawnPos, rotationdog);
+						a.name = "secondskill";
 		
-		GameObject a;
-		a = (GameObject) Instantiate(secondskill, spawnPos ,rotationdog);
-		a.name="secondskill";
-		
-		a.transform.parent = dogy.transform;
-		skillTwoReady = true;
+						a.transform.parent = dogy.transform;
+						skillTwoReady = true;
+				}
 	}
 
 	public void skill1Plus_bot(){
+		skills [0].sprite = skill1_spr;
+		skill_state [0] = true;
 		_lvUpEvolve.closeSkillPlus ();
 	}
 
 	public void skill2Plus_bot(){
+		skills [1].sprite = skill2_spr;
+		skill_state [1] = true;
 		_lvUpEvolve.closeSkillPlus ();
 	}
 

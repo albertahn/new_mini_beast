@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
              
             timer1 = setInterval(redSender,1000);
             timer2 = setInterval(blueSender,1000);
-            var maxMinion =10;
+            var maxMinion =10000;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;
