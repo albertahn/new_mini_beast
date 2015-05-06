@@ -11,6 +11,9 @@ public class CameraTouch : MonoBehaviour {
 
 	public float h,v;
 
+	public GameObject player;
+	public bool focusCamPlayer;
+
 
 	// Use this for initialization
 	public float speed;
@@ -28,6 +31,8 @@ public class CameraTouch : MonoBehaviour {
 
 		camera.transform.LookAt(a.transform.position);*/
 
+
+		focusCamPlayer = false;
 	}
 	
 	// Update is called once per frame
@@ -86,6 +91,33 @@ public class CameraTouch : MonoBehaviour {
 		transform.Translate(moveDir * Time.deltaTime*10.0f,Space.Self);
 
 		#endif
+
+
+		//focus the player here
+
+		if(focusCamPlayer){
+
+			GameObject myplayer = GameObject.Find(ClientState.id);
+
+			camera.transform.position = myplayer.transform.position -Vector3.forward*20 +Vector3.up * 20;
+			camera.transform.LookAt (myplayer.transform.position);
+
+			focusCamPlayer = false;
+
+
+		}
 	
-	}
+	}//end update
+
+
+	public void cameraFocusPlayer(){
+
+
+		Debug.Log ("camera focus: "+ focusCamPlayer);
+
+
+		focusCamPlayer = true;
+
+
+	}//end camfoc
 }

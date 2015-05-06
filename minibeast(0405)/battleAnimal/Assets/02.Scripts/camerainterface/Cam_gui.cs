@@ -67,4 +67,9 @@ public class Cam_gui : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
+
+
+
 }

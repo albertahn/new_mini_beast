@@ -8,16 +8,27 @@ public class Respawn : MonoBehaviour {
 	private GameObject player;
 	private PlayerHealthState _playerState;
 
+	public CameraTouch _CameraTouch;
+	public GameObject cameraman; 
+
 	// Use this for initialization
 	void Start () {
 		respawnTime = 10.0f;
 		birth = 0;
 		_switch = false;
+
+		cameraman = GameObject.Find ("CameraWrap");
+		
+		_CameraTouch = cameraman.GetComponent<CameraTouch>();
+
 	}
 
 	public void setPlayer(){		
 		player = GameObject.Find (ClientState.id);
 		_playerState = player.GetComponent<PlayerHealthState> ();
+
+
+
 	}
 
 	public void Set(){
@@ -34,6 +45,7 @@ public class Respawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (_switch && (Time.time - birth > respawnTime)) {
 			_playerState.isDie = false;
 			player.collider.enabled = true;
@@ -44,6 +56,11 @@ public class Respawn : MonoBehaviour {
 				player.transform.position = new Vector3(70.0f,50.0f,70.0f);
 
 			_switch = false;
+
+			_CameraTouch.focusCamPlayer = true;
+
+			Debug.Log ("respawns");
+
 		}
 	
 	}

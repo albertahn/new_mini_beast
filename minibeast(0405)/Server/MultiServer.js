@@ -10,8 +10,8 @@ var buildingHP = {};
 
 var isRun = false;
 
-var timer1;
-var timer2;
+//var timer1;
+//var timer2;
 
 
 
@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
              
             jarray[socket.room].timer1 = setInterval(redSender,1000);
              jarray[socket.room].timer2 = setInterval(blueSender,1000);
-            var maxMinion =10000;
+            var maxMinion =50;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;
@@ -111,7 +111,7 @@ io.sockets.on('connection', function (socket) {
                  io.sockets.in(socket.room).emit("createRedMinionRES",data);
                  currMinion++;
                  if(currMinion>=maxMinion)
-                    clearInterval(timer1);
+                    clearInterval(jarray[socket.room].timer1 );
                 
                 // console.log(" "+JSON.stringify(jarray));
             }
@@ -132,7 +132,7 @@ io.sockets.on('connection', function (socket) {
                  io.sockets.in(socket.room).emit("createBlueMinionRES",data);
                  currMinion++;
                  if(currMinion>=maxMinion)
-                    clearInterval(timer2);
+                    clearInterval(jarray[socket.room].timer2);
             }
         }//end create minion
         
@@ -291,7 +291,7 @@ var userTeam={};
         if(rooms[key].length <=1){
             
             
-           /* for(var i in jarray[socket.room].minionPos){
+            for(var i in jarray[socket.room].minionPos){
                 delete(jarray[socket.room].minionPos[i]);              
             }
             
@@ -306,7 +306,7 @@ var userTeam={};
             for(var i in jarray[socket.room].minionNames){
                 delete(jarray[socket.room].minionNames[i]);
             }
-                        */
+                        
             clearInterval(jarray[socket.room].timer1);
             clearInterval(jarray[socket.room].timer2);
 

@@ -10,15 +10,58 @@ public class PlayerHealthState : MonoBehaviour {
 	public bool isDie;
 	private Respawn _respawn;
 
+	public GameObject myplayer, red_building, blue_building;
+
+
 
 	// Use this for initialization
 	void Start () {
 		isDie = false;
 		_respawn = GameObject.Find ("NetworkManager").GetComponent<Respawn> ();
+
+		myplayer = this.gameObject;
+
+
+		red_building = GameObject.Find ("red_building");
+		blue_building = GameObject.Find ("blue_building");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		//if near the building health up per sec
+
+		if (ClientState.team == "red") {
+				
+			float  distance = Vector3.Distance(red_building.transform.position, myplayer.transform.position);
+
+			if(distance <10.0f){
+
+				if(hp<maxhp){
+
+					hp ++;
+				}
+
+			}
+
+
+				} else {//not red team
+		
+			float  distance = Vector3.Distance(blue_building.transform.position, myplayer.transform.position);
+			
+			if(distance <10.0f){
+				
+				if(hp<maxhp){
+					
+					hp ++;
+				}
+				
+			}
+		
+		}//end blue team health recover
+
+
 	
 	}
 

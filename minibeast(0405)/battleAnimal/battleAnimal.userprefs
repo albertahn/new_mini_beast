@@ -1,10 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\Skill_gui\DogSkill_GUI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DynamicElements_Effects/scripts/destroyThisTimed.js">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\minion_scripts\blueMinionCtrl.cs" Line="228" Column="31" />
-      <File FileName="Assets\02.Scripts\scMulty\minion_scripts\minionCtrl.cs" Line="226" Column="23" />
-      <File FileName="Assets\02.Scripts\Skill_gui\DogSkill_GUI.cs" Line="109" Column="21" />
+      <File FileName="Assets/02.Scripts/scMulty/SocketStarter.cs" Line="24" Column="3" />
+      <File FileName="Assets/02.Scripts/camerainterface/CameraTouch.cs" Line="1" Column="1" />
+      <File FileName="../../../../unity-dev/unity_files/backup/bigsuermonbob-master/Assets/02.Scripts/FollowCam.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/Respawn.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="40" Column="1" />
+      <File FileName="Assets/DynamicElements_Effects/scripts/destroyThisTimed.js" Line="7" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
