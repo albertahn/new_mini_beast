@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Camera_focus_change : MonoBehaviour {
+public class goldUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

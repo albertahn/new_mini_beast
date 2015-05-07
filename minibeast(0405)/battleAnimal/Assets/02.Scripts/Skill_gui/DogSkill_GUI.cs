@@ -115,14 +115,19 @@ public class DogSkill_GUI : MonoBehaviour {
 		skills [0].sprite = skill1_spr;
 		skill_state [0] = true;
 		skill_live [0] = true;
-		_lvUpEvolve.closeSkillPlus ();
+		ClientState.skillPoint--;
+		if(ClientState.skillPoint<=0)
+			_lvUpEvolve.closeSkillPlus ();
+
 	}
 
 	public void skill2Plus_bot(){
 		skills [1].sprite = skill2_spr;
 		skill_state [1] = true;
 		skill_live [1] = true;
-		_lvUpEvolve.closeSkillPlus ();
+		ClientState.skillPoint--;
+		if(ClientState.skillPoint<=0)
+			_lvUpEvolve.closeSkillPlus ();
 	}
 
 	// Update is called once per frame
@@ -160,7 +165,6 @@ public class DogSkill_GUI : MonoBehaviour {
 					dog.transform.LookAt(hiterone.point);
 					
 					skillfire = dog.GetComponent<FireSkill> ();	
-					Debug.Log("this name = "+this.name);
 					skillfire.Fireman(ClientState.id);
 					//destroy gameobject]
 					//destroy all wraps

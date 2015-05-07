@@ -225,7 +225,6 @@ public class blueMinionCtrl : MonoBehaviour {
 	void OnTriggerEnter(Collider coll){
 		if (coll.tag == "BluePoint") {
 			if (isMaster) {
-				Debug.Log ("blue blue!!");
 				if (idx < point.Length - 1) {
 					syncTarget = dest = point [++idx].position;
 					moveKey = true;

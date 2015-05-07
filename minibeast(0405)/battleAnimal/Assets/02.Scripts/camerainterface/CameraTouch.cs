@@ -12,7 +12,7 @@ public class CameraTouch : MonoBehaviour {
 	public float h,v;
 
 	public GameObject player;
-	public bool focusCamPlayer, zoomCamPlayer;
+	public bool focusCamPlayer;
 
 
 	// Use this for initialization
@@ -26,9 +26,11 @@ public class CameraTouch : MonoBehaviour {
 		v = 0.0f;
 
 		camera = GameObject.Find ("Main Camera").camera;
-	
+		/*
+			GameObject a = GameObject.Find (PlayerPrefs.GetString("email"));
 
-		zoomCamPlayer = false;
+		camera.transform.LookAt(a.transform.position);*/
+
 
 		focusCamPlayer = false;
 	}
@@ -98,29 +100,11 @@ public class CameraTouch : MonoBehaviour {
 			GameObject myplayer = GameObject.Find(ClientState.id);
 
 			camera.transform.position = myplayer.transform.position -Vector3.forward*20 +Vector3.up * 20;
-
 			camera.transform.LookAt (myplayer.transform.position);
-
 
 			focusCamPlayer = false;
 
 
-		}
-
-
-//zoom in player
-		if(zoomCamPlayer){
-			
-			GameObject myplayer = GameObject.Find(ClientState.id);
-			
-			camera.transform.position = myplayer.transform.position - Vector3.forward*5 +Vector3.up * 0;
-
-
-			camera.transform.LookAt (myplayer.transform.position);
-			
-			zoomCamPlayer = false;
-			
-			StartCoroutine(timeDelayBackme());
 		}
 	
 	}//end update
@@ -136,24 +120,4 @@ public class CameraTouch : MonoBehaviour {
 
 
 	}//end camfoc
-
-
-	public void cameraZoomPlayer(){
-		
-		
-		Debug.Log ("camera focus: "+ focusCamPlayer);
-		
-		
-		zoomCamPlayer = true;
-		
-		
-	}//end camfoc
-
- public IEnumerator timeDelayBackme(){
-
-		yield return new WaitForSeconds(3f);
-
-		focusCamPlayer = true;
-	}
-
 }

@@ -9,11 +9,16 @@ public class ItemShop : MonoBehaviour {
 	public RectTransform[] inventorylist;
 
 	private Image[] inventoryWindow;
-	public Sprite sword,amor;
+	public Sprite sword,amor,blank;
 
 	private float sx,sy;
 	private float xx,xy;
 	private float ix,iy;
+
+	private int[] stack;
+	private int sp;
+	private int count;
+	private bool[] invBool;
 
 
 	// Use this for initialization
@@ -24,6 +29,12 @@ public class ItemShop : MonoBehaviour {
 		inventorylist = GameObject.Find ("inventory_list").GetComponentsInChildren<RectTransform> ();
 		inventoryWindow = GameObject.Find ("inventory_list").GetComponentsInChildren<Image> ();
 
+		invBool = new bool[6];
+		for(int i=0;i<6;i++){
+			inventoryWindow[i].sprite = blank;
+			invBool[i] = false;
+		}
+
 		sx = itemWindow.sizeDelta.x;
 		sy = itemWindow.sizeDelta.y;
 
@@ -32,6 +43,17 @@ public class ItemShop : MonoBehaviour {
 
 		ix = itemlist [1].sizeDelta.x;
 		iy = itemlist [1].sizeDelta.y;
+
+		stack = new int[6];
+		stack[0]=5;
+		stack[1]=4;
+		stack[2]=3;
+		stack[3]=2;
+		stack[4]=1;
+		stack[5]=0;
+		sp=5;
+		count = 0;
+
 		closeWindow ();
 	}
 	
@@ -64,16 +86,90 @@ public class ItemShop : MonoBehaviour {
 	}
 
 	public void buySword(){
-		if (ClientState.idx < 3) {
-						inventoryWindow [ClientState.idx].sprite = sword;
-						ClientState.addInventory ("sword");
-				}
+		if (count < 6) {
+			inventoryWindow[stack[sp]].sprite = sword;
+			ClientState.addInventory ("sword",stack[sp]);
+			invBool[stack[sp]] = true;
+			sp--;
+			count++;	
+		}
 	}
 
 	public void buyAmor(){
-		if (ClientState.idx < 3) {
-						inventoryWindow [ClientState.idx].sprite = amor;
-						ClientState.addInventory ("amor");
-				}
+		if (count < 6) {
+			inventoryWindow [stack[sp]].sprite = amor;
+			ClientState.addInventory ("amor",stack[sp]);
+			invBool[stack[sp]] = true;
+			sp--;
+			count++;	
+		}
+	}
+
+
+
+	public void sellItem1(){
+		if (invBool [0]) {
+			sp++;
+			stack[sp] = 0;
+			inventoryWindow[0].sprite = blank;
+			ClientState.addInventory ("",0);
+			count--;
+			invBool[0] = false;
+		}
+	}
+
+	public void sellItem2(){
+		if (invBool [1]) {
+			sp++;
+			stack[sp] = 1;
+			inventoryWindow[1].sprite = blank;
+			ClientState.addInventory ("",1);
+			count--;
+			invBool[1] = false;
+		}
+	}
+
+	public void sellItem3(){
+		if (invBool [2]) {
+			sp++;
+			stack[sp] = 2;
+			inventoryWindow[2].sprite = blank;
+			ClientState.addInventory ("",2);
+			count--;
+			invBool[2] = false;
+		}
+	}
+
+	public void sellItem4(){
+		if (invBool [3]) {
+			sp++;
+			stack[sp] = 3;
+			inventoryWindow[3].sprite = blank;
+			ClientState.addInventory ("",3);
+			count--;
+			invBool[3] = false;
+		}
+	}
+
+	public void sellItem5(){
+		if (invBool [4]) {
+			sp++;
+			stack[sp] = 4;
+			inventoryWindow[4].sprite = blank;
+			ClientState.addInventory ("",4);
+			count--;
+			invBool[4] = false;
+		}
+	}
+
+	public void sellItem6(){
+		if (invBool [5]) {
+			sp++;
+			stack[sp] = 5;
+			inventoryWindow[5].sprite = blank;
+			ClientState.addInventory ("",5);
+			count--;
+			invBool[5] = false;
+		}
 	}
 }

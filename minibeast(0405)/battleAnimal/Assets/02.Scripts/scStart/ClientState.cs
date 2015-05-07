@@ -12,28 +12,38 @@ public class ClientState : MonoBehaviour {
 	public static int exp;
 	public static int money;
 	public static string[] inventory;
-	
-	public static int idx;
+
+	public static int[] maxExp;
+
+	public static int skillPoint;
+
 	// Use this for initialization
-	
 	void Awake(){
 		id = PlayerPrefs.GetString ("email");
 		isMaster = false;
 		exp = 0;
 		level = 1;
 		money = 0;
-		idx = 0;
+		skillPoint = 0;
 		
-		inventory = new string[3];
+		inventory = new string[6];
+		maxExp = new int[7];
+		maxExp [0] = 10;
+		maxExp [1] = 30;
+		maxExp [2] = 60;
+		maxExp [3] = 1000;
+		maxExp [4] = 1500;
+		maxExp [5] = 2200;
+		maxExp [6] = 3000;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 	
-	public static void addInventory(string a){
+	public static void addInventory(string a,int idx){
 		inventory [idx] = a.ToString();
-		idx ++;
 	}
 	
 	void OnGUI(){

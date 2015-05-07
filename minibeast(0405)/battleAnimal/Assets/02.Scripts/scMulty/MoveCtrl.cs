@@ -171,7 +171,6 @@ public class MoveCtrl : MonoBehaviour {
 					if(Physics.Raycast (ray, out hitman2, Mathf.Infinity)){
 						if(hitman2.collider.tag =="BUILDING" || hitman2.collider.tag =="MINION"||hitman2.collider.tag =="Player"
 					   ||hitman2.collider.tag=="BLUE_CANNON"||hitman2.collider.tag=="RED_CANNON"){
-						Debug.Log("not terrain");
 						string targetName = hitman2.collider.name;
 						if(hitman2.collider.tag=="Player"){
 							string parentName = hitman2.collider.gameObject.transform.parent.name;
@@ -197,7 +196,6 @@ public class MoveCtrl : MonoBehaviour {
 							}
 						}
 					}else if (Physics.Raycast (ray, out hitman, Mathf.Infinity,1<<LayerMask.NameToLayer("FLOOR"))) {
-						Debug.Log("terrain");
 						myxpos = hitman.point.x; //Input.touches [0].position.x;
 						myypos = hitman.point.y;  //Input.touches [0].position.y;
 						myzpos = hitman.point.z;
