@@ -20,6 +20,7 @@ public class ItemShop : MonoBehaviour {
 	private int count;
 	private bool[] invBool;
 
+	private moneyUI _moneyUI;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class ItemShop : MonoBehaviour {
 		itemlist = GameObject.Find ("item_list").GetComponentsInChildren<RectTransform> ();
 		inventorylist = GameObject.Find ("inventory_list").GetComponentsInChildren<RectTransform> ();
 		inventoryWindow = GameObject.Find ("inventory_list").GetComponentsInChildren<Image> ();
+		_moneyUI = GameObject.Find ("UIManager").GetComponent<moneyUI>();
 
 		invBool = new bool[6];
 		for(int i=0;i<6;i++){
@@ -86,17 +88,19 @@ public class ItemShop : MonoBehaviour {
 	}
 
 	public void buySword(){
-		if (count < 6) {
+		if (count < 6 && ClientState.money>=50) {
+			_moneyUI.makeMoney(-50);
 			inventoryWindow[stack[sp]].sprite = sword;
 			ClientState.addInventory ("sword",stack[sp]);
 			invBool[stack[sp]] = true;
 			sp--;
-			count++;	
+			count++;
 		}
 	}
 
 	public void buyAmor(){
-		if (count < 6) {
+		if (count < 6 && ClientState.money>=50) {
+			_moneyUI.makeMoney(-50);
 			inventoryWindow [stack[sp]].sprite = amor;
 			ClientState.addInventory ("amor",stack[sp]);
 			invBool[stack[sp]] = true;
@@ -109,6 +113,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem1(){
 		if (invBool [0]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 0;
 			inventoryWindow[0].sprite = blank;
@@ -120,6 +125,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem2(){
 		if (invBool [1]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 1;
 			inventoryWindow[1].sprite = blank;
@@ -131,6 +137,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem3(){
 		if (invBool [2]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 2;
 			inventoryWindow[2].sprite = blank;
@@ -142,6 +149,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem4(){
 		if (invBool [3]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 3;
 			inventoryWindow[3].sprite = blank;
@@ -153,6 +161,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem5(){
 		if (invBool [4]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 4;
 			inventoryWindow[4].sprite = blank;
@@ -164,6 +173,7 @@ public class ItemShop : MonoBehaviour {
 
 	public void sellItem6(){
 		if (invBool [5]) {
+			_moneyUI.makeMoney(25);
 			sp++;
 			stack[sp] = 5;
 			inventoryWindow[5].sprite = blank;

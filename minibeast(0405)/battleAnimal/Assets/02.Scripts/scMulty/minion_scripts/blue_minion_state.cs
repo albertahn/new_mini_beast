@@ -10,9 +10,10 @@ public class blue_minion_state : MonoBehaviour {
 
 	public string firedbyname;
 	
+	private moneyUI _moneyUI;
 	// Use this for initialization
 	void Start () {
-		
+		_moneyUI = GameObject.Find ("UIManager").GetComponent<moneyUI>();		
 	}
 	
 	// Update is called once per frame
@@ -61,7 +62,7 @@ public class blue_minion_state : MonoBehaviour {
 			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 			
 			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(10);
-			ClientState.money +=10;
+			_moneyUI.makeMoney(10);
 		}
 		Destroy (this.gameObject, 3.0f);		
 	}

@@ -8,17 +8,17 @@ public class minion_state : MonoBehaviour {
 	
 	public int hp = 100;
 	public string firedbyname;
+
+	private moneyUI _moneyUI;
 	// Use this for initialization
 	void Start () {
-		
+		_moneyUI = GameObject.Find ("UIManager").GetComponent<moneyUI>();
 	}
 	
 	// Update is called once per frame
 	void Update () {	
-		
-		
+				
 	}
-
 
 
 
@@ -48,16 +48,14 @@ public class minion_state : MonoBehaviour {
 		this.collider.enabled = false;
 		GetComponent<minionCtrl> ().isDie = true;
 
-		if(ClientState.id==firedbyname){
-			
+		if(ClientState.id==firedbyname){			
 			int oldInt = PlayerPrefs.GetInt ("minions_killed");
 			PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 
 			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(10);
-			ClientState.money +=10;
+			_moneyUI.makeMoney(10);
 		}
 		Destroy (this.gameObject, 3.0f);
-
 	}
 	
 	

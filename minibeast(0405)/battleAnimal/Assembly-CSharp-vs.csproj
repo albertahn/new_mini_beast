@@ -93,7 +93,7 @@
      <Compile Include="Assets\02.Scripts\scMulty\UI\UIhpbar.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\UI\UImpbar.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\UI\expBar.cs" />
-     <Compile Include="Assets\02.Scripts\scMulty\UI\goldUI.cs" />
+     <Compile Include="Assets\02.Scripts\scMulty\UI\moneyUI.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\animationCtrl.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\minionSync.cs" />
      <Compile Include="Assets\02.Scripts\scMulty\minion_scripts\blueMinionCtrl.cs" />
