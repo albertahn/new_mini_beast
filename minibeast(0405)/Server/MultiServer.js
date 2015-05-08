@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket) {
                     socket.join(temp[1]);
                     socket.emit('createRoomRES',temp[0]);
                     //socketRoom[socket.room] = roomKey;
-                    console.log("i'm not first socket.id = "+JSON.stringify(jarray));
+                  //  console.log("i'm not first socket.id = "+JSON.stringify(jarray));
                     
                     
                     
@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
        
            
          if(jarray[temp[1]]===undefined){
-             
+           
              socket.room = temp[1];
              socket.join(temp[1]);
              socketRoom[socket.room ] = temp[1];
@@ -311,7 +311,9 @@ var userTeam={};
             clearInterval(jarray[socket.room].timer2);
 
             delete (jarray[socket.room]);
+            
         }else{
+            
 
                  var ret = jarray[socket.room].userNames[socket.id];
                         io.sockets.in(socket.room).emit("imoutRES", ret);
