@@ -10,7 +10,7 @@ public class SpawnPlayer : MonoBehaviour {
 
 	public GameObject Rteam, Bteam;
 	private Respawn _respawn;
-	private DogSkill_GUI _gui;
+	//private DogSkill_GUI _gui;
 	private expBar _exp;
 
 	public IEnumerator CreatePlayer(){
@@ -34,7 +34,7 @@ public class SpawnPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_respawn = GetComponent<Respawn> ();
-		_gui = GameObject.Find ("UIManager").GetComponent<DogSkill_GUI>();
+		//_gui = GameObject.Find ("UIManager").GetComponent<DogSkill_GUI>();
 		_exp = GameObject.Find ("ExpBarParent").GetComponent<expBar>();
 		ClientID = ClientState.id;
 		Rteam = GameObject.Find ("RedTeam");
@@ -69,7 +69,7 @@ public class SpawnPlayer : MonoBehaviour {
 			}
 			//a.GetComponentInChildren<HP_Bar>().target = a.transform;
 			_respawn.setPlayer();
-			_gui.setPlayer();
+			//_gui.setPlayer();
 			_exp.setPlayer();
 			spawnSwitch=false;
 		}

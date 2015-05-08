@@ -23,6 +23,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	public bool skillOneReady =false;
 	public bool skillTwoReady =false;
+	public bool skillThreeReady = false;
 
 	private bool[] skill_state;
 	private bool[] skill_live;
@@ -33,6 +34,7 @@ public class DogSkill_GUI : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start (){
+
 		ClientID = ClientState.id;
 		
 		//Get game object
@@ -51,25 +53,26 @@ public class DogSkill_GUI : MonoBehaviour {
 		skillCool = new float[3];
 		skillCool [0] = 5.0f;
 		skillCool [1] = 5.0f;
-		skillCool [2] = 10.0f;
+		skillCool [2] = 1.0f;
 
 		skillStartTime = new float[3];
 
 		skill_live = new bool[3];
 		for (int i=0; i<3; i++)
-			skill_live[i] = false;
+						skill_live [i] = true;//false;
 	}
 
 	public void setPlayer(){
 		_lvUpEvolve =  GameObject.Find (ClientState.id).GetComponent<Level_up_evolve> ();
 	}
 	
-	void OnGUI(){
 
-	}
 
 	public void Skill1_bot()
 	{
+
+		Debug.Log ("dog_skill_gui");
+
 		if (skill_state [0]&&Time.time-skillStartTime[0]>=skillCool[0]) {
 						GameObject dogy = GameObject.Find (ClientState.id);
 
@@ -110,6 +113,33 @@ public class DogSkill_GUI : MonoBehaviour {
 						skills [1].sprite = skill2Blank_spr;
 		}
 	}
+
+
+	public void Skill3_bot()
+	{
+		
+		Debug.Log ("3rd skill bot");
+		
+		//if (skill_state [2]&& Time.time-skillStartTime[2] >= skillCool[2]) {
+			GameObject dogy = GameObject.Find (ClientState.id);
+			
+			//Debug.Log ("client id : "+ClientID);
+			
+			Vector3 spawnPos = dogy.transform.position;
+			Quaternion rotationdog = dogy.transform.rotation;
+			
+			GameObject a;
+			a = (GameObject)Instantiate (firstskill, spawnPos, rotationdog);
+			a.name = "firstskill";
+			
+			a.transform.parent = dogy.transform;	
+			skillThreeReady = true;
+			skillStartTime[2] = Time.time;
+			skill_state [2] = false;
+			skills [2].sprite = skill1Blank_spr;
+		//}
+	}
+
 
 	public void skill1Plus_bot(){
 		skills [0].sprite = skill1_spr;
@@ -164,8 +194,8 @@ public class DogSkill_GUI : MonoBehaviour {
 					
 					dog.transform.LookAt(hiterone.point);
 					
-					skillfire = dog.GetComponent<FireSkill> ();	
-					skillfire.Fireman(ClientState.id);
+					WingSkill wingskill = dog.GetComponent<WingSkill> ();	
+					wingskill.Fireman(ClientState.id);
 					//destroy gameobject]
 					//destroy all wraps
 					clearSkillWraps();
@@ -196,6 +226,32 @@ public class DogSkill_GUI : MonoBehaviour {
 					GameObject skill1 =  GameObject.Find("secondskill");
 					Destroy (skill1);	
 				}
+
+
+
+				if(skillThreeReady ==true){
+					
+					//	Debug.Log("fired: skill "+skillfire.ToString());
+					GameObject dog =  GameObject.Find(ClientState.id);
+					
+					dog.transform.LookAt(hiterone.point);
+					
+					skillfire = dog.GetComponent<FireSkill> ();	
+					skillfire.Fireman(ClientState.id);
+					//destroy gameobject]
+					//destroy all wraps
+					clearSkillWraps();
+					
+					skillThreeReady = false;
+					
+					
+					Vector3	clickendpoint= hiterone.point;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					
+					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
+					
+					
+				}//skill 1 ready true
 				
 				
 			} ///raycasr

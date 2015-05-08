@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FireSkill : MonoBehaviour {
+public class WingSkill : MonoBehaviour {
 
 	public GameObject bulleta;
 	public Transform firePosa;
@@ -27,22 +27,18 @@ public class FireSkill : MonoBehaviour {
 	
 	public void Fireman(string firedBy){
 
-
-		Debug.Log ("fireman: "+ firedBy);
-			
-			StartCoroutine (this.CreateBullet (firedBy));
-			StartCoroutine (this.ShowMuzzleFlash ());
-			birth = Time.time;
-
-
+		//Debug.Log ("fireman: "+ firedBy);
+		StartCoroutine (this.CreateBullet (firedBy));
+		StartCoroutine (this.ShowMuzzleFlash ());
+		birth = Time.time;
+		
+		
 	}
 	
 	IEnumerator CreateBullet(string firedBy){
-
+		
 		GameObject a = (GameObject)Instantiate(bulleta,firePosa.position,firePosa.rotation);
-
-		a.GetComponent<SkillFirstCrl> ().shotByname(firedBy);
-
+		a.GetComponent<WingSkillCtrl> ().shotByname(firedBy);
 
 		yield return null;
 	}
@@ -50,6 +46,6 @@ public class FireSkill : MonoBehaviour {
 	IEnumerator ShowMuzzleFlash(){
 		//_renderera.enabled = true;
 		yield return new WaitForSeconds(Random.Range(0.01f,0.2f));
-	//	_renderera.enabled = false;
+		//	_renderera.enabled = false;
 	}
 }
