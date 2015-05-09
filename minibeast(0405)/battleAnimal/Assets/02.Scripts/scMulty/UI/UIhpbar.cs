@@ -4,7 +4,6 @@ using System.Collections;
 public class UIhpbar : MonoBehaviour {
 
 	public GameObject player, hpText;
-	private int maxHP;
 	// Use this for initialization
 	private bool switch_;
 
@@ -19,7 +18,7 @@ public class UIhpbar : MonoBehaviour {
 	void Update () {
 		if (player != null) {
 						int hp = player.GetComponent<PlayerHealthState> ().hp;
-						Vector3 temp = new Vector3 ((float)hp / maxHP, 1, 1);
+						Vector3 temp = new Vector3 ((float)hp / playerStat.maxHp, 1, 1);
 						GetComponent<RectTransform> ().localScale = temp;
 						//this.transform.localScale = temp;
 		
@@ -27,7 +26,6 @@ public class UIhpbar : MonoBehaviour {
 		}
 		if (switch_) {			
 			player = GameObject.Find (ClientState.id);
-			maxHP = player.GetComponent<PlayerHealthState> ().hp;
 			switch_=false;
 		}		
 	}

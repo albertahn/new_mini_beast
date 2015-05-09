@@ -22,7 +22,7 @@ public class My_inteface_hp_bar : MonoBehaviour {
 		player = GameObject.Find (PlayerPrefs.GetString("email"));
 		if (player!= null) {
 			
-			maxHP = player.GetComponent<PlayerHealthState> ().maxhp;
+			maxHP = playerStat.maxHp;
 			
 			//Debug.Log("myhp: "+maxHP);
 			

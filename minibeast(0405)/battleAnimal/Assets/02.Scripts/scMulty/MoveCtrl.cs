@@ -9,8 +9,7 @@ public class MoveCtrl : MonoBehaviour {
 	
 	public float h = 0.0f;
 	public float v = 0.0f;
-	
-	public float movSpeed = 5.0f;
+
 	public float rotSpeed = 50.0f;
 	
 	private Vector3 movDir = Vector3.zero;	
@@ -218,7 +217,7 @@ public class MoveCtrl : MonoBehaviour {
 		if (playermoving) {
 			tr.LookAt (clickendpoint);
 			//if (clickendpoint != tr.position) {
-				float step = 5 * Time.deltaTime;
+				float step = playerStat.speed* Time.deltaTime;
 
 				tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
 			//}

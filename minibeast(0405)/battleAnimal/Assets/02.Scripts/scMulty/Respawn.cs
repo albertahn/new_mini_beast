@@ -26,9 +26,6 @@ public class Respawn : MonoBehaviour {
 	public void setPlayer(){		
 		player = GameObject.Find (ClientState.id);
 		_playerState = player.GetComponent<PlayerHealthState> ();
-
-
-
 	}
 
 	public void Set(){
@@ -49,7 +46,7 @@ public class Respawn : MonoBehaviour {
 		if (_switch && (Time.time - birth > respawnTime)) {
 			_playerState.isDie = false;
 			player.collider.enabled = true;
-			_playerState.hp =_playerState.maxhp;
+			_playerState.hp =playerStat.maxHp;
 			if(ClientState.team=="red")
 				player.transform.position = new Vector3( 25.0f,50.0f,25.0f);
 			else

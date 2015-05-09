@@ -5,8 +5,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
-	public int maxhp = 1100;	
-	public int hp = 1100;
+	public int hp;
 	public bool isDie;
 	private Respawn _respawn;
 
@@ -21,6 +20,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 		myplayer = this.gameObject;
 
+		hp = playerStat.maxHp;
 
 		red_building = GameObject.Find ("red_building");
 		blue_building = GameObject.Find ("blue_building");
@@ -38,7 +38,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 			if(distance <10.0f){
 
-				if(hp<maxhp){
+				if(hp<playerStat.maxHp){
 
 					hp ++;
 				}
@@ -52,7 +52,7 @@ public class PlayerHealthState : MonoBehaviour {
 			
 			if(distance <10.0f){
 				
-				if(hp<maxhp){
+				if(hp<playerStat.maxHp){
 					
 					hp ++;
 				}
