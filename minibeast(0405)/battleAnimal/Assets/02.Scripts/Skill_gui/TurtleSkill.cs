@@ -137,7 +137,7 @@ public class TurtleSkill : MonoBehaviour {
 					myplayer.transform.LookAt(hiterone.point);
 					
 					skillfire = myplayer.GetComponent<FireSkill> ();					
-					skillfire.Fireman(this.name);
+					//skillfire.Fireman(this.name);
 					
 					//destroy gameobject]
 					

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WingSkill : MonoBehaviour {
 
-	public GameObject bulleta;
+	public GameObject wingbulleta;
 	public Transform firePosa;
 	//public MeshRenderer _renderera;
 	
@@ -25,7 +25,7 @@ public class WingSkill : MonoBehaviour {
 		
 	}
 	
-	public void Fireman(string firedBy){
+	public void fireWing(string firedBy){
 
 		//Debug.Log ("fireman: "+ firedBy);
 		StartCoroutine (this.CreateBullet (firedBy));
@@ -37,7 +37,7 @@ public class WingSkill : MonoBehaviour {
 	
 	IEnumerator CreateBullet(string firedBy){
 		
-		GameObject a = (GameObject)Instantiate(bulleta,firePosa.position,firePosa.rotation);
+		GameObject a = (GameObject)Instantiate(wingbulleta,firePosa.position,firePosa.rotation);
 		a.GetComponent<WingSkillCtrl> ().shotByname(firedBy);
 
 		yield return null;

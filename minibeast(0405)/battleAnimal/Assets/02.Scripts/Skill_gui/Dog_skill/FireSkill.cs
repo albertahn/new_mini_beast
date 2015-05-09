@@ -25,7 +25,7 @@ public class FireSkill : MonoBehaviour {
 		
 	}
 	
-	public void Fireman(string firedBy){
+	public void fireBall(string firedBy){
 
 
 		Debug.Log ("fireman1: "+ firedBy);

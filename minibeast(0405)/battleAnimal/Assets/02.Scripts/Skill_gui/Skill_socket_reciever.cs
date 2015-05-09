@@ -21,15 +21,18 @@ public class Skill_socket_reciever : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+//show the skill to other player
 
 		if(firedskill ==true){
+
+			//if my skill dont show, else show
 
 			GameObject firedplayer = GameObject.Find(userID);
 
 			firedplayer.transform.LookAt(newPos);
 			
 			skillfire = firedplayer.GetComponent<FireSkill> ();					
-			skillfire.Fireman(userID);
+			//skillfire.Fireman(userID);
 
 			firedskill = false;
 

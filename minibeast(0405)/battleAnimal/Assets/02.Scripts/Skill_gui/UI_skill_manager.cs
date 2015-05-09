@@ -48,7 +48,10 @@ public class UI_skill_manager : MonoBehaviour {
 							dog_skill_gui.Skill1_bot(); 
 						    firstOn =false;
 
+
+
 				}else if(secondOn){
+
 					dog_skill_gui.Skill2_bot(); 
 					secondOn =false;
 
@@ -64,14 +67,24 @@ public class UI_skill_manager : MonoBehaviour {
 			break;
 		case "turtle":
 
-				TurtleSkill turtleskill = GameObject.Find (ClientState.id).GetComponent<TurtleSkill>();
+				Tutu_skill_gui tutu_skill = GameObject.Find (ClientState.id).GetComponent<Tutu_skill_gui>();
 
 				if(firstOn){
 					
-					//turtleskill.Skill1_bot(); 
+					tutu_skill.Skill1_bot(); 
 					firstOn =false;
 					
-				}//endif
+				}else if(secondOn){
+					
+					tutu_skill.Skill2_bot(); 
+					secondOn =false;
+					
+				}else if(thirdOn){
+					
+					tutu_skill.Skill3_bot(); 
+					thirdOn =false;
+					
+				}//endif//endif
 
 		
 			break;
