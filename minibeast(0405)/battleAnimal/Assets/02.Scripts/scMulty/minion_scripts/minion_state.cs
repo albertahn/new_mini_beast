@@ -41,7 +41,7 @@ public class minion_state : MonoBehaviour {
 			SocketStarter.Socket.Emit ("minionDieREQ", data2);
 		}
 		
-		Destroy (obj.gameObject);
+		//Destroy (obj.gameObject);
 	}
 
 	public void minionDie(){

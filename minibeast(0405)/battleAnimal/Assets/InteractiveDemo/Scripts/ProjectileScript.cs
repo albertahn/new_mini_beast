@@ -35,8 +35,11 @@ public class ProjectileScript : MonoBehaviour {
             curTrail.transform.parent = null;
             Destroy(curTrail, 3f); 
 	    }
+
+		Destroy(impactParticle, 5f);
+
         Destroy(projectileParticle, 3f);
-        Destroy(impactParticle, 5f);
+
         Destroy(gameObject);
         //projectileParticle.Stop();
 

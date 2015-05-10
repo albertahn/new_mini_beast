@@ -211,8 +211,8 @@ public class Tutu_skill_gui : MonoBehaviour {
 					
 					dog.transform.LookAt(hiterone.point);
 					
-					WingSkill wingskill = dog.GetComponent<WingSkill> ();	
-					wingskill.fireWing(ClientState.id);
+					swirl_sword wingskill = dog.GetComponent<swirl_sword> ();	
+					wingskill.swirlIt(ClientState.id);
 					//destroy gameobject]
 					//destroy all wraps
 					clearSkillWraps();

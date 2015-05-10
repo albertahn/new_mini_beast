@@ -100,6 +100,7 @@ public class DogSkill_GUI : MonoBehaviour {
 		if (skill_state [1]&&Time.time-skillStartTime[1]>=skillCool[1]) {		
 						Debug.Log ("clicked 2 man");
 						GameObject dogy = GameObject.Find (ClientID);
+			dogy.transform.position = dogy.transform.position+ Vector3.up * 10;
 		
 						Vector3 spawnPos = dogy.transform.position;
 						Quaternion rotationdog = dogy.transform.rotation;
@@ -113,6 +114,8 @@ public class DogSkill_GUI : MonoBehaviour {
 						skillStartTime[1] = Time.time;
 						skill_state [1] = false;
 						skills [1].sprite = skill2Blank_spr;
+
+
 		}
 	}
 
@@ -237,8 +240,15 @@ public class DogSkill_GUI : MonoBehaviour {
 					dog.transform.LookAt(hiterone.point);
 					
 					Vector3 clickendpoint = hiterone.point;
-					float step = 350 * Time.deltaTime;
+					float step = 35 * Time.deltaTime;
+
+
+
+
+
 					dog.transform.position = Vector3.MoveTowards(dog.transform.position, clickendpoint, step);
+
+					//dog.transform.position.y = 50.0f;
 					
 					skillTwoReady = false;
 					

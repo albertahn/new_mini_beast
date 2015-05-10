@@ -29,7 +29,7 @@ io.sockets.on('connection', function (socket) {
         var temp = data.split(':');
          var rooms = io.sockets.manager.rooms;
          
-         console.log("room_mng: "+ JSON.stringify(rooms));
+        // console.log("room_mng: "+ JSON.stringify(rooms));
          
          //if(rooms["/"+temp[1]]==)
          
@@ -46,7 +46,7 @@ io.sockets.on('connection', function (socket) {
                 var roomKey = key.replace('/','');
                 if(temp[1] == roomKey){
                     
-                    console.log("rooms already exits :"+roomKey);
+                   // console.log("rooms already exits :"+roomKey);
                     socket.room = temp[1];
                     socket.join(temp[1]);
                     socket.emit('createRoomRES',temp[0]);
@@ -68,7 +68,7 @@ io.sockets.on('connection', function (socket) {
              socket.join(temp[1]);
              socketRoom[socket.room ] = temp[1];
              
-             console.log("remade room: "+jarray[socket.room ]);
+           //  console.log("remade room: "+jarray[socket.room ]);
              
              jarray[socket.room ] = socketRoom;     
              
@@ -159,7 +159,7 @@ var userTeam={};
         userCharacter[ret[0]] = ret[2];
         userTeam[ret[0]] = ret[3];
         
-         console.log("my room : "+ JSON.stringify(socket.room));
+       //  console.log("my room : "+ JSON.stringify(socket.room));
          
        // console.log("create playername jaray: "+ JSON.stringify(jarray[socket.room]["userNames"]));
  if(JSON.stringify(socket.room) !==undefined){
@@ -201,11 +201,11 @@ var userTeam={};
             
             
                      //console.log("createplayer: ret"+ret[0]);
-  console.log("room: "+JSON.stringify(socket.room));
- console.log("username: "+JSON.stringify(jarray[socket.room].userNames));
- console.log("userPos: "+JSON.stringify(jarray[socket.room].userPos));
- console.log("userCharacter: "+JSON.stringify(jarray[socket.room].userCharacter));
- console.log("userTeam: "+JSON.stringify(jarray[socket.room].userTeam));
+//  console.log("room: "+JSON.stringify(socket.room));
+// console.log("username: "+JSON.stringify(jarray[socket.room].userNames));
+// console.log("userPos: "+JSON.stringify(jarray[socket.room].userPos));
+// console.log("userCharacter: "+JSON.stringify(jarray[socket.room].userCharacter));
+// console.log("userTeam: "+JSON.stringify(jarray[socket.room].userTeam));
       //   console.log("the array :"+JSON.stringify(jarray));
     }else{//no roomyet
         
@@ -242,13 +242,13 @@ var userTeam={};
         
         if(jarray[socket.room]["userPos"][ret[0]] !==undefined){
             
-            console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
+          //  console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
             
         jarray[socket.room]["userPos"][ret[0]] = ret[1];
         io.sockets.in(socket.room).emit("movePlayerRES", data);      
         }else{
             
-            console.log(socket.room+" undefined : movePlayerREQ error: "+JSON.stringify(jarray[socket.room]));
+           // console.log(socket.room+" undefined : movePlayerREQ error: "+JSON.stringify(jarray[socket.room]));
         }
         
         
