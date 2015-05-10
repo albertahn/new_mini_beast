@@ -217,7 +217,7 @@ public class MoveCtrl : MonoBehaviour {
 		if (playermoving) {
 			tr.LookAt (clickendpoint);
 			//if (clickendpoint != tr.position) {
-				float step = 2*playerStat.speed* Time.deltaTime;
+				float step = playerStat.speed* Time.deltaTime;
 
 				tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
 			//}
