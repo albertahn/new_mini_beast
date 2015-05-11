@@ -26,8 +26,8 @@ public class Tutu_skill_gui : MonoBehaviour {
 	public bool skillTwoReady =false;
 	public bool skillThreeReady = false;
 	
-	private bool[] skill_state;
-	private bool[] skill_live;
+	public bool[] skill_state;
+	public bool[] skill_live;
 	private Level_up_evolve _lvUpEvolve;
 	
 	private float[] skillCool;

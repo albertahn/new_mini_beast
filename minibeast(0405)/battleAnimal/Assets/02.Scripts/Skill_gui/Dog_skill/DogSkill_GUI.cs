@@ -25,8 +25,8 @@ public class DogSkill_GUI : MonoBehaviour {
 	public bool skillTwoReady =false;
 	public bool skillThreeReady = false;
 
-	private bool[] skill_state;
-	private bool[] skill_live;
+	public bool[] skill_state;
+	public bool[] skill_live;
 	private Level_up_evolve _lvUpEvolve;
 
 	private float[] skillCool;
@@ -100,7 +100,7 @@ public class DogSkill_GUI : MonoBehaviour {
 		if (skill_state [1]&&Time.time-skillStartTime[1]>=skillCool[1]) {		
 						Debug.Log ("clicked 2 man");
 						GameObject dogy = GameObject.Find (ClientID);
-			dogy.transform.position = dogy.transform.position+ Vector3.up * 10;
+		            	dogy.transform.position = dogy.transform.position+ Vector3.up * 10;
 		
 						Vector3 spawnPos = dogy.transform.position;
 						Quaternion rotationdog = dogy.transform.rotation;
@@ -211,7 +211,12 @@ public class DogSkill_GUI : MonoBehaviour {
 					Debug.Log("first skill fired");
 
 					GameObject dog =  GameObject.Find(ClientState.id);
-					
+
+					Vector3	clickendpoint = hiterone.point;
+
+					fireFirst(dog, clickendpoint);
+
+
 					dog.transform.LookAt(hiterone.point);
 					
 					WingSkill wingskill = dog.GetComponent<WingSkill> ();	
@@ -223,8 +228,8 @@ public class DogSkill_GUI : MonoBehaviour {
 					skillOneReady = false;
 			
 
-					Vector3	clickendpoint= hiterone.point;
-					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character +":first";
 
 					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
@@ -254,6 +259,13 @@ public class DogSkill_GUI : MonoBehaviour {
 					
 					GameObject skill1 =  GameObject.Find("secondskill");
 					Destroy (skill1);	
+
+					
+					clickendpoint= hiterone.point;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character+":second";
+					
+					SocketStarter.Socket.Emit ("SkillAttack", data);
+
 				}
 
 
@@ -274,10 +286,9 @@ public class DogSkill_GUI : MonoBehaviour {
 					clearSkillWraps();
 					
 					skillThreeReady = false;
-					
-					
+
 					Vector3	clickendpoint= hiterone.point;
-					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z+":"+ ClientState.character+":third";
 					
 					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
@@ -305,4 +316,34 @@ public class DogSkill_GUI : MonoBehaviour {
 		}		
 		
 	}//clear
+
+
+
+//realfire skills
+
+	//first
+
+	public void fireFirst(GameObject gameobject, Vector3 vector){
+
+		GameObject dog = gameobject;
+
+		
+		dog.transform.LookAt(vector);
+		
+		WingSkill wingskill = dog.GetComponent<WingSkill> ();	
+		wingskill.fireWing(ClientState.id);
+		//destroy gameobject]
+		//destroy all wraps
+		clearSkillWraps();
+		
+		skillOneReady = false;
+
+		/*string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character +":first";
+		
+		SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.		*/
+
+	}
+
+
+
 }

@@ -111,7 +111,7 @@ public class MoveCtrl : MonoBehaviour {
 				
 			if(Physics.Raycast (ray3, out hit3, Mathf.Infinity)){
 				if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"
-					   ||hitman2.collider.tag=="BLUE_CANNON"||hitman2.collider.tag=="RED_CANNON"){
+					   ||hit3.collider.tag=="BLUE_CANNON"||hit3.collider.tag=="RED_CANNON"){
 					string targetName = hit3.collider.name;
 					Debug.Log("target = "+targetName);
 					Vector3 target = hit3.point;
