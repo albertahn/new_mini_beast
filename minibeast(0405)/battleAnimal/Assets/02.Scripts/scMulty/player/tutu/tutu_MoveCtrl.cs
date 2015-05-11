@@ -237,6 +237,7 @@ public class tutu_MoveCtrl : MonoBehaviour {
 			tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
 			//}
 			_aniCtrl._animation.CrossFade(_aniCtrl.anim.run.name,0.3f);
+			_aniCtrl._animation["attack"].speed = 5.5f;
 		}
 		
 		if (isAttack) {

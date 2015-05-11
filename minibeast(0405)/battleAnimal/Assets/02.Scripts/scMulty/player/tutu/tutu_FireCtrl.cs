@@ -16,8 +16,8 @@ public class tutu_FireCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_renderer.enabled = false;	
-		duration = 0.5f;
-		distance = 2.0f;
+		duration = 0.4f;
+		distance = 7.0f;
 	}
 	
 	// Update is called once per frame
