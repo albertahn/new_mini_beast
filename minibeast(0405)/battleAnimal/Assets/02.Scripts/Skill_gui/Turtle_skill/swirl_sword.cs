@@ -45,7 +45,7 @@ public class swirl_sword : MonoBehaviour {
 		
 		a.GetComponent<SwirlSwordCtrl> ().shotByname(firedBy);
 
-		GameObject meobj = GameObject.Find (ClientState.id);
+		GameObject meobj = GameObject.Find (firedBy);
 
 		a.transform.parent = meobj.transform;
 

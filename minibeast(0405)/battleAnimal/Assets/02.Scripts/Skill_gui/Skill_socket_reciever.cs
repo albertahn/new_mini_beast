@@ -49,6 +49,7 @@ public class Skill_socket_reciever : MonoBehaviour {
 				tutu_skill = GameObject.Find (userID).GetComponent<Tutu_skill_gui>();	
 
 				for (int i=0; i<3; i++){
+
 					tutu_skill.skill_state[i] = true;
 					tutu_skill.skill_live[i] = true;
 				}
@@ -109,6 +110,8 @@ public class Skill_socket_reciever : MonoBehaviour {
 		
 		}//skill number
 
+		firedskill = true;
+
 	}//end fireskill now
 
 
@@ -119,20 +122,19 @@ public class Skill_socket_reciever : MonoBehaviour {
 		switch (userCharacter) {
 		case "dog":
 
-
-
-			dog_skill_gui.fireFirst(firedplayer, newPos);
+			dog_skill_gui.fireFirst(firedplayer, newPos, userID);
 
 			break;
 		case "turtle":
-			tutu_skill.Skill1_bot();
+			tutu_skill.firedFirst(firedplayer, newPos, userID); 	
 			break;
 		}
+
 	}
 	
 	public  void secondSkill(){
 
-		Debug.Log ("firstSkill()");
+		Debug.Log ("secSkill()");
 
 		switch (userCharacter) {
 		case "dog":
@@ -150,12 +152,12 @@ public class Skill_socket_reciever : MonoBehaviour {
 
 		switch (userCharacter) {
 		case "dog":
-			dog_skill_gui.Skill3_bot();			
+			dog_skill_gui.fireThird(firedplayer, newPos, userID); 		
 			break;
 		case "turtle":
-			tutu_skill.Skill3_bot(); 			
+			tutu_skill.firedThird(firedplayer, newPos, userID); 			
 			break;
 		}	
-	}
+	}//third
 
 }

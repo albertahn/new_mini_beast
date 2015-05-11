@@ -208,8 +208,10 @@ public class Tutu_skill_gui : MonoBehaviour {
 					Debug.Log("first skill fired");
 					
 					GameObject dog =  GameObject.Find(ClientState.id);
+
+					firedFirst(dog, hiterone.point, ClientState.id);
 					
-					dog.transform.LookAt(hiterone.point);
+					/*dog.transform.LookAt(hiterone.point);
 					
 					swirl_sword wingskill = dog.GetComponent<swirl_sword> ();	
 					wingskill.swirlIt(ClientState.id);
@@ -217,11 +219,11 @@ public class Tutu_skill_gui : MonoBehaviour {
 					//destroy all wraps
 					clearSkillWraps();
 					
-					skillOneReady = false;
+					skillOneReady = false;*/
 					
 					
 					Vector3	clickendpoint= hiterone.point;
-					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character +":first";
 					
 					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
@@ -254,20 +256,13 @@ public class Tutu_skill_gui : MonoBehaviour {
 					
 					//	Debug.Log("fired: skill "+skillfire.ToString());
 					GameObject dog =  GameObject.Find(ClientState.id);
+
+					firedThird(dog, hiterone.point, ClientState.id);
 					
-					dog.transform.LookAt(hiterone.point);
-					
-					fireShell skillfire = dog.GetComponent<fireShell> ();	
-					skillfire.fireBall(ClientState.id);
-					//destroy gameobject]
-					//destroy all wraps
-					clearSkillWraps();
-					
-					skillThreeReady = false;
-					
+
 					
 					Vector3	clickendpoint= hiterone.point;
-					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
+					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character +":third";
 					
 					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
 					
@@ -295,4 +290,34 @@ public class Tutu_skill_gui : MonoBehaviour {
 		}		
 		
 	}//clear
+
+//all fired skills
+
+	public void firedFirst(GameObject gameobject, Vector3 vector, string firedby){
+
+		gameobject.transform.LookAt(vector);
+		
+		swirl_sword wingskill = gameobject.GetComponent<swirl_sword> ();	
+		wingskill.swirlIt(firedby);
+
+		clearSkillWraps();
+		
+		skillOneReady = false;
+	} 
+
+
+
+	public void firedThird(GameObject gameobject, Vector3 vector, string firedby){
+		
+		gameobject.transform.LookAt(vector);
+		
+		fireShell skillfire =  gameobject.GetComponent<fireShell> ();	
+		skillfire.fireBall(firedby);
+		//destroy gameobject]
+		//destroy all wraps
+		clearSkillWraps();
+		
+		skillThreeReady = false;
+
+	} 
 }

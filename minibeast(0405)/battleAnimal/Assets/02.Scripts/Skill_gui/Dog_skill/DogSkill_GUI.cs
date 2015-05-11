@@ -214,13 +214,13 @@ public class DogSkill_GUI : MonoBehaviour {
 
 					Vector3	clickendpoint = hiterone.point;
 
-					fireFirst(dog, clickendpoint);
+					fireFirst(dog, clickendpoint, ClientState.id);
 
 
 					dog.transform.LookAt(hiterone.point);
 					
-					WingSkill wingskill = dog.GetComponent<WingSkill> ();	
-					wingskill.fireWing(ClientState.id);
+					/*WingSkill wingskill = dog.GetComponent<WingSkill> ();	
+					wingskill.fireWing(ClientState.id);*/
 					//destroy gameobject]
 					//destroy all wraps
 					clearSkillWraps();
@@ -278,21 +278,23 @@ public class DogSkill_GUI : MonoBehaviour {
 					GameObject dog =  GameObject.Find(ClientState.id);
 					
 					dog.transform.LookAt(hiterone.point);
+
+					fireThird(dog, hiterone.point, ClientState.id);
 					
-					FireSkill skillfire = dog.GetComponent<FireSkill> ();	
+					/*FireSkill skillfire = dog.GetComponent<FireSkill> ();	
 					skillfire.fireBall(ClientState.id);
+*/
+
 					//destroy gameobject]
 					//destroy all wraps
 					clearSkillWraps();
-					
 					skillThreeReady = false;
 
 					Vector3	clickendpoint= hiterone.point;
 					string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z+":"+ ClientState.character+":third";
 					
 					SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.				
-					
-					
+
 				}//skill 1 ready true
 				
 				
@@ -323,7 +325,7 @@ public class DogSkill_GUI : MonoBehaviour {
 
 	//first
 
-	public void fireFirst(GameObject gameobject, Vector3 vector){
+	public void fireFirst(GameObject gameobject, Vector3 vector, string firedBy){
 
 		GameObject dog = gameobject;
 
@@ -331,16 +333,21 @@ public class DogSkill_GUI : MonoBehaviour {
 		dog.transform.LookAt(vector);
 		
 		WingSkill wingskill = dog.GetComponent<WingSkill> ();	
-		wingskill.fireWing(ClientState.id);
-		//destroy gameobject]
-		//destroy all wraps
+		wingskill.fireWing(firedBy);
+
 		clearSkillWraps();
 		
 		skillOneReady = false;
 
-		/*string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z +":"+ ClientState.character +":first";
-		
-		SocketStarter.Socket.Emit ("SkillAttack", data);  //내위치를 서버에 알린다.		*/
+	}
+
+	public void fireThird(GameObject gameobject, Vector3 vector, string firedBy){
+
+		gameobject.transform.LookAt(vector);
+
+		FireSkill skillfire = gameobject.GetComponent<FireSkill> ();	
+		skillfire.fireBall(firedBy);
+
 
 	}
 

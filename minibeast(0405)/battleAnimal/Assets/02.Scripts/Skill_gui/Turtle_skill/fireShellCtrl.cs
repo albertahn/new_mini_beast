@@ -15,7 +15,7 @@ public class fireShellCtrl : MonoBehaviour {
 		speed = 1000.0f;
 		rigidbody.AddForce (transform.forward * speed);
 		birth = Time.time;
-		durationTime = 5.0f;
+		durationTime = 15.0f;
 	}
 	
 	// Update is called once per frame
@@ -42,7 +42,7 @@ public class fireShellCtrl : MonoBehaviour {
 					coll.gameObject.GetComponent<minion_state>().Heated("skill", gameObject,damage);
 				else if(coll.gameObject.name[0]=='b')
 					coll.gameObject.GetComponent<blue_minion_state>().Heated("skill", gameObject,damage);
-				Destroy (this.gameObject);
+				//Destroy (this.gameObject);
 			}
 			
 			
@@ -55,7 +55,7 @@ public class fireShellCtrl : MonoBehaviour {
 				Debug.Log("hitskill");
 				
 				coll.gameObject.GetComponent<PlayerHealthState>().hitbySkill(firedByName, this.gameObject);
-				Destroy (this.gameObject);
+				//Destroy (this.gameObject);
 			}//if
 			
 		}//hit player
