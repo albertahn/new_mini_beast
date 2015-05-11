@@ -2,36 +2,36 @@
 using System.Collections;
 
 public class CameraTouch : MonoBehaviour {
-
-
+	
+	
 	public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
 	public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
-
+	
 	public Camera camera; 
-
+	
 	public float h,v;
-
+	
 	public GameObject player;
 	public bool focusCamPlayer;
-
-
+	
+	
 	// Use this for initialization
 	public float speed;
 	void Start () {
-
+		
 		speed  = 0.5F;
-
-
+		
+		
 		h = 0.0f;
 		v = 0.0f;
-
+		
 		camera = GameObject.Find ("Main Camera").camera;
 		/*
 			GameObject a = GameObject.Find (PlayerPrefs.GetString("email"));
 
 		camera.transform.LookAt(a.transform.position);*/
-
-
+		
+		
 		focusCamPlayer = false;
 	}
 	
@@ -39,14 +39,14 @@ public class CameraTouch : MonoBehaviour {
 	void Update () {		
 		#if UNITY_ANDROID||UNITY_IPHONE
 		if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved) {
-
+			
 			Vector3 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-
+			
 			speed  = 0.55F;
-
+			
 			transform.Translate(-touchDeltaPosition.x * speed,0, -touchDeltaPosition.y * speed);
 		}
-
+		
 		if (Input.touchCount == 2)
 		{
 			//Debug.Log("2touched man!");
@@ -86,38 +86,44 @@ public class CameraTouch : MonoBehaviour {
 		#else
 		h = Input.GetAxis("Horizontal");
 		v = Input.GetAxis("Vertical");
-
+		
 		Vector3 moveDir = (Vector3.forward*v) + (Vector3.right*h);
 		transform.Translate(moveDir * Time.deltaTime*10.0f,Space.Self);
-
+		
 		#endif
-
-
+		
+		
 		//focus the player here
-
+		
 		if(focusCamPlayer){
-
+			
 			GameObject myplayer = GameObject.Find(ClientState.id);
-
+			
 			camera.transform.position = myplayer.transform.position -Vector3.forward*20 +Vector3.up * 20;
 			camera.transform.LookAt (myplayer.transform.position);
-
-			focusCamPlayer = false;
-
-
+			
+			
+			
+			
 		}
-	
+		
 	}//end update
-
-
+	
+	
 	public void cameraFocusPlayer(){
-
-
+		
+		
 		Debug.Log ("camera focus: "+ focusCamPlayer);
-
-
-		focusCamPlayer = true;
-
-
+		
+		if(focusCamPlayer){
+			focusCamPlayer = false;
+			
+		}else{
+			
+			focusCamPlayer = true;
+		}
+		
+		
+		
 	}//end camfoc
 }
