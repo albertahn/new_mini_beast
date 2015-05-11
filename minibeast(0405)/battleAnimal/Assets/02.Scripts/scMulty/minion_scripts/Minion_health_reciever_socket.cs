@@ -12,8 +12,8 @@ public class Minion_health_reciever_socket : MonoBehaviour {
 	
 	private Vector3 destPos;
 	
-	private PlayerHealthState _playerhealthstate;
-	
+	private minion_state minion_state;
+	private blue_minion_state blue_minion_state;
 	
 	
 	// Use this for initialization
@@ -29,8 +29,18 @@ public class Minion_health_reciever_socket : MonoBehaviour {
 			GameObject a = GameObject.Find (id);
 
 			if(a !=null){
-				_playerhealthstate = a.GetComponent<PlayerHealthState>();
-				_playerhealthstate.hp = int.Parse(rec_hp);
+
+				if(id[0]== 'r'){
+					minion_state = a.GetComponent<minion_state>();
+					minion_state.hp = int.Parse(rec_hp);
+
+				}else{
+					blue_minion_state = a.GetComponent<blue_minion_state>();
+					blue_minion_state.hp = int.Parse(rec_hp);
+
+				}
+
+
 				switch_=false;
 			}
 
