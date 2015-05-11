@@ -55,6 +55,7 @@ public class SocketOn : MonoBehaviour {
 		_pAttackReceiver = GetComponent<playerAttackReceiver> ();
 		_moveMinionReceiver = GetComponent<moveMinionReceiver> ();
 
+
 		Screen.SetResolution(480, 800, true);
 
 		_uihpbar = GameObject.Find("HpBarParent").GetComponent<UIhpbar> ();

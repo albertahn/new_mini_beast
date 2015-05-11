@@ -50,9 +50,6 @@ public class GUI_rooms : MonoBehaviour {
 
 								if (GUI.Button (new Rect (50, 20 + 50 * i, 130, 30), roomarray [0])) {
 
-
-			
-										Debug.Log ("clicked" + roomarray [0]);
 										ClientState.room = roomarray [0];
 
 										Application.LoadLevel ("scWait");

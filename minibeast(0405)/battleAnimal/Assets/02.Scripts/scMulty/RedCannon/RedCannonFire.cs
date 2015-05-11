@@ -9,14 +9,11 @@ public class RedCannonFire : MonoBehaviour {
 	private float birth;
 	private float duration;
 	
-	public float distance;
-	
 	
 	// Use this for initialization
 	void Start () {
 		_renderer.enabled = false;	
 		duration = 0.5f;
-		distance = 10.0f;
 	}
 	
 	// Update is called once per frame

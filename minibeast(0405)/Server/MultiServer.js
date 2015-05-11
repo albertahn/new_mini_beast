@@ -10,11 +10,6 @@ var buildingHP = {};
 
 var isRun = false;
 
-//var timer1;
-//var timer2;
-
-
-
  var jarray ={
      
  };
