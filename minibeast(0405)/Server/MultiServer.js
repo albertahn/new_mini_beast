@@ -215,6 +215,12 @@ var userTeam={};
  
     });
     
+    socket.on("moveMinionREQ",function(data){  
+        if(data !==null){
+            io.sockets.in(socket.room).emit("moveMinionRES", data);
+        }
+    });
+    
     socket.on("preuserREQ", function(data){
         var ret1=data+'=';
         var ret2=data+'=';

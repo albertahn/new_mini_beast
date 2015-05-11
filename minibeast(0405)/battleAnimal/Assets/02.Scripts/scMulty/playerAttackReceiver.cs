@@ -6,7 +6,9 @@ public class playerAttackReceiver : MonoBehaviour {
 	private string attacker;
 	private string target;
 	private MoveCtrl _moveCtrl;
-
+	private tutu_MoveCtrl _tutu_moveCtrl;
+	private string character;
+	
 	// Use this for initialization
 	void Start () {
 		switch_ = false;
@@ -18,11 +20,16 @@ public class playerAttackReceiver : MonoBehaviour {
 			GameObject a = GameObject.Find (attacker);
 			
 			if (a != null) {
-				//Debug.Log ("hihi");
-				_moveCtrl = a.GetComponent<MoveCtrl>();
-				_moveCtrl.attack(target);
+				if(character=="dog"){
+					_moveCtrl = a.GetComponent<MoveCtrl>();
+					_moveCtrl.attack(target);
+				}
+				else if(character=="turtle"){
+					_tutu_moveCtrl = a.GetComponent<tutu_MoveCtrl>();
+					_tutu_moveCtrl.attack(target);
+				}
 			}
-
+			
 			switch_=false;
 		}	
 	}
@@ -30,7 +37,8 @@ public class playerAttackReceiver : MonoBehaviour {
 		string[] temp = data.Split (':');
 		while (switch_) {}
 		attacker = temp [0];
-		target = temp [1];
+		character = temp [1];
+		target = temp [2];
 		Debug.Log("attacker = "+attacker+" target = "+target);
 		switch_ = true;
 	}
