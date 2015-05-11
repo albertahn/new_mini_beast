@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\SocketStarter.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../5_12_new_mini_beast/minibeast(0405)/battleAnimal/Assets/02.Scripts/scMulty/BlueCannon/BlueCannonState.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\SocketStarter.cs" Line="12" Column="28" />
-      <File FileName="Assets\02.Scripts\scWait\waitSocketStarter.cs" Line="12" Column="28" />
+      <File FileName="Assets/02.Scripts/scMulty/BlueCannon/BlueCannonState.cs" Line="8" Column="2" />
+      <File FileName="../../../5_12_new_mini_beast/minibeast(0405)/battleAnimal/Assets/02.Scripts/scMulty/BlueCannon/BlueCannonState.cs" Line="80" Column="47" />
+      <File FileName="Assets/02.Scripts/scMulty/RedCannon/RedCannonState.cs" Line="61" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

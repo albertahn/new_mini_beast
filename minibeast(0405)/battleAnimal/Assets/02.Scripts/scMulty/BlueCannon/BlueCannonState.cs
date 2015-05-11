@@ -5,6 +5,10 @@ public class BlueCannonState : MonoBehaviour {
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
 	
+	public GameObject fireDie;
+	
+	public GameObject lavaDie;
+	
 	public int maxhp = 1100;
 	
 	public int hp = 1100;
@@ -57,23 +61,23 @@ public class BlueCannonState : MonoBehaviour {
 	
 	
 	void playerDie(){
+		
+		Debug.Log ("die!!");
+		
 		this.collider.enabled = false;
 		isDie = true;
 		//GetComponent<MoveCtrl> ().isDie = true;
 		
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
-		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 		
-		/*if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
-			
-			
-			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().switchToEvol=true;
-			
-			//PlayerPrefs.SetString("evolved", "true");
-			
-		}*/
-		//	Destroy (this.gameObject, 3.0f);
+		
+		GameObject flash = (GameObject)Instantiate(fireDie,this.transform.position,Quaternion.identity);
+		GameObject lava = (GameObject)Instantiate(lavaDie,this.transform.position,Quaternion.identity);
+		
+		Destroy (this.gameObject, 3.0f);
+		
+		Destroy (flash, 5.0f); Destroy (lava, 5.0f);
 		
 	}
 	

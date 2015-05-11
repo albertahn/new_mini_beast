@@ -10,7 +10,9 @@ public class RedCannonState : MonoBehaviour {
 	public int hp = 1100;
 	
 	public bool isDie;
+	public GameObject fireDie;
 	
+	public GameObject lavaDie;
 	
 	// Use this for initialization
 	void Start () {
@@ -65,15 +67,12 @@ public class RedCannonState : MonoBehaviour {
 		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 		
-		/*if(PlayerPrefs.GetInt ("minions_killed") >1  && PlayerPrefs.GetString("evolved")=="false"){
-			
-			
-			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().switchToEvol=true;
-			
-			//PlayerPrefs.SetString("evolved", "true");
-			
-		}*/
-		//	Destroy (this.gameObject, 3.0f);
+		GameObject flash = (GameObject)Instantiate(fireDie,this.transform.position,Quaternion.identity);
+		GameObject lava = (GameObject)Instantiate(lavaDie,this.transform.position,Quaternion.identity);
+		
+		Destroy (this.gameObject, 3.0f);
+		
+		Destroy (flash, 5.0f); Destroy (lava, 5.0f);
 		
 	}
 	
