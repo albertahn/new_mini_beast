@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class MoveCtrl : MonoBehaviour {	
 	private Transform tr;
@@ -123,7 +124,7 @@ public class MoveCtrl : MonoBehaviour {
 					attack(targetName);								
 				}//else hit player
 					else if(Physics.Raycast(ray3, out hit4, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))){//&& hit3.collider.tag=="FLOOR"){
-						
+						if(EventSystem.current.IsPointerOverGameObject()==false){
 						Vector3 target = new Vector3(hit4.point.x, 0 , hit4.point.z);
 						
 						clickendpoint = hit4.point;
@@ -146,7 +147,7 @@ public class MoveCtrl : MonoBehaviour {
 						tr.LookAt(hit4.point); 
 						myxpos	=hit4.point.x; //Input.touches [0].position.x;
 						myypos	=hit4.point.z;  //Input.touches [0].position.y;	
-						
+						}						
 					} 
 			}
 			}//if
@@ -195,6 +196,7 @@ public class MoveCtrl : MonoBehaviour {
 							}
 						}
 					}else if (Physics.Raycast (ray, out hitman, Mathf.Infinity,1<<LayerMask.NameToLayer("FLOOR"))) {
+						if(EventSystem.current.IsPointerOverGameObject()==false){
 						myxpos = hitman.point.x; //Input.touches [0].position.x;
 						myypos = hitman.point.y;  //Input.touches [0].position.y;
 						myzpos = hitman.point.z;
@@ -206,6 +208,7 @@ public class MoveCtrl : MonoBehaviour {
 						SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.							
 						
 						move();
+						}
 					}
 				}
 				} ///raycasr

@@ -1,11 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Skill_gui/Dog_skill/DogSkill_GUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\MoveCtrl.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/Skill_gui/Dog_skill/DogSkill_GUI.cs" Line="234" Column="31" />
-      <File FileName="Assets/02.Scripts/Skill_gui/Turtle_skill/Tutu_skill_gui.cs" Line="19" Column="2" />
-      <File FileName="Assets/02.Scripts/building_scripts/MainFortress.cs" Line="53" Column="37" />
-      <File FileName="Assets/02.Scripts/Skill_gui/Skill_socket_reciever.cs" Line="124" Column="41" />
+      <File FileName="Assets\02.Scripts\scMulty\MoveCtrl.cs" Line="150" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
