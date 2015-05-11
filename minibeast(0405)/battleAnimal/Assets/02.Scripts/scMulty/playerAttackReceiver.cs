@@ -18,7 +18,7 @@ public class playerAttackReceiver : MonoBehaviour {
 			GameObject a = GameObject.Find (attacker);
 			
 			if (a != null) {
-				Debug.Log ("hihi");
+				//Debug.Log ("hihi");
 				_moveCtrl = a.GetComponent<MoveCtrl>();
 				_moveCtrl.attack(target);
 			}

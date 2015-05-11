@@ -123,23 +123,25 @@ public class MoveCtrl : MonoBehaviour {
 					SocketStarter.Socket.Emit ("attackREQ", data);	
 					attack(targetName);								
 				}//else hit player
-					else if(Physics.Raycast(ray3, out hit4, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))){//&& hit3.collider.tag=="FLOOR"){
-						if(EventSystem.current.IsPointerOverGameObject()==false){
+					else if(Physics.Raycast(ray3, out hit4, Mathf.Infinity, 1<<LayerMask.NameToLayer("FLOOR"))){
+						//int pointerID = Input.touches; //EventSystem.current.IsPointerOverGameObject
+
+						Touch currentTouch = Input.GetTouch(0);
+
+						bool inputIsActive = (currentTouch.phase != TouchPhase.Ended &&
+						                      currentTouch.phase != TouchPhase.Canceled);
+
+
+
+						if( inputIsActive && EventSystem.current.IsPointerOverGameObject(currentTouch.fingerId)==false){  
 						Vector3 target = new Vector3(hit4.point.x, 0 , hit4.point.z);
 						
 						clickendpoint = hit4.point;
-						
-						//mark the plack  moveToPointMark
-						//moveToPointMark(clickendpoint);
 						
 						string data = ClientID + ":" +tr.position.x+","+tr.position.y+","+tr.position.z+
 							":"+ clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
 						SocketStarter.Socket.Emit ("movePlayerREQ", data);//내위치를 서버에 알린다.		
 						
-						/*	string data = ClientID + ":" + clickendpoint.x + "," + clickendpoint.y + "," + clickendpoint.z;
-				
-				SocketStarter.Socket.Emit ("movePlayerREQ", data);
-				*/
 						move();
 						
 						//playermoving = true;
@@ -147,8 +149,10 @@ public class MoveCtrl : MonoBehaviour {
 						tr.LookAt(hit4.point); 
 						myxpos	=hit4.point.x; //Input.touches [0].position.x;
 						myypos	=hit4.point.z;  //Input.touches [0].position.y;	
-						}						
-					} 
+
+
+						}//if false						
+					}//end 
 			}
 			}//if
 				

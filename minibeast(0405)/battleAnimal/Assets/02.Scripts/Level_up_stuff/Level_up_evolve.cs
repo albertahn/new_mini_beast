@@ -133,7 +133,9 @@ public class Level_up_evolve : MonoBehaviour {
 	}
 
 	void OnGUI(){		
-		if (GUI.Button (new Rect (400, 0, 70, 30), "kill: "+ PlayerPrefs.GetInt("minions_killed"))) {			
+		if (GUI.Button (new Rect (400, 0, 70, 30), "kill: "+ PlayerPrefs.GetInt("minions_killed"))) {
+
+
 		}
 		
 		
@@ -152,10 +154,8 @@ public class Level_up_evolve : MonoBehaviour {
 		if(evol_already == false && PlayerPrefs.GetString("evolved")=="false"){
 			
 			Destroy (prevob); 
-			
-			
+
 			GameObject aa;
-			
 			aa = (GameObject)Instantiate(firstEvolvPlayer, pastpos, Quaternion.identity);
 			
 			aa.name= PlayerPrefs.GetString("email");

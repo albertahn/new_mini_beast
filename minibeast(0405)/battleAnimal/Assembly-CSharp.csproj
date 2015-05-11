@@ -50,6 +50,7 @@
      <Compile Include="Assets\02.Scripts\Level_up_stuff\Level_up_evolve.cs" />
      <Compile Include="Assets\02.Scripts\Player_hp\PlayerHealthState.cs" />
      <Compile Include="Assets\02.Scripts\Player_hp\Player_hp_bar.cs" />
+     <Compile Include="Assets\02.Scripts\Player_hp\Player_hp_reciever_socket.cs" />
      <Compile Include="Assets\02.Scripts\Skill_gui\Dog_skill\DogSkill_GUI.cs" />
      <Compile Include="Assets\02.Scripts\Skill_gui\Dog_skill\FireSkill.cs" />
      <Compile Include="Assets\02.Scripts\Skill_gui\Dog_skill\SkillFirstCrl.cs" />

@@ -1,10 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Level_up_stuff/Level_up_evolve.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Player_hp/PlayerHealthState.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/Skill_gui/Turtle_skill/fireShellCtrl.cs" Line="39" Column="31" />
-      <File FileName="../../../5_11_super_new_mini_beast/minibeast(0405)/battleAnimal/Assets/02.Scripts/Skill_gui/Dog_skill/DogSkill_GUI.cs" Line="331" Column="3" />
-      <File FileName="Assets/02.Scripts/Level_up_stuff/Level_up_evolve.cs" Line="144" Column="24" />
+      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="95" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/SocketOn.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/moveMinionReceiver.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/minion_HP.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Player_hp/Player_hp_reciever_socket.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Skill_gui/Turtle_skill/fireShell.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/playerAttackReceiver.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/blue_minion_state.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/minion_state.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/FireCtrl.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

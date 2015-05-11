@@ -30,6 +30,7 @@ public class minion_state : MonoBehaviour {
 			hp -= damage;
 		
 		string data = this.name+":" + hp.ToString()+"";
+
 		SocketStarter.Socket.Emit ("attackMinion", data);			
 		
 		if(hp<=0)

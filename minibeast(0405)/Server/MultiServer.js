@@ -10,6 +10,11 @@ var buildingHP = {};
 
 var isRun = false;
 
+//var timer1;
+//var timer2;
+
+
+
  var jarray ={
      
  };
@@ -24,7 +29,7 @@ io.sockets.on('connection', function (socket) {
         var temp = data.split(':');
          var rooms = io.sockets.manager.rooms;
          
-        // console.log("room_mng: "+ JSON.stringify(rooms));
+         console.log("room_mng: "+ JSON.stringify(rooms));
          
          //if(rooms["/"+temp[1]]==)
          
@@ -41,7 +46,7 @@ io.sockets.on('connection', function (socket) {
                 var roomKey = key.replace('/','');
                 if(temp[1] == roomKey){
                     
-                   // console.log("rooms already exits :"+roomKey);
+                    console.log("rooms already exits :"+roomKey);
                     socket.room = temp[1];
                     socket.join(temp[1]);
                     socket.emit('createRoomRES',temp[0]);
@@ -57,13 +62,13 @@ io.sockets.on('connection', function (socket) {
        
        
            
-         if(jarray[temp[1]]===undefined){
+         if( typeof jarray[temp[1]]=='undefined'){
            
              socket.room = temp[1];
              socket.join(temp[1]);
              socketRoom[socket.room ] = temp[1];
              
-           //  console.log("remade room: "+jarray[socket.room ]);
+             console.log("remade room: "+jarray[socket.room ]);
              
              jarray[socket.room ] = socketRoom;     
              
@@ -85,9 +90,9 @@ io.sockets.on('connection', function (socket) {
              var minionNames={};
              var minionPos = {};
              
-            jarray[socket.room].timer1 = setInterval(redSender,1000);
-             jarray[socket.room].timer2 = setInterval(blueSender,1000);
-            var maxMinion =50;
+            jarray[socket.room].timer1 = setInterval(redSender,15000);
+             jarray[socket.room].timer2 = setInterval(blueSender,15000);
+            var maxMinion =10;
             var currMinion=0;
             var redIdx=0;
             var blueIdx=0;
@@ -154,11 +159,10 @@ var userTeam={};
         userCharacter[ret[0]] = ret[2];
         userTeam[ret[0]] = ret[3];
         
-       //  console.log("my room : "+ JSON.stringify(socket.room));
+         console.log("my room : "+ JSON.stringify(socket.room));
          
        // console.log("create playername jaray: "+ JSON.stringify(jarray[socket.room]["userNames"]));
  if(JSON.stringify(socket.room) !==undefined){
-        
         
             //1. add username to player in room 
             if(JSON.stringify(jarray[socket.room]["userNames"])===undefined ){
@@ -196,11 +200,11 @@ var userTeam={};
             
             
                      //console.log("createplayer: ret"+ret[0]);
-//  console.log("room: "+JSON.stringify(socket.room));
-// console.log("username: "+JSON.stringify(jarray[socket.room].userNames));
-// console.log("userPos: "+JSON.stringify(jarray[socket.room].userPos));
-// console.log("userCharacter: "+JSON.stringify(jarray[socket.room].userCharacter));
-// console.log("userTeam: "+JSON.stringify(jarray[socket.room].userTeam));
+  console.log("room: "+JSON.stringify(socket.room));
+ console.log("username: "+JSON.stringify(jarray[socket.room].userNames));
+ console.log("userPos: "+JSON.stringify(jarray[socket.room].userPos));
+ console.log("userCharacter: "+JSON.stringify(jarray[socket.room].userCharacter));
+ console.log("userTeam: "+JSON.stringify(jarray[socket.room].userTeam));
       //   console.log("the array :"+JSON.stringify(jarray));
     }else{//no roomyet
         
@@ -234,16 +238,16 @@ var userTeam={};
     socket.on("movePlayerREQ",function(data){   
         var ret = data.split(":");
         
-        
-        if(jarray[socket.room]["userPos"][ret[0]] !==undefined){
+        //typeof myVar != 'undefined'
+        if(typeof jarray[socket.room]["userPos"][ret[0]] !='undefined'){
             
-          //  console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
+            console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
             
         jarray[socket.room]["userPos"][ret[0]] = ret[1];
         io.sockets.in(socket.room).emit("movePlayerRES", data);      
         }else{
             
-           // console.log(socket.room+" undefined : movePlayerREQ error: "+JSON.stringify(jarray[socket.room]));
+            console.log(socket.room+" undefined : movePlayerREQ error: "+JSON.stringify(jarray[socket.room]));
         }
         
         
@@ -326,12 +330,14 @@ var userTeam={};
 
     socket.on('attackMinion', function(data){
         var ret2 = data.split(":");
+        
         buildingHP[ret2[0]] = ret2[1];         
         io.sockets.in(socket.room).emit("attackMinion", data);
     });
 
     socket.on('attackBuilding', function(data){
         var ret2 = data.split(":");
+        
         buildingHP[ret2[0]] = ret2[1];         
         io.sockets.in(socket.room).emit("attackBuilding", data);
     });
@@ -340,6 +346,13 @@ var userTeam={};
             
        io.sockets.in(socket.room).emit("SkillAttack", data);
     });
+    
+    
+    socket.on('HealthSync', function(data){
+            
+       io.sockets.in(socket.room).emit("HealthSync", data);
+    });
+
 
 
 });

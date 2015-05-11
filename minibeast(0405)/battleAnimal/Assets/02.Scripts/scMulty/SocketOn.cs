@@ -46,6 +46,7 @@ public class SocketOn : MonoBehaviour {
 	private movePlayerReceiver _movePlayerReceiver;
 	private playerAttackReceiver _pAttackReceiver;
 	private moveMinionReceiver _moveMinionReceiver;
+	private Player_hp_reciever_socket _player_hp_reciever;
 
 	void Start () {
 		_mAttackReceiver = GetComponent<minionAttackReceiver>();
@@ -54,6 +55,8 @@ public class SocketOn : MonoBehaviour {
 		skill_reciever = GetComponent<Skill_socket_reciever> ();
 		_pAttackReceiver = GetComponent<playerAttackReceiver> ();
 		_moveMinionReceiver = GetComponent<moveMinionReceiver> ();
+
+		_player_hp_reciever = GetComponent<Player_hp_reciever_socket>();
 
 
 		Screen.SetResolution(480, 800, true);
@@ -272,10 +275,8 @@ public class SocketOn : MonoBehaviour {
 			string[] temp = data.Json.args[0].ToString().Split(':');
 			minion_name = temp[0];
 			minion_hp_int = int.Parse(temp[1]);
-			
-			//Debug.Log("attack: " + minion_name+":"+minion_hp_int);
-			
-			minion_health_change= true;
+
+			minion_health_change = true;
 		});
 
 
@@ -298,6 +299,17 @@ public class SocketOn : MonoBehaviour {
 			if(temp[0]!=ClientID){
 				if(temp[0][0] =='r')
 					_mDieReceiver.receive(temp[1]);
+			}
+		});
+
+//changed player health sync
+
+		SocketStarter.Socket.On ("HealthSync", (data) =>{
+			string[] temp = data.Json.args[0].ToString().Split(':');
+			if(temp[0]!=ClientID){
+
+				_player_hp_reciever.receive(data.Json.args[0].ToString());
+					
 			}
 		});
 		

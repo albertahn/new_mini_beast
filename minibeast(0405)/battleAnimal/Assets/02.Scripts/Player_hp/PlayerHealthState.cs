@@ -76,7 +76,7 @@ public class PlayerHealthState : MonoBehaviour {
 			hp -= damage;
 		
 		string data = this.name+":" + hp.ToString()+"";
-		SocketStarter.Socket.Emit ("attackMinion", data);			
+		SocketStarter.Socket.Emit ("", data);			
 		
 		if(hp<=0)
 		{

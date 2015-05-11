@@ -28,7 +28,7 @@ public class fireShell : MonoBehaviour {
 	public void fireBall(string firedBy){
 		
 		
-		Debug.Log ("fireman1: "+ firedBy);
+//		Debug.Log ("fireman1: "+ firedBy);
 		
 		StartCoroutine (this.CreateBullet (firedBy));
 		StartCoroutine (this.ShowMuzzleFlash ());
