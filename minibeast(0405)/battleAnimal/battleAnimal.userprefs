@@ -1,17 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Player_hp/PlayerHealthState.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\scMulty\player\tutu\tutu_MoveCtrl.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="95" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/SocketOn.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/moveMinionReceiver.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/minion_HP.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/Player_hp/Player_hp_reciever_socket.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/Skill_gui/Turtle_skill/fireShell.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/playerAttackReceiver.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/blue_minion_state.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/minion_state.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/scMulty/FireCtrl.cs" Line="1" Column="1" />
+      <File FileName="Assets\02.Scripts\scMulty\player\chichi\MoveCtrl.cs" Line="163" Column="25" />
+      <File FileName="Assets\02.Scripts\scMulty\player\tutu\tutu_MoveCtrl.cs" Line="167" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
