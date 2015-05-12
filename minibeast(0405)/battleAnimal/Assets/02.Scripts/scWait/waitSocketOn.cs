@@ -33,6 +33,11 @@ public class waitSocketOn : MonoBehaviour {
 			_waitGUI.remoteDeleteUser(a);
 		});
 
+		waitSocketStarter.Socket.On ("readyRES", (data) =>{
+			//Debug.Log ("gogogo1!!");
+			_waitGUI.timeRemote();
+		});
+
 		waitSocketStarter.Socket.On("preuserRES",(data) =>
 		                            {//접속한 플레이어가 있을때 호출된다.
 			string temp = data.Json.args[0].ToString();

@@ -4,39 +4,54 @@ using UnityEngine.UI;
 
 public class waitGUI : MonoBehaviour {
 	public Sprite dogPortrait,turtlePortrait,randomPortrait,emptyPortrait,nameTag;
-
+	
 	private string[] name;
 	//public Texture2D[] portrait;
 	public Image[] portrait_ = new Image[6];
 	private int userNum;
 	public GameObject img;
-
+	
+	private Text timeText;
+	
 	int addUserOrder;
 	string addUserId;
 	bool addUserSwitch;
-		
+	
 	int charSelectOrder;
 	string charSelectCharacter;
 	bool charSelectSwitch;
-
 	
 	int delUserOrder;
-	bool delUserSwitch;
-
+	bool delUserSwitch;	
+	
+	private float birth;
+	private float duration;
+	private float limit;
+	private bool timeSwitch;
+	private bool timeRemoteSwitch;
+	
 	// Use this for initialization
 	void Start (){
 		addUserSwitch = false;
 		charSelectSwitch = false;
 		delUserSwitch = false;
-
+		
+		birth = 0.0f;
+		duration = 1.0f;
+		limit = 5.0f;
+		timeSwitch = false;
+		timeRemoteSwitch = false;
+		
 		userNum = 0;
 		name = new string[6];
 		//portrait = new Texture2D[6];
 		portrait_=img.GetComponentsInChildren<Image> ();
-
+		
+		timeText = GameObject.Find ("timeText").GetComponent<Text>();
+		
 		for(int i=0;i<6;i++)
 			name [i] = "";
-
+		
 		for(int i=0;i<6;i++){
 			//portrait[i] = emptyPortrait;
 			portrait_[i].sprite = emptyPortrait;
@@ -54,26 +69,26 @@ public class waitGUI : MonoBehaviour {
 	id = ClientID;
 	character = ClientState.character;
 	*/
-
+	
 	public void remoteAddUser(int _order,string _id){
 		while (addUserSwitch) {	}
 		addUserOrder = _order;
 		addUserId = _id;
 		addUserSwitch = true;
 	}
-
+	
 	void addUser(int _order,string _id){
 		name [_order] = _id;
 		portrait_ [_order].sprite = randomPortrait;
 		userNum++;
 	}
-
+	
 	public void deleteUser(int _order){
 		name [_order] = "";
 		portrait_ [_order].sprite = emptyPortrait;
 		userNum--;
 	}
-
+	
 	public void remoteDeleteUser(int _order){
 		while (delUserSwitch) {	}
 		delUserOrder = _order;
@@ -86,17 +101,42 @@ public class waitGUI : MonoBehaviour {
 			addUser(addUserOrder,addUserId);
 			addUserSwitch = false;
 		}
-
+		
 		if (charSelectSwitch) {
 			setCharacter(charSelectOrder,charSelectCharacter);
 			charSelectSwitch = false;
 		}
-		if (delUserSwitch) {
+		if (delUserSwitch){
 			deleteUser(delUserOrder);
 			delUserSwitch = false;
 		}
+		
+		if (timeRemoteSwitch) {
+			birth = Time.time;
+			timeSwitch = true;
+			timeRemoteSwitch=false;
+		}
+		
+		if (timeSwitch) {
+			if(Time.time - birth<limit){
+				if(Time.time-birth<1.0f){
+					timeText.text = "5";
+				}else if(Time.time-birth<2.0f){
+					timeText.text = "4";
+				}else if(Time.time-birth<3.0f){
+					timeText.text = "3";
+				}else if(Time.time-birth<4.0f){
+					timeText.text = "2";
+				}else if(Time.time-birth<5.0f){
+					timeText.text = "1";
+				}
+			}else{
+				timeSwitch=false;
+				Application.LoadLevel("scMulty");
+			}
+		}
 	}
-
+	
 	void OnGUI(){
 		/*
 		GUI.DrawTexture (new Rect(20,50,100,100),portrait[0]);
@@ -120,14 +160,14 @@ public class waitGUI : MonoBehaviour {
 		GUI.DrawTexture (new Rect(300,330,100,40),nameTag);
 		GUI.Label (new Rect(320,340,100,40),name[5]);
 */
-
+		
 		GUI.Label(new Rect(200,10,50,50),"id = "+ClientState.id);
 		GUI.Label(new Rect(200,70,50,50),"room = "+ClientState.room);
 		GUI.Label(new Rect(200,130,50,50),"order = "+ClientState.order);
 		GUI.Label(new Rect(200,190,50,50),"character = "+ClientState.character);
 		GUI.Label(new Rect(200,250,50,50),"team = "+ClientState.team);
 	}
-
+	
 	public void Dog_bot()
 	{
 		//portrait[ClientState.order] = dogPortrait;
@@ -135,15 +175,15 @@ public class waitGUI : MonoBehaviour {
 		waitSocketStarter.Socket.Emit ("characterSelectREQ", data);
 		ClientState.character = "dog";
 	}
-
+	
 	public void Turtle_bot()
 	{
 		//portrait[ClientState.order] = turtlePortrait;
 		string data = ClientState.id +":"+ClientState.order+":turtle";
 		waitSocketStarter.Socket.Emit ("characterSelectREQ", data);
-		ClientState.character = "turtle";	
+		ClientState.character = "turtle";
 	}
-
+	
 	public void Random_bot()
 	{
 		//portrait[ClientState.order] = turtlePortrait;
@@ -158,23 +198,28 @@ public class waitGUI : MonoBehaviour {
 			break;
 		}
 	}
-
-
+	
+	
 	public void Ready()
 	{
 		if(ClientState.order % 2 ==0){
 			ClientState.team = "red";
 		}else
 			ClientState.team = "blue";
-
-		Application.LoadLevel("scMulty");
+		
+		string data = ClientState.order.ToString();
+		waitSocketStarter.Socket.Emit ("readyREQ", data);
 	}
+
+	public void Crack(){
+		Application.LoadLevel("scMulty");
+		}
 
 	public void Back()
 	{
 		Application.LoadLevel ("scStart");
 	}
-
+	
 	void setCharacter(int _order,string _char){
 		if (_char == "dog")
 			portrait_[_order].sprite = dogPortrait;
@@ -183,11 +228,14 @@ public class waitGUI : MonoBehaviour {
 		else if(_char =="random")
 			portrait_[_order].sprite = randomPortrait;
 	}
-
 	public void remoteSetCharacter(int _order,string _char){
 		while(charSelectSwitch){ }
 		charSelectOrder = _order;
 		charSelectCharacter = _char;
 		charSelectSwitch = true;
+	}
+	
+	public void timeRemote(){
+		timeRemoteSwitch = true;
 	}
 }

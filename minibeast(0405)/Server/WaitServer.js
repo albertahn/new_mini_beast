@@ -16,6 +16,12 @@ var userNames = {};//id
 var selectCharacter={};
 var userNum={};//position in waitRoom
 */
+
+var confirmReady= new Array(6);
+for(var i=0;i<=5;i++){
+    confirmReady[i]=false;
+}
+
 var thrashNum =[];//shoud be at the each room
 var thrashIdx=0;//shoud be at the each room
 
@@ -31,10 +37,9 @@ io.sockets.on('connection', function (socket) {
     socket.on("joinRoomREQ",function(data){
         
         
-        var roomname = data;
-        
-         var rooms = io.sockets.manager.rooms;
-         for(var key in rooms){
+        var roomname = data;        
+        var rooms = io.sockets.manager.rooms;
+        for(var key in rooms){
              if(key==''){
                  continue;
              }
@@ -98,8 +103,6 @@ io.sockets.on('connection', function (socket) {
         
         selectCharacter[data] = 'random';
         
-        data = userNum[data]+':'+data;
-        io.sockets.in(socket.room).emit("createPlayerRES", data);
 //check if there
 //1. username
         if(jarray[socket.room]["userNames"]===undefined ){
@@ -127,6 +130,8 @@ io.sockets.on('connection', function (socket) {
                 jarray[socket.room]["userNum"][socket.id] = userNum;
             }
         
+        data = userNum[data]+':'+data;
+        io.sockets.in(socket.room).emit("createPlayerRES", data);
         console.log("create : "+ JSON.stringify(jarray));
     });
     
@@ -150,6 +155,30 @@ io.sockets.on('connection', function (socket) {
         io.sockets.in(socket.room).emit("characterSelectRES",ret);
     });
     
+     socket.on("readyREQ", function(data){
+        confirmReady[data]= true;
+        console.log("yaya!");
+        
+        var red=0;
+        var blue=0;
+        for(var key in confirmReady){
+            console.log(key +" = " + confirmReady[key]);
+            if(confirmReady[key]==true){
+                if(0<=key&&key<=2){
+                    red+=1;
+                }else if(3<=key&&key<=5){
+                    blue+=1;
+                }
+            }
+        }
+        console.log("red = "+red);
+        console.log("blue = "+blue);
+        if(red==blue&&red!=0){
+            io.sockets.in(socket.room).emit("readyRES",data);
+            console.log("gogogo!");
+        }
+    });
+    
     socket.on('disconnect',function(data){
         var rooms = io.sockets.manager.rooms;
         var key = socket.room;
@@ -169,6 +198,9 @@ io.sockets.on('connection', function (socket) {
                 for(var i in jarray[socket.room].userNum){
                     delete(jarray[socket.room].userNum[i]);                    
                 } 
+                for(var i=0;i<=5;i++){
+                     confirmReady[i]=false;
+                }
                 
                 
   thrashNum[0]=5;thrashNum[1]=2;thrashNum[2]=4;
