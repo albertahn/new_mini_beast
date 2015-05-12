@@ -44,6 +44,9 @@ public class waitSocketOn : MonoBehaviour {
 			string[] temp2 = temp.Split('=');
 			string sender = temp2[0];
 
+			Debug.Log ( data.Json.args[0].ToString());
+
+
 			if(clientID==sender){
 				string[] temp3 = temp2[1].Split('-');
 				for(int i=0;i<temp3.Length-1;i++){

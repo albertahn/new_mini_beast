@@ -119,7 +119,7 @@ io.sockets.on('connection', function (socket) {
                 jarray[socket.room]["selectCharacter"] = selectCharacter;
                 
             }else{
-                jarray[socket.room]["selectCharacter"][socket.id] = 'random';
+                jarray[socket.room]["selectCharacter"][data] = 'random';
             }
  //3. user num           
             if(jarray[socket.room]["userNum"]===undefined ){
@@ -133,13 +133,16 @@ io.sockets.on('connection', function (socket) {
         data = userNum[data]+':'+data;
         io.sockets.in(socket.room).emit("createPlayerRES", data);
         console.log("create : "+ JSON.stringify(jarray));
-    });
+    }); //create player req
     
     socket.on("preuserREQ", function(data){
         var ret=data+'=';
         
         for(var key in jarray[socket.room]["selectCharacter"]){
             ret +=jarray[socket.room].userNum[key]+':'+key+':'+jarray[socket.room].selectCharacter[key]+'-';
+
+            console.log(jarray[socket.room].selectCharacter[key]);
+
         }
         
         io.sockets.in(socket.room).emit("preuserRES",ret);

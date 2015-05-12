@@ -42,7 +42,7 @@ for(thrashIdx=0;thrashIdx<6;thrashIdx++){
 }
 thrashIdx--;
 
-io.sockets.on('connection', function (socket) {       
+io.sockets.on('connection', function (socket) {	      
     console.log("A user connected !");    
 
  
@@ -95,4 +95,5 @@ io.sockets.on('connection', function (socket) {
         }
     });
 });
+
 
