@@ -89,9 +89,23 @@ io.sockets.on('connection', function (socket) {
          function createMinion(){
              var minionNames={};
              var minionPos = {};
+         if(typeof (jarray[socket.room].timer1) !='undefined'){
+             jarray[socket.room].timer1 = setInterval(redSender,15000);
+         }else{
+             jarray[socket.room].timer1 = {"timer1":"timer1"};
              
-            jarray[socket.room].timer1 = setInterval(redSender,15000);
+         }    
+         
+         if(typeof (jarray[socket.room].timer2) !='undefined'){
              jarray[socket.room].timer2 = setInterval(blueSender,15000);
+         }else{
+             jarray[socket.room].timer2 = {"timer2":"timer2"};
+             
+         }   
+           
+             
+             
+             
             var maxMinion =10;
             var currMinion=0;
             var redIdx=0;
@@ -245,7 +259,7 @@ var userTeam={};
         var ret = data.split(":");
         
         //typeof myVar != 'undefined'
-        if(typeof jarray[socket.room]["userPos"][ret[0]] !='undefined'){
+        if(typeof (jarray[socket.room]["userPos"][ret[0]]) !='undefined'){
             
             console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
             

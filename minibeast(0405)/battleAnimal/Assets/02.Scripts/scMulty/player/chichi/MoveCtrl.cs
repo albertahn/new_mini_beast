@@ -233,6 +233,8 @@ public class MoveCtrl : MonoBehaviour {
 			tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
 			//}
 			_aniCtrl._animation.CrossFade(_aniCtrl.anim.run.name,0.3f);
+			_aniCtrl._animation["attack"].speed = 2.5f;
+			_aniCtrl._animation["run"].speed = 2.5f;
 		}
 		
 		if (isAttack) {
