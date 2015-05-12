@@ -115,7 +115,7 @@ public class tutu_MoveCtrl : MonoBehaviour {
 				RaycastHit hit3;
 				RaycastHit hit4;    
 				
-				if(Physics.Raycast (ray3, out hit3, Mathf.Infinity)){
+				if(Physics.Raycast (ray3, out hit3, Mathf.Infinity,(-1) -(1 << LayerMask.NameToLayer("OBSTACLE")))){
 					if(hit3.collider.tag =="BUILDING" || hit3.collider.tag =="MINION"||hit3.collider.tag =="Player"
 					   ||hit3.collider.tag=="BLUE_CANNON"||hit3.collider.tag=="RED_CANNON"){
 						string targetName = hit3.collider.name;
@@ -177,7 +177,7 @@ public class tutu_MoveCtrl : MonoBehaviour {
 			
 			
 			if (Input.GetMouseButtonDown (0)) {						
-				if (Physics.Raycast (ray, out hitman2, Mathf.Infinity)) {
+				if (Physics.Raycast (ray, out hitman2, Mathf.Infinity,(-1) -(1 << LayerMask.NameToLayer("OBSTACLE")))) {
 					if (hitman2.collider.tag == "BUILDING" || hitman2.collider.tag == "MINION" || hitman2.collider.tag == "Player"
 					    || hitman2.collider.tag == "BLUE_CANNON" || hitman2.collider.tag == "RED_CANNON") {
 						string targetName = hitman2.collider.name;
@@ -234,7 +234,12 @@ public class tutu_MoveCtrl : MonoBehaviour {
 			tr.LookAt (clickendpoint);
 			//if (clickendpoint != tr.position) {
 			float step = playerStat.speed* Time.deltaTime;
-			tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
+
+			Vector3 dir = clickendpoint - tr.position;
+			Vector3 movement = dir.normalized*step;
+			if(movement.magnitude>dir.magnitude)movement = dir;
+			GetComponent<CharacterController>().Move(movement);
+			//tr.position = Vector3.MoveTowards(tr.position, clickendpoint, step);
 			//}
 			_aniCtrl._animation.CrossFade(_aniCtrl.anim.run.name,0.3f);
 			_aniCtrl._animation["attack"].speed = 5.5f;
@@ -288,7 +293,7 @@ public class tutu_MoveCtrl : MonoBehaviour {
 			}
 		}
 		
-		if(clickendpoint == tr.position) {
+		if(Vector3.Distance( clickendpoint,tr.position)<=0.5f) {
 			playermoving = false;
 			_aniCtrl._animation.CrossFade(_aniCtrl.anim.idle.name,0.3f);
 		}
