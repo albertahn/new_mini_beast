@@ -1,10 +1,23 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\02.Scripts\Skill_gui\Dog_skill\DogSkill_GUI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/scMulty/BlueCannon/BlueCannonState.cs">
     <Files>
-      <File FileName="Assets\02.Scripts\scMulty\SpawnPlayer.cs" Line="73" Column="21" />
-      <File FileName="Assets\02.Scripts\Skill_gui\Dog_skill\DogSkill_GUI.cs" Line="147" Column="3" />
-      <File FileName="Assets\02.Scripts\Skill_gui\Turtle_skill\Tutu_skill_gui.cs" Line="136" Column="3" />
+      <File FileName="Assets/02.Scripts/building_scripts/MainFortress.cs" Line="75" Column="7" />
+      <File FileName="../../../jangaye_5_122new_mannew_mini_beast/minibeast(0405)/battleAnimal/Assets/02.Scripts/building_scripts/MainFortress.cs" Line="10" Column="2" />
+      <File FileName="Assets/02.Scripts/scMulty/SocketStarter.cs" Line="25" Column="1" />
+      <File FileName="Assets/02.Scripts/Player_hp/Player_hp_bar.cs" Line="16" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/player/chichi/MoveCtrl.cs" Line="213" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/status/turtleStat.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/user_interface/My_inteface_hp_bar.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/UI/expBar.cs" Line="27" Column="25" />
+      <File FileName="Assets/02.Scripts/scStart/ClientState.cs" Line="12" Column="23" />
+      <File FileName="Assets/02.Scripts/scMulty/minion_scripts/blue_minion_state.cs" Line="65" Column="4" />
+      <File FileName="Assets/02.Scripts/scMulty/RedCannon/RedCannonState.cs" Line="66" Column="3" />
+      <File FileName="Assets/02.Scripts/scMulty/BlueCannon/BlueCannonState.cs" Line="77" Column="24" />
+      <File FileName="Assets/02.Scripts/scMulty/BlueCannon/BlueCannonFire.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/scMulty/BlueCannon/BlueCannonCtrl.cs" Line="24" Column="28" />
+      <File FileName="Assets/02.Scripts/scMulty/BlueCannon/BlueCannon_OutterCtrl.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Player_hp/PlayerHealthState.cs" Line="39" Column="101" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
