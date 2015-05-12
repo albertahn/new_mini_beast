@@ -13,6 +13,10 @@ public class SpawnPlayer : MonoBehaviour {
 	private expBar _exp;
 	private UI_skill_manager _ui_skill_manager;
 
+	private skill1Plus _skill1Plus;
+	private skill2Plus _skill2Plus;
+	private skill3Plus _skill3Plus;
+
 	public IEnumerator CreatePlayer(){
 		spawnSwitch = false;
 		string data;
@@ -37,6 +41,10 @@ public class SpawnPlayer : MonoBehaviour {
 		//_gui = GameObject.Find ("UIManager").GetComponent<DogSkill_GUI>();
 		_exp = GameObject.Find ("ExpBarParent").GetComponent<expBar>();
 		_ui_skill_manager = GameObject.Find ("UIManager").GetComponent<UI_skill_manager> ();
+
+		_skill1Plus = GameObject.Find ("skill1+").GetComponent<skill1Plus> ();
+		_skill2Plus = GameObject.Find ("skill2+").GetComponent<skill2Plus> ();
+		_skill3Plus = GameObject.Find ("skill3+").GetComponent<skill3Plus> ();
 
 		ClientID = ClientState.id;
 		Rteam = GameObject.Find ("RedTeam");
@@ -73,7 +81,11 @@ public class SpawnPlayer : MonoBehaviour {
 			_respawn.setPlayer();
 			_ui_skill_manager.setPlayer();
 			//_gui.setPlayer();
-			_exp.setPlayer();
+			_exp.setPlayer();			
+			_skill1Plus.setPlayer();
+			_skill2Plus.setPlayer();
+			_skill3Plus.setPlayer();
+
 			spawnSwitch=false;
 		}
 	}

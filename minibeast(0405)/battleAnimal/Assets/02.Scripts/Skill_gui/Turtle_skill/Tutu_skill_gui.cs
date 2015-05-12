@@ -59,13 +59,10 @@ public class Tutu_skill_gui : MonoBehaviour {
 		
 		skill_live = new bool[3];
 		for (int i=0; i<3; i++) {
-			skill_live [i] = true;//false;
+			skill_live [i] = false;//false;
 		}
+		_lvUpEvolve =  GetComponent<Level_up_evolve> ();
 		
-	}
-
-	public void setPlayer(){
-		_lvUpEvolve =  GameObject.Find (ClientState.id).GetComponent<Level_up_evolve> ();
 	}
 	
 	
@@ -119,10 +116,7 @@ public class Tutu_skill_gui : MonoBehaviour {
 	
 	public void Skill3_bot()
 	{
-		
-		Debug.Log ("3rd skill bot");
-		
-		//if (skill_state [2]&& Time.time-skillStartTime[2] >= skillCool[2]) {
+		if (skill_state [2]&& Time.time-skillStartTime[2] >= skillCool[2]) {
 		GameObject dogy = GameObject.Find (ClientState.id);
 		
 		//Debug.Log ("client id : "+ClientID);
@@ -139,7 +133,7 @@ public class Tutu_skill_gui : MonoBehaviour {
 		skillStartTime[2] = Time.time;
 		skill_state [2] = false;
 		skills [2].sprite = skill1Blank_spr;
-		//}
+		}
 	}
 	
 	
