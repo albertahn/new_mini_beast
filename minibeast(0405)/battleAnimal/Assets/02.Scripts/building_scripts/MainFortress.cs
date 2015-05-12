@@ -24,26 +24,19 @@ public class MainFortress : MonoBehaviour {
 
 	void OnGUI(){
 
-		if (this.gameObject.name == "blue_building" && buildingDead==true ) {
+
+		if (this.gameObject.name == "blue_building" && buildingDead ==true ) {
 		
-						if (GUI.Button (new Rect (300, 200, 450, 300), "Red Team Win")) {
-			
-								PlayerPrefs.SetString ("email", "");
-								PlayerPrefs.SetString ("username", "");
-								PlayerPrefs.SetString ("user_index", "");
-			
-								Application.LoadLevel ("scLogin");
-			
-						}
+			if (GUI.Button (new Rect (10, 100, 450, 300), "Red Team Win")) {
+				
+				Application.LoadLevel ("scStart");
+				
+			}
 		}else if(this.gameObject.name == "red_building" && buildingDead==true){
 
-			if (GUI.Button (new Rect (300, 0, 50, 30), "Blue Team Win")) {
+			if (GUI.Button (new Rect (10, 100, 450, 300), "Blue Team Win")) {
 				
-				PlayerPrefs.SetString ("email", "");
-				PlayerPrefs.SetString ("username", "");
-				PlayerPrefs.SetString ("user_index", "");
-				
-				Application.LoadLevel ("scLogin");
+				Application.LoadLevel ("scStart");
 				
 			}
 		}

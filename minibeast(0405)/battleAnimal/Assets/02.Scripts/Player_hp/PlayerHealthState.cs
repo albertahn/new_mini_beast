@@ -5,7 +5,7 @@ public class PlayerHealthState : MonoBehaviour {
 
 	public GameObject bloodEffect;
 	public GameObject bloodDecal;
-	public int hp;
+	public int hp, maxhp;
 	public bool isDie;
 	private Respawn _respawn;
 
@@ -21,6 +21,8 @@ public class PlayerHealthState : MonoBehaviour {
 		myplayer = this.gameObject;
 
 		hp = playerStat.maxHp;
+
+		maxhp = playerStat.maxHp;
 
 		red_building = GameObject.Find ("red_building");
 		blue_building = GameObject.Find ("blue_building");

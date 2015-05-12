@@ -124,7 +124,7 @@ public class tutu_MoveCtrl : MonoBehaviour {
 						target.y=50.0f;
 						attackPoint = target;
 						
-						string data = ClientID + ":"+ClientState.character + ":" + + targetName;
+						string data = ClientID + ":"+ClientState.character + ":" +targetName;
 						SocketStarter.Socket.Emit ("attackREQ", data);    
 						attack(targetName);                                
 					}//else hit player

@@ -259,7 +259,7 @@ var userTeam={};
         var ret = data.split(":");
         
         //typeof myVar != 'undefined'
-        if(typeof (jarray[socket.room]["userPos"][ret[0]]) !='undefined'){
+        if(typeof (jarray[socket.room]["userPos"][ret[0]]) !==undefined){
             
             console.log(socket.room+":"+ret[0]+ ": movePlayerREQ : "+jarray[socket.room]["userPos"][ret[0]]);
             

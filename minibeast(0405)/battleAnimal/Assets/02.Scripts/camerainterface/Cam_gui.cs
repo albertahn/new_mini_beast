@@ -25,15 +25,10 @@ public class Cam_gui : MonoBehaviour {
 
 	void OnGUI(){
 		
-				if (GUI.Button (new Rect (10, 0, 50, 30), "logout")) {
-
-							PlayerPrefs.SetString("email", "");
-							PlayerPrefs.SetString("username", "");
-							PlayerPrefs.SetString("user_index", "");
+				if (GUI.Button (new Rect (10, 0, 50, 30), "Exit")) {
 
 
-
-			Application.LoadLevel ("scLogin");
+			Application.LoadLevel ("scStart");
 			
 				}
 		//www= new WWW(url);

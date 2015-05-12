@@ -31,6 +31,8 @@ public class DogSkill_GUI : MonoBehaviour {
 
 	private float[] skillCool;
 	private float[] skillStartTime;
+
+	public PlayerHealthState _playerHealthState;
 	
 	// Use this for initialization
 	void Start (){
@@ -40,6 +42,8 @@ public class DogSkill_GUI : MonoBehaviour {
 		//Get game object
 		myMoveCtrl = GetComponent<MoveCtrl> ();
 		guilayer = Camera.main.GetComponent<GUILayer>();
+
+		_playerHealthState = this.GetComponent<PlayerHealthState>();
 
 		trans = GetComponent<Transform>();
 		//FireSkill skillfire = GetComponent<FireSkill>();
@@ -100,10 +104,15 @@ public class DogSkill_GUI : MonoBehaviour {
 		if (skill_state [1]&&Time.time-skillStartTime[1]>=skillCool[1]) {		
 						Debug.Log ("clicked 2 man");
 						GameObject dogy = GameObject.Find (ClientID);
-		            	dogy.transform.position = dogy.transform.position+ Vector3.up * 10;
+		            	//dogy.transform.position = dogy.transform.position+ Vector3.up * 10;
 		
 						Vector3 spawnPos = dogy.transform.position;
 						Quaternion rotationdog = dogy.transform.rotation;
+			if( _playerHealthState.hp < _playerHealthState.maxhp){
+				_playerHealthState.hp= _playerHealthState.hp+50;
+
+			}
+
 		
 						GameObject a;
 						a = (GameObject)Instantiate (secondskill, spawnPos, rotationdog);
