@@ -14,11 +14,12 @@ public class BlueCannonState : MonoBehaviour {
 	public int hp = 1100;
 	
 	public bool isDie;
-	
+	private moneyUI _moneyUI;
 	
 	// Use this for initialization
 	void Start () {
 		isDie = false;
+		_moneyUI = GameObject.Find ("UIManager").GetComponent<moneyUI>();
 	}
 	
 	// Update is called once per frame
@@ -40,7 +41,7 @@ public class BlueCannonState : MonoBehaviour {
 		if(hp<=0)
 		{
 			hp=0;
-			playerDie();
+			playerDie(firedby);
 		}
 		
 		//Destroy (obj.gameObject);
@@ -60,9 +61,9 @@ public class BlueCannonState : MonoBehaviour {
 	}
 	
 	
-	void playerDie(){
+	void playerDie(string firedby){
 		
-		Debug.Log ("die!!");
+		Debug.Log ("firedby: "+firedby);
 		
 		this.collider.enabled = false;
 		isDie = true;
@@ -71,6 +72,15 @@ public class BlueCannonState : MonoBehaviour {
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
 		
+
+		float  distance = Vector3.Distance(GameObject.Find(ClientState.id).transform.position, this.transform.position);
+		if (distance<10.0f) {
+			
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(100);
+			_moneyUI.makeMoney(100);
+
+		}
+
 		
 		GameObject flash = (GameObject)Instantiate(fireDie,this.transform.position,Quaternion.identity);
 		GameObject lava = (GameObject)Instantiate(lavaDie,this.transform.position,Quaternion.identity);
@@ -78,6 +88,7 @@ public class BlueCannonState : MonoBehaviour {
 		Destroy (this.gameObject, 3.0f);
 		
 		Destroy (flash, 5.0f); Destroy (lava, 5.0f);
+
 		
 	}
 	

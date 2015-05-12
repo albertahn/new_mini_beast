@@ -13,10 +13,13 @@ public class RedCannonState : MonoBehaviour {
 	public GameObject fireDie;
 	
 	public GameObject lavaDie;
-	
+
+	public string FiredBy;
+	private moneyUI _moneyUI;
 	// Use this for initialization
 	void Start () {
 		isDie = false;
+		_moneyUI = GameObject.Find ("UIManager").GetComponent<moneyUI>();
 	}
 	
 	// Update is called once per frame
@@ -25,7 +28,7 @@ public class RedCannonState : MonoBehaviour {
 	}
 	
 	public void Heated(string firedby,GameObject obj,int damage){
-		
+		FiredBy = firedby;
 		Collider coll = obj.collider;
 		
 		StartCoroutine (this.CreateBloodEffect(coll.transform.position));
@@ -38,13 +41,13 @@ public class RedCannonState : MonoBehaviour {
 		if(hp<=0)
 		{
 			hp=0;
-			playerDie();
+			playerDie(firedby);
 		}
 		
 		//Destroy (obj.gameObject);
 	}//end heated
 	
-	public void hitbySkill(string firedby,GameObject obj){
+	public void hitbySkill(string firedby, GameObject obj){
 		
 		Debug.Log ("skill hit: "+ firedby);
 		
@@ -58,7 +61,10 @@ public class RedCannonState : MonoBehaviour {
 	}
 	
 	
-	void playerDie(){
+	void playerDie(string firedby){
+
+		Debug.Log ("firedby: "+firedby);
+
 		this.collider.enabled = false;
 		isDie = true;
 		//GetComponent<MoveCtrl> ().isDie = true;
@@ -66,13 +72,20 @@ public class RedCannonState : MonoBehaviour {
 		int oldInt = PlayerPrefs.GetInt ("minions_killed");
 		
 		PlayerPrefs.SetInt ("minions_killed",oldInt+1);
+
+		if (firedby == ClientState.id) {
+			
+			GameObject.Find (ClientState.id).GetComponent<Level_up_evolve>().expUp(100);
+			_moneyUI.makeMoney(100);
+		}
 		
 		GameObject flash = (GameObject)Instantiate(fireDie,this.transform.position,Quaternion.identity);
 		GameObject lava = (GameObject)Instantiate(lavaDie,this.transform.position,Quaternion.identity);
 		
 		Destroy (this.gameObject, 3.0f);
-		
 		Destroy (flash, 5.0f); Destroy (lava, 5.0f);
+
+	
 		
 	}
 	

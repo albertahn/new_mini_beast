@@ -11,6 +11,8 @@ public class MainFortress : MonoBehaviour {
 
 	public bool buildingDead;
 
+	public Texture2D victory, defeat ;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -24,17 +26,40 @@ public class MainFortress : MonoBehaviour {
 
 	void OnGUI(){
 
-
-		if (this.gameObject.name == "blue_building" && buildingDead ==true ) {
+		/*GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
 		
-			if (GUI.Button (new Rect (10, 100, 450, 300), "Red Team Win")) {
-				
+		if (GUI.Button (new Rect (100, 400, 150, 100), "Blue Team Win: "+ClientState.team)) {
+			
+			Application.LoadLevel ("scStart");
+			
+		}*/
+		
+		if (this.gameObject.name == "blue_building" && buildingDead ==true ) {
+			
+					if(ClientState.team =="red"){
+						GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
+
+					}else{
+						GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
+					}
+			
+			if (GUI.Button (new Rect (100, 400, 150, 100), "exit")) {
 				Application.LoadLevel ("scStart");
-				
 			}
 		}else if(this.gameObject.name == "red_building" && buildingDead==true){
 
-			if (GUI.Button (new Rect (10, 100, 450, 300), "Blue Team Win")) {
+
+			if(ClientState.team =="blue"){
+				GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
+				
+			}else{
+				GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
+			}
+
+			
+			GUI.DrawTexture(new Rect (10, 100, 450, 300), victory);
+			
+			if (GUI.Button (new Rect (100, 400, 150, 100), "exit")) {
 				
 				Application.LoadLevel ("scStart");
 				
